@@ -1,0 +1,9 @@
+export const PATH_INDEX = "/";
+export const SIGN_UP_PATH = "/sign-up";
+export const LOGIN_PATH = "/login";
+export const NEWS_PATH = "/news";
+export const CATEGORY_PATH = "/category/:id";
+export const POST_PATH = "/post/:id";
+export const POSTS_APPROVAL_PATH = "/posts-approval";
+export const PROFILE_PATH = "/profile/:id";
+export const CREATE_POST_PATH = "/create-post";
