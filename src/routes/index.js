@@ -7,23 +7,27 @@ import { PATH_INDEX, LOGIN_PATH, SIGN_UP_PATH } from "../constants/routes";
 const routes = [
   {
     path: LOGIN_PATH,
-    name: "login",
-    component: Login
+    name: "Log in",
+    component: Login,
+    inHeader: true
   },
   {
     path: SIGN_UP_PATH,
     name: "Sign up",
-    component: SignUp
+    component: SignUp,
+    inHeader: true
   },
   {
     path: PATH_INDEX,
     name: "Root",
-    component: Root
+    component: Root,
+    inHeader: false
   },
   {
     path: "",
     name: "Not found",
-    component: NotFound
+    component: NotFound,
+    inHeader: false
   }
 ];
 

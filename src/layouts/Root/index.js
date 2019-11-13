@@ -2,10 +2,12 @@ import React from "react";
 import appRoutes from "../../routes/routes";
 import { Redirect, Route, Switch } from "react-router";
 import { NEWS_PATH, PATH_INDEX } from "../../constants/routes";
+import Header from "../../components/Header";
+import { user } from "../../constants";
+import { makeStyles } from "@material-ui/core";
+import style from "./style";
 
-const user = {
-  role: "guest"
-};
+const useStyles = makeStyles(style);
 
 const chooseRoutes = () => {
   const routes = appRoutes[user.role];
@@ -24,11 +26,15 @@ const chooseRoutes = () => {
   );
 };
 
-const Root = () => (
-  <div>
-    <h1>Root</h1>
-    {chooseRoutes()}
-  </div>
-);
+const Root = () => {
+  const classes = useStyles();
+
+  return (
+    <div>
+      <Header />
+      <main className={classes.mainContainer}>{chooseRoutes()}</main>
+    </div>
+  );
+};
 
 export default Root;

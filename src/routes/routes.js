@@ -19,25 +19,29 @@ const guestRoutes = [
     path: NEWS_PATH,
     name: "News",
     component: News,
-    layout: PATH_INDEX
+    layout: PATH_INDEX,
+    inHeader: true
   },
   {
     path: CATEGORY_PATH,
-    name: "Category",
+    name: "Categories",
     component: Category,
-    layout: PATH_INDEX
+    layout: PATH_INDEX,
+    inHeader: true
   },
   {
     path: PROFILE_PATH,
     name: "Profile",
     component: Profile,
-    layout: PATH_INDEX
+    layout: PATH_INDEX,
+    inHeader: false
   },
   {
     path: POST_PATH,
     name: "Post",
     component: Post,
-    layout: PATH_INDEX
+    layout: PATH_INDEX,
+    inHeader: false
   }
 ];
 
@@ -49,7 +53,8 @@ const journalistRoutes = [
     path: CREATE_POST_PATH,
     name: "Create post",
     component: CreatePost,
-    layout: PATH_INDEX
+    layout: PATH_INDEX,
+    inHeader: true
   }
 ];
 
@@ -59,7 +64,8 @@ const adminRoutes = [
     path: POSTS_APPROVAL_PATH,
     name: "Posts approval",
     component: PostsApproval,
-    layout: PATH_INDEX
+    layout: PATH_INDEX,
+    inHeader: true
   }
 ];
 

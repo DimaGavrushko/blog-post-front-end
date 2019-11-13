@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import { API_URL } from "../../constants/api";
+import React from "react";
 
 const News = () => {
-  useEffect(() => {
+  /*useEffect(() => {
     fetch(API_URL)
       .then(res => res.json())
       .then(console.log);
-  }, []);
+  }, []);*/
 
   return (
     <div>
