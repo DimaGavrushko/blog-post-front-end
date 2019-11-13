@@ -7,7 +7,7 @@ export default () => ({
     flexDirection: "row",
     justifyContent: "space-between",
     background: `rgba(0, 0, 0, 0) linear-gradient(to right, ${primaryColor[0]} 0px, ${primaryColor[1]} 100%) repeat scroll 0 0 !important`,
-    padding: "0.5rem 7%"
+    padding: "0.5rem 10%"
   },
   headerPartContainer: {
     display: "flex",
@@ -22,7 +22,7 @@ export default () => ({
       backgroundColor: fade(whiteColor, 0.45)
     },
     marginRight: 20,
-    width: "100%"
+    width: "15rem"
   },
   searchIcon: {
     paddingLeft: 10,
@@ -38,8 +38,7 @@ export default () => ({
   },
   inputInput: {
     padding: 10,
-    paddingLeft: "30%",
-    transition: "width 1s",
+    paddingLeft: "25%",
     width: "100%"
   }
 });

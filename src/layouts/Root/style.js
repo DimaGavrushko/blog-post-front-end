@@ -1,5 +1,5 @@
 export default () => ({
   mainContainer: {
-    padding: "0.1rem 7%"
+    padding: "0.5rem 10%"
   }
 });
