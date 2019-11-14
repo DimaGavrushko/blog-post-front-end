@@ -1,6 +1,6 @@
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import style from "./styles";
+import style from "./style";
 import { NavLink } from "react-router-dom";
 import { NEWS_PATH } from "../../../constants/routes";
 

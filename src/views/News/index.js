@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { API_URL } from "../../constants/api";
 
 const News = () => {
   /*useEffect(() => {
