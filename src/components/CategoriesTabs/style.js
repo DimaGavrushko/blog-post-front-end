@@ -1,4 +1,4 @@
-import { grayColor, whiteColor } from "../../constants/colors";
+import { grayColor } from "../../constants/colors";
 
 export default () => ({
   categoriesTabsContainer: {

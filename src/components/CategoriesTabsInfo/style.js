@@ -1,5 +1,3 @@
-import { grayColor, whiteColor } from "../../constants/colors";
-
 export default () => ({
   categoriesTabsInfoContainer: {
     width: "100%",
