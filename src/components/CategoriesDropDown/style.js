@@ -2,6 +2,7 @@ import { grayColor, whiteColor } from "../../constants/colors";
 
 export default () => ({
   categoriesDropDownContainer: {
+    zIndex: 1000,
     display: "flex",
     position: "absolute",
     width: "100%",

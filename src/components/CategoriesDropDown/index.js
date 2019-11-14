@@ -4,6 +4,9 @@ import style from "./style";
 import CategoriesTabs from "../CategoriesTabs";
 import CategoriesTabsInfo from "../CategoriesTabsInfo";
 import { categories } from "../../constants";
+import Collapse from "@material-ui/core/Collapse";
+import Zoom from "@material-ui/core/Zoom";
+import Fade from "@material-ui/core/Fade";
 
 const useStyles = makeStyles(style);
 
@@ -17,14 +20,16 @@ const CategoriesDropDown = () => {
   };
 
   return (
-    <div className={classes.categoriesDropDownContainer}>
-      <CategoriesTabs
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryClick={onCategoryClick}
-      />
-      <CategoriesTabsInfo />
-    </div>
+    <Fade in={true} timeout={400}>
+      <div className={classes.categoriesDropDownContainer}>
+        <CategoriesTabs
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryClick={onCategoryClick}
+        />
+        <CategoriesTabsInfo />
+      </div>
+    </Fade>
   );
 };
 

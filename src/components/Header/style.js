@@ -7,7 +7,7 @@ export default () => ({
     flexDirection: "row",
     justifyContent: "space-between",
     background: `rgba(0, 0, 0, 0) linear-gradient(to right, ${primaryColor[0]} 0px, ${primaryColor[1]} 100%) repeat scroll 0 0 !important`,
-    padding: "0.5rem 10%"
+    padding: "0.2rem 10%"
   },
   headerPartContainer: {
     display: "flex",
