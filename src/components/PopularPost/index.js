@@ -7,10 +7,12 @@ import { NavLink } from "react-router-dom";
 import { POST_PATH } from "../../constants/routes";
 import DateAndAuthor from "../shared/DateAndAuthor";
 import { whiteColor } from "../../constants/colors";
+import * as classnames from "classnames";
+import CategoryLabel from "../shared/CategoryLabel";
 
 const useStyles = makeStyles(style);
 
-const PopularPost = ({ post }) => {
+const PopularPost = ({ post, isFirst = false }) => {
   const classes = useStyles();
 
   return (
@@ -18,15 +20,22 @@ const PopularPost = ({ post }) => {
       <img className={classes.image} src={post.img} />
       <div className={classes.postBackground}>
         <div className={classes.postInfoContainer}>
-          <Typography variant="h5">
+          <CategoryLabel name={post.category} />
+          <Typography
+            className={classnames({
+              [classes.title]: true,
+              [classes.bigText]: isFirst
+            })}
+            variant="h5"
+          >
             <NavLink
+              className={classes.link}
               to={POST_PATH.replace(":id", post.id)}
-              className={classes.title}
             >
               {post.title}
             </NavLink>
-            <DateAndAuthor post={post} color={whiteColor} />
           </Typography>
+          <DateAndAuthor post={post} color={whiteColor} />
         </div>
       </div>
     </div>
@@ -35,6 +44,7 @@ const PopularPost = ({ post }) => {
 
 PopularPost.propTypes = {
   post: PropTypes.object.isRequired,
+  isFirst: PropTypes.bool
 };
 
 export default PopularPost;

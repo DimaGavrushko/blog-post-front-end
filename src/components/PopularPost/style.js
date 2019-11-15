@@ -1,4 +1,4 @@
-import { blackColor, whiteColor } from "../../constants/colors";
+import { blackColor, hexToRgb, whiteColor } from "../../constants/colors";
 
 export default () => ({
   postContainer: {
@@ -17,11 +17,10 @@ export default () => ({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: blackColor,
+    backgroundColor: `rgba(${hexToRgb(blackColor)}, 0.75)`,
     margin: "0.2rem",
-    opacity: 0.75,
     "&:hover": {
-      opacity: 0.9
+      backgroundColor: `rgba(${hexToRgb(blackColor)}, 0.9)`
     }
   },
   postInfoContainer: {
@@ -33,10 +32,18 @@ export default () => ({
     padding: "1rem 1.5rem",
     color: whiteColor
   },
-  title: {
+  bigText: {
+    fontSize: "26px !important"
+  },
+  link: {
     textDecoration: "none",
     color: whiteColor,
-    fontSize: "1.5rem",
+    "&:hover": {
+      textDecoration: "underline"
+    }
+  },
+  title: {
+    fontSize: 18,
     fontWeight: 600,
     padding: "0.8rem 0 0.5rem !important"
   },

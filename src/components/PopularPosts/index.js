@@ -15,13 +15,13 @@ const PopularPosts = () => {
   return (
     <Grid container>
       <Grid item xs={12} sm={12} md={6} lg={6}>
-        <PopularPost post={popularPosts[0]} />
+        <PopularPost post={popularPosts[0]} isFirst={true} />
       </Grid>
       <Grid item xs={12} sm={12} md={3} lg={3}>
-        <PopularPost post={popularPosts[1]} />
+        <PopularPost post={popularPosts[1]} isFirst={false} />
       </Grid>
       <Grid item xs={12} sm={12} md={3} lg={3}>
-        <PopularPost post={popularPosts[2]} />
+        <PopularPost post={popularPosts[2]} isFirst={false} />
       </Grid>
     </Grid>
   );

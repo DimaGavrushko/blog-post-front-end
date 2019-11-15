@@ -4,8 +4,6 @@ import style from "./style";
 import CategoriesTabs from "../CategoriesTabs";
 import CategoriesTabsInfo from "../CategoriesTabsInfo";
 import { categories } from "../../constants";
-import Collapse from "@material-ui/core/Collapse";
-import Zoom from "@material-ui/core/Zoom";
 import Fade from "@material-ui/core/Fade";
 
 const useStyles = makeStyles(style);

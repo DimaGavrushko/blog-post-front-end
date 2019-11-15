@@ -7,10 +7,7 @@ const useStyles = makeStyles(style);
 const CategoriesTabsInfo = () => {
   const classes = useStyles();
 
-  return (
-    <div className={classes.categoriesTabsInfoContainer}>
-    </div>
-  );
+  return <div className={classes.categoriesTabsInfoContainer}></div>;
 };
 
 CategoriesTabsInfo.propTypes = {};

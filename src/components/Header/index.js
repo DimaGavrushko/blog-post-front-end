@@ -22,7 +22,7 @@ const Header = () => {
     if (user.role === "guest") {
       return layouts.map(
         ({ name, path, inHeader }) =>
-          inHeader && <HeaderLink key={name} name={name} path={path}/>
+          inHeader && <HeaderLink key={name} name={name} path={path} />
       );
     }
 
