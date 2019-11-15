@@ -10,13 +10,9 @@ const News = () => {
   }, []);*/
 
   return (
-    <div>
+    <>
       <PopularPosts />
-      <div style={{
-        width: "100px",
-        height: "100px"
-      }}></div>
-    </div>
+    </>
   );
 };
 

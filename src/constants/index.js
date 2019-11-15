@@ -13,11 +13,13 @@ export const categories = [
 export const popularPosts = [
   {
     id: "1",
-    title: "Say hello to real handmade office furniture! Clean & beautiful design",
+    title:
+      "Say hello to real handmade office furniture! Clean & beautiful design",
     category: "Technology",
     date: "24 JULY, 2019",
     author: "Dmitry",
-    img: "http://images.unsplash.com/photo-1532262318931-eb6ff23aabc6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9"
+    img:
+      "http://images.unsplash.com/photo-1532262318931-eb6ff23aabc6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9"
   },
   {
     id: "2",
