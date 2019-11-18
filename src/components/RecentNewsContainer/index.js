@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import * as PropTypes from "prop-types";
@@ -13,6 +13,16 @@ const useStyles = makeStyles(style);
 
 const RecentNewsContainer = () => {
   const classes = useStyles();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [postsPerPage] = useState(10);
+  const [selectedPosts, setPosts] = useState(
+    posts.slice(currentPage * postsPerPage, (currentPage + 1) * postsPerPage)
+  );
+
+  const onPaginationClick = page => {
+    setCurrentPage(page);
+    setPosts(posts.slice(page * postsPerPage, (page + 1) * postsPerPage));
+  };
 
   return (
     <>
@@ -22,14 +32,19 @@ const RecentNewsContainer = () => {
         </Typography>
       </div>
       <Grid container>
-        {posts.map(post => (
+        {selectedPosts.map(post => (
           <Grid key={post.id} item xs={12} sm={12} md={12} lg={8}>
             <RecentNews post={post} />
           </Grid>
         ))}
       </Grid>
       <div className={classes.paginationContainer}>
-        <Pagination current={0} count={10} total={posts.length} />
+        <Pagination
+          current={currentPage}
+          count={postsPerPage}
+          total={posts.length}
+          onPaginationClick={onPaginationClick}
+        />
       </div>
     </>
   );

@@ -6,8 +6,18 @@ import * as classnames from "classnames";
 
 const useStyles = makeStyles(style);
 
-const PaginationButton = ({ selected, label, size = "small" }) => {
+const PaginationButton = ({
+  index,
+  onPaginationClick,
+  selected,
+  label,
+  size = "small"
+}) => {
   const classes = useStyles();
+
+  const onClick = () => {
+    onPaginationClick(index);
+  };
 
   return (
     <div
@@ -15,6 +25,7 @@ const PaginationButton = ({ selected, label, size = "small" }) => {
         [classes.paginationButtonContainer]: true,
         [classes.selected]: selected
       })}
+      onClick={onClick}
     >
       {label}
     </div>
@@ -24,18 +35,26 @@ const PaginationButton = ({ selected, label, size = "small" }) => {
 PaginationButton.propTypes = {
   selected: PropTypes.bool.isRequired,
   label: PropTypes.number.isRequired,
-  size: PropTypes.string
+  size: PropTypes.string,
+  index: PropTypes.number.isRequired,
+  onPaginationClick: PropTypes.func.isRequired
 };
 
-const Pagination = ({ current, count, total }) => {
+const Pagination = ({ onPaginationClick, current, count, total }) => {
   const classes = useStyles();
   const length = Math.ceil(total / count);
-  const arr = [...Array(length)].map(() => 0);
+  const arr = [...Array(length)];
 
   return (
     <div className={classes.paginationContainer}>
       {arr.map((el, i) => (
-        <PaginationButton key={i} selected={current === i} label={i + 1} />
+        <PaginationButton
+          key={i}
+          index={i}
+          selected={current === i}
+          label={i + 1}
+          onPaginationClick={onPaginationClick}
+        />
       ))}
     </div>
   );
@@ -44,7 +63,8 @@ const Pagination = ({ current, count, total }) => {
 Pagination.propTypes = {
   current: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired
+  total: PropTypes.number.isRequired,
+  onPaginationClick: PropTypes.func.isRequired
 };
 
 export default Pagination;
