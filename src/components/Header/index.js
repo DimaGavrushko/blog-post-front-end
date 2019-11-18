@@ -32,7 +32,7 @@ const Header = () => {
   return (
     <>
       <AppBar
-        position="static"
+        position="sticky"
         classes={{
           root: classes.headerContainer
         }}
@@ -76,8 +76,8 @@ const Header = () => {
           </div>
           {renderRightContainer()}
         </div>
+        {isCategoriesOpen && <CategoriesDropDown />}
       </AppBar>
-      {isCategoriesOpen && <CategoriesDropDown />}
     </>
   );
 };

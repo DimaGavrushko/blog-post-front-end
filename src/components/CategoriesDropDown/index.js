@@ -18,7 +18,7 @@ const CategoriesDropDown = () => {
   };
 
   return (
-    <Fade in={true} timeout={400}>
+    <Fade in={true} timeout={500}>
       <div className={classes.categoriesDropDownContainer}>
         <CategoriesTabs
           categories={categories}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { API_URL } from "../../constants/api";
 import PopularPosts from "../../components/PopularPosts";
+import RecentNewsContainer from "../../components/RecentNewsContainer";
 
 const News = () => {
   /*useEffect(() => {
@@ -12,6 +13,7 @@ const News = () => {
   return (
     <>
       <PopularPosts />
+      <RecentNewsContainer />
     </>
   );
 };
