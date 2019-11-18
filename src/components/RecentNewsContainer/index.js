@@ -5,10 +5,9 @@ import * as PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import Grid from "@material-ui/core/Grid/Grid";
 import { posts, RECENT_NEWS } from "../../constants";
-import PopularPost from "../PopularPost";
-import * as classnames from "classnames";
 import Typography from "@material-ui/core/Typography";
 import RecentNews from "../RecentNews";
+import Pagination from "../Pagination";
 
 const useStyles = makeStyles(style);
 
@@ -29,6 +28,9 @@ const RecentNewsContainer = () => {
           </Grid>
         ))}
       </Grid>
+      <div className={classes.paginationContainer}>
+        <Pagination current={0} count={10} total={posts.length} />
+      </div>
     </>
   );
 };

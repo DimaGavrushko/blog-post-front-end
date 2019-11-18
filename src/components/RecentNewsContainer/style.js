@@ -9,5 +9,9 @@ export default () => ({
   },
   blogTopContainer: {
     paddingBottom: "4rem"
+  },
+  paginationContainer: {
+    float: "left",
+    marginBottom: "2rem"
   }
 });
