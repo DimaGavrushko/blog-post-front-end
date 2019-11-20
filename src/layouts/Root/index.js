@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import { user } from "../../constants";
 import { makeStyles } from "@material-ui/core";
 import style from "./style";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles(style);
 
@@ -33,6 +34,7 @@ const Root = () => {
     <div>
       <Header />
       <main className={classes.mainContainer}>{chooseRoutes()}</main>
+      <Footer />
     </div>
   );
 };

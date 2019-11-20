@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import * as PropTypes from "prop-types";
@@ -18,10 +18,12 @@ const RecentNewsContainer = () => {
   const [selectedPosts, setPosts] = useState(
     posts.slice(currentPage * postsPerPage, (currentPage + 1) * postsPerPage)
   );
+  const postsStartRef = useRef(null);
 
   const onPaginationClick = page => {
     setCurrentPage(page);
     setPosts(posts.slice(page * postsPerPage, (page + 1) * postsPerPage));
+    postsStartRef.current.scrollIntoView(false);
   };
 
   return (
@@ -32,6 +34,7 @@ const RecentNewsContainer = () => {
         </Typography>
       </div>
       <Grid container>
+        <div ref={postsStartRef}/>
         {selectedPosts.map(post => (
           <Grid key={post.id} item xs={12} sm={12} md={12} lg={8}>
             <RecentNews post={post} />
