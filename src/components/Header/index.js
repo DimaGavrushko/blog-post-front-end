@@ -5,15 +5,17 @@ import style from "./style";
 import Logo from "../shared/Logo";
 import appRoutes from "../../routes/routes";
 import layouts from "../../routes";
-import { user } from "../../constants";
 import HeaderLink from "../HeaderLink";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import CategoriesDropDown from "../CategoriesDropDown";
+import { connect } from "react-redux";
+import * as PropTypes from "prop-types";
+import { login } from "../../store/thunk/auth";
 
 const useStyles = makeStyles(style);
 
-const Header = () => {
+const Header = ({ user }) => {
   const classes = useStyles();
   const routes = appRoutes[user.role];
   const [isCategoriesOpen, onCategoriesClick] = useState(false);
@@ -82,4 +84,12 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user
+});
+
+Header.propTypes = {
+  user: PropTypes.object.isRequired
+};
+
+export default connect(mapStateToProps, null)(Header);
