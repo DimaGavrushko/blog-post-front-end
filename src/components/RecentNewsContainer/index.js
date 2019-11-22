@@ -34,7 +34,7 @@ const RecentNewsContainer = () => {
         </Typography>
       </div>
       <Grid container>
-        <div ref={postsStartRef}/>
+        <div ref={postsStartRef} />
         {selectedPosts.map(post => (
           <Grid key={post.id} item xs={12} sm={12} md={12} lg={8}>
             <RecentNews post={post} />

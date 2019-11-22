@@ -21,6 +21,7 @@ export class ApiService {
     return ApiService.request(
       fetch(`${this.baseUrl}/${resource}`, {
         ...options,
+        credentials: "include",
         method: "DELETE"
       })
     );
@@ -35,6 +36,7 @@ export class ApiService {
           "Content-Type": "application/json"
         },
         method: "PUT",
+        credentials: "include",
         body: JSON.stringify(data)
       })
     );
@@ -48,22 +50,24 @@ export class ApiService {
           ...options.headers,
           "Content-Type": "application/json"
         },
+        credentials: "include",
         method: "POST",
         body: JSON.stringify(data)
       })
     );
   }
 
-  async get(resource, options = {}) {
-    return ApiService.request(
-      fetch(`${this.baseUrl}/${resource}`, {
-        ...options,
-        headers: {
-          ...options.headers,
-          "Content-Type": "application/json"
-        },
-        method: "GET"
-      })
-    );
+  async get(resource, options = {}, withResponse = true) {
+    const requestPromise = fetch(`${this.baseUrl}/${resource}`, {
+      ...options,
+      headers: {
+        ...options.headers,
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      method: "GET"
+    });
+
+    return withResponse ? ApiService.request(requestPromise) : requestPromise;
   }
 }

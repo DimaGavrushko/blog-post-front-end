@@ -11,11 +11,12 @@ import SearchIcon from "@material-ui/icons/Search";
 import CategoriesDropDown from "../CategoriesDropDown";
 import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
-import { login } from "../../store/thunk/auth";
+import { logout } from "../../store/thunk/auth";
+import UserHeaderCard from "../UserHeaderCard";
 
 const useStyles = makeStyles(style);
 
-const Header = ({ user }) => {
+const Header = ({ user, logout }) => {
   const classes = useStyles();
   const routes = appRoutes[user.role];
   const [isCategoriesOpen, onCategoriesClick] = useState(false);
@@ -28,7 +29,7 @@ const Header = ({ user }) => {
       );
     }
 
-    return <p>User Profile</p>;
+    return <UserHeaderCard user={user} logout={logout} />;
   };
 
   return (
@@ -88,8 +89,13 @@ const mapStateToProps = ({ auth }) => ({
   user: auth.user
 });
 
-Header.propTypes = {
-  user: PropTypes.object.isRequired
+const mapDispatchToProps = {
+  logout
 };
 
-export default connect(mapStateToProps, null)(Header);
+Header.propTypes = {
+  user: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

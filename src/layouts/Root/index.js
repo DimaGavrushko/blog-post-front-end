@@ -30,23 +30,29 @@ const chooseRoutes = user => {
   );
 };
 
-const tryAuth = () => WrappingComponent => {
+const tryAuth = () => WrappedComponent => {
   class TryAuth extends PureComponent {
     componentDidMount = () => {
-      const { tryAuthentication } = this.props;
-      tryAuthentication();
+      const {
+        auth: { user },
+        tryAuthentication
+      } = this.props;
+
+      if (user && user.role === "guest") {
+        tryAuthentication();
+      }
     };
 
     render() {
       const {
-        auth: { user, isLoading }
+        auth: { isLoading }
       } = this.props;
 
-      if (!user || isLoading) {
+      if (isLoading) {
         return null;
       }
 
-      return <WrappingComponent />;
+      return <WrappedComponent />;
     }
   }
 

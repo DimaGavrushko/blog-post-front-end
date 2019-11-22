@@ -1,7 +1,9 @@
 import { auth } from "../actions/types";
 
 const initialState = {
-  user: null,
+  user: {
+    role: "guest"
+  },
   latestAuthError: null,
   isLoading: null
 };
@@ -26,18 +28,28 @@ export default (state = initialState, action) => {
       };
     }
 
-    case auth.CATCH_LOGIN_ERROR: {
+    case auth.CATCH_ERROR: {
       const { error } = action.payload;
 
       return {
         ...state,
-        user: null,
         isLoading: false,
         latestAuthError: error.message
       };
     }
 
     case auth.CATCH_TRY_AUTH_ERROR: {
+      return {
+        ...state,
+        user: {
+          role: "guest"
+        },
+        isLoading: false,
+        latestAuthError: null
+      };
+    }
+
+    case auth.HANDLE_SUCCESS_LOG_OUT: {
       return {
         ...state,
         user: {
