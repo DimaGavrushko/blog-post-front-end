@@ -32,8 +32,6 @@ export const tryAuthentication = () => async dispatch => {
     dispatch(handleSuccessLogin({ user }));
   } catch (error) {
     dispatch(catchTryAuthError());
-  } finally {
-    dispatch(push(NEWS_PATH));
   }
 };
 
