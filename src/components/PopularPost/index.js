@@ -17,7 +17,7 @@ const PopularPost = ({ post, isFirst = false }) => {
 
   return (
     <div className={classes.postContainer}>
-      <img className={classes.image} src={post.img} />
+      <img alt="" className={classes.image} src={post.img} />
       <div className={classes.postBackground}>
         <div className={classes.postInfoContainer}>
           <CategoryLabel name={post.category} />

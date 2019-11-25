@@ -5,3 +5,9 @@ export const auth = {
   START_LOGIN: "auth/START_LOGIN",
   HANDLE_SUCCESS_LOG_OUT: "auth/HANDLE_SUCCESS_LOG_OUT"
 };
+
+export const users = {
+  START_LOAD_USER: "users/START_LOAD_USER",
+  HANDLE_SUCCESS_LOAD_USER: "users/HANDLE_SUCCESS_LOAD_USER",
+  CATCH_ERROR: "users/CATCH_ERROR"
+};

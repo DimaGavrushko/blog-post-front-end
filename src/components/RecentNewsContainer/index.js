@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
-import * as PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
 import Grid from "@material-ui/core/Grid/Grid";
 import { posts, RECENT_NEWS } from "../../constants";
 import Typography from "@material-ui/core/Typography";

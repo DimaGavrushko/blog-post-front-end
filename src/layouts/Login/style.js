@@ -43,7 +43,7 @@ export default {
     borderRadius: 4,
     padding: "1rem",
     marginBottom: "1rem",
-    border: `1px solid ${dangerColor}`,
+    border: `1px solid ${dangerColor}`
   },
   sizeLetter: {
     fontSize: 16

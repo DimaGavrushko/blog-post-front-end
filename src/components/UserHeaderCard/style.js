@@ -6,13 +6,27 @@ import {
 } from "../../constants/colors";
 
 export default () => ({
-  container: {
-    padding: "0.2rem 0",
-    marginLeft: "2rem",
+  image: {
+    width: "3.5rem",
+    height: "3.5rem",
+    borderRadius: "50%",
+    objectFit: "cover",
+    marginLeft: "1rem"
+  },
+  userInfoContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  userTextInfoContainer: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-end",
-    justifyContent: "center",
+    justifyContent: "center"
+  },
+  container: {
+    padding: "0.2rem 0",
+    marginLeft: "2rem",
     color: whiteColor
   },
   name: {
@@ -51,5 +65,10 @@ export default () => ({
   },
   user: {
     backgroundColor: greenColor
+  },
+  link: {
+    textDecoration: "none",
+    color: whiteColor,
+    fontWeight: "bold"
   }
 });

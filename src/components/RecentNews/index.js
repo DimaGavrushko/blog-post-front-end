@@ -18,7 +18,7 @@ const RecentNews = ({ post }) => {
   return (
     <div className={classes.container}>
       <div className={classes.imageContainer}>
-        <img className={classes.image} src={post.img} />
+        <img alt="" className={classes.image} src={post.img} />
       </div>
       <div className={classes.metaContainer}>
         <div className={classes.titleContainer}>

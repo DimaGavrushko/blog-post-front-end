@@ -1,4 +1,4 @@
-import React, { PureComponent, useEffect } from "react";
+import React, { PureComponent } from "react";
 import appRoutes from "../../routes/routes";
 import { Redirect, Route, Switch } from "react-router";
 import { NEWS_PATH, PATH_INDEX } from "../../constants/routes";

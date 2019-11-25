@@ -4,6 +4,9 @@ import style from "./style";
 import * as PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import * as classnames from "classnames";
+import { NavLink } from "react-router-dom";
+import { PROFILE_PATH } from "../../constants/routes";
+import defaultAvatar from "../../assets/images/default-avatar.png";
 
 const useStyles = makeStyles(style);
 
@@ -12,23 +15,37 @@ const UserHeaderCard = ({ user, logout }) => {
 
   return (
     <div className={classes.container}>
-      <Typography variant="h6" className={classes.name}>
-        {user.first}
-      </Typography>
-      <div className={classes.roleContainer}>
-        <div
-          className={classnames({
-            [classes.dot]: true,
-            [classes[user.role]]: true
-          })}
-        />
-        <Typography variant="h6" className={classes.role}>
-          {user.role}
-        </Typography>
+      <div className={classes.userInfoContainer}>
+        <div className={classes.userTextInfoContainer}>
+          <NavLink
+            to={PROFILE_PATH.replace(":id", user._id)}
+            className={classes.link}
+          >
+            <Typography variant="h6" className={classes.name}>
+              {user.first + " " + user.last}
+            </Typography>
+          </NavLink>
+          <div className={classes.roleContainer}>
+            <div
+              className={classnames({
+                [classes.dot]: true,
+                [classes[user.role]]: true
+              })}
+            />
+            <Typography variant="h6" className={classes.role}>
+              {user.role}
+            </Typography>
+          </div>
+          <Typography
+            variant="button"
+            className={classes.button}
+            onClick={logout}
+          >
+            Log out
+          </Typography>
+        </div>
+        <img alt="" className={classes.image} src={user.url || defaultAvatar} />
       </div>
-      <Typography variant="button" className={classes.button} onClick={logout}>
-        Log out
-      </Typography>
     </div>
   );
 };
