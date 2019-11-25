@@ -12,6 +12,8 @@ export const grayColor = [
 
 export const whiteColor = "#ffffff";
 
+export const dangerColor = "#ff0000";
+
 export const redColor = "#ff6347";
 
 export const greenColor = "#34BB62";

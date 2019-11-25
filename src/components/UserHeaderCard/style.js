@@ -16,18 +16,18 @@ export default () => ({
     color: whiteColor
   },
   name: {
-    lineHeight: "1.25",
+    lineHeight: "1.5",
     fontSize: "1rem"
   },
   role: {
     marginLeft: "0.25rem",
-    lineHeight: "1.25",
+    lineHeight: "1.5",
     fontSize: "0.75rem",
     textTransform: "capitalize"
   },
   button: {
     fontSize: "0.75rem",
-    lineHeight: "1.25",
+    lineHeight: "1.5",
     cursor: "pointer",
     textTransform: "none",
     "&:hover": {

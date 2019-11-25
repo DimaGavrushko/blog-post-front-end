@@ -3,7 +3,7 @@ import { fade } from "@material-ui/core/styles";
 
 export default () => ({
   headerContainer: {
-    maxHeight: "10vh",
+    height: "10vh",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
