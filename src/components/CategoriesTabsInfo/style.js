@@ -1,7 +1,8 @@
 export default () => ({
   categoriesTabsInfoContainer: {
     width: "100%",
-    minHeight: 100, // optional
-    padding: "1rem 10% 1rem 0"
+    height: "100%",
+    padding: "1rem 10% 1rem 2rem",
+    display: "flex"
   }
 });

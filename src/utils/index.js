@@ -21,3 +21,14 @@ export const getDescription = text => {
   const subText = text.substring(0, 200);
   return subText.substring(0, subText.lastIndexOf(".") + 1 || subText.length);
 };
+
+export const getShortName = text => {
+  let name;
+  if (text.length > 50) {
+    name = text.substring(0, 50);
+    name = name.substring(0, name.lastIndexOf(" ") + 1);
+    return name + "...";
+  }
+
+  return text;
+};
