@@ -10,7 +10,7 @@ import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { tryAuthentication } from "../../store/thunk/auth";
 import { compose } from "redux";
-import { loadCategories } from "../../store/thunk/posts";
+import { loadCategoriesAndPosts } from "../../store/thunk/posts";
 
 const useStyles = makeStyles(style);
 
@@ -37,22 +37,19 @@ const tryAuth = () => WrappedComponent => {
       const {
         auth: { user },
         tryAuthentication,
-        loadCategories
+        loadCategoriesAndPosts
       } = this.props;
 
-      loadCategories();
+      loadCategoriesAndPosts();
       if (user && user.role === "guest") {
         tryAuthentication();
       }
     };
 
     render() {
-      const {
-        auth: { isLoading },
-        posts: { isLoadingCategories }
-      } = this.props;
+      const { auth, posts } = this.props;
 
-      if (isLoading || isLoadingCategories) {
+      if (auth.isLoading || posts.isLoading) {
         return null;
       }
 
@@ -64,11 +61,11 @@ const tryAuth = () => WrappedComponent => {
     auth: PropTypes.object.isRequired,
     posts: PropTypes.object.isRequired,
     tryAuthentication: PropTypes.func.isRequired,
-    loadCategories: PropTypes.func.isRequired
+    loadCategoriesAndPosts: PropTypes.func.isRequired
   };
 
   const mapStateToProps = ({ auth, posts }) => ({ auth, posts });
-  const mapDispatchToProps = { tryAuthentication, loadCategories };
+  const mapDispatchToProps = { tryAuthentication, loadCategoriesAndPosts };
 
   return connect(mapStateToProps, mapDispatchToProps)(TryAuth);
 };

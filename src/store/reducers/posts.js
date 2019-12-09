@@ -4,25 +4,26 @@ const initialState = {
   posts: [],
   categories: [],
   latestAuthError: null,
-  isLoadingCategories: null
+  isLoading: null
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case posts.START_LOAD_CATEGORIES: {
+    case posts.START_LOAD_CATEGORIES_AND_POSTS: {
       return {
         ...state,
-        isLoadingCategories: true
+        isLoading: true
       }
     }
 
-    case posts.HANDLE_SUCCESS_LOAD_CATEGORIES: {
-      const { categories } = action.payload;
+    case posts.HANDLE_SUCCESS_LOAD_CATEGORIES_AND_POSTS: {
+      const { posts, categories } = action.payload;
 
       return {
         ...state,
-        isLoadingCategories: false,
-        categories
+        isLoading: false,
+        categories,
+        posts
       }
     }
 
