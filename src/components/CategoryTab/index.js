@@ -8,7 +8,6 @@ const useStyles = makeStyles(style);
 
 const CategoryTab = ({
   onCategoryClick,
-  name,
   selectedCategory,
   currentCategory
 }) => {
@@ -16,22 +15,21 @@ const CategoryTab = ({
 
   return (
     <div
-      onClick={e => onCategoryClick(e, currentCategory)}
+      onClick={e => onCategoryClick(e, currentCategory._id)}
       className={classnames({
         [classes.category]: true,
-        [classes.selected]: selectedCategory === currentCategory
+        [classes.selected]: selectedCategory._id === currentCategory._id
       })}
     >
-      {name}
+      {currentCategory.name}
     </div>
   );
 };
 
 CategoryTab.propTypes = {
   onCategoryClick: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  selectedCategory: PropTypes.number.isRequired,
-  currentCategory: PropTypes.number.isRequired
+  selectedCategory: PropTypes.object.isRequired,
+  currentCategory: PropTypes.object.isRequired
 };
 
 export default CategoryTab;

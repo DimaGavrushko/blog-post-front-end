@@ -3,9 +3,10 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import PostInHeader from "../PostInHeader";
 import { posts } from "../../constants";
+import * as PropTypes from "prop-types";
 const useStyles = makeStyles(style);
 
-const CategoriesTabsInfo = () => {
+const CategoriesTabsInfo = ({ selectedCategory }) => {
   const classes = useStyles();
 
   return (
@@ -17,6 +18,7 @@ const CategoriesTabsInfo = () => {
   );
 };
 
-CategoriesTabsInfo.propTypes = {};
+CategoriesTabsInfo.propTypes = {
+};
 
 export default CategoriesTabsInfo;

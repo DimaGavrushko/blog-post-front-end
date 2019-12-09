@@ -17,14 +17,6 @@ export const user = {
   role: "admin"
 };
 
-export const categories = [
-  "category1",
-  "category2",
-  "category3",
-  "category4",
-  "category5"
-];
-
 export const RECENT_NEWS = "Recent News";
 
 export const popularPosts = [

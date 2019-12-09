@@ -16,6 +16,11 @@ const PostInHeader = ({ post }) => {
     <div className={classes.container}>
       <div className={classes.imageContainer}>
         <img alt="" className={classes.image} src={post.img} />
+        <div className={classes.postBackground}>
+          <div className={classes.labelContainer}>
+            {post.category}
+          </div>
+        </div>
       </div>
       <NavLink to={POST_PATH.replace(":id", post.id)} className={classes.link}>
         <Typography variant="h4" className={classes.title}>

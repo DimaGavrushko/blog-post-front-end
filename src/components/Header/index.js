@@ -16,7 +16,7 @@ import UserHeaderCard from "../UserHeaderCard";
 
 const useStyles = makeStyles(style);
 
-const Header = ({ user, logout }) => {
+const Header = ({ user, logout, categories }) => {
   const classes = useStyles();
   const routes = appRoutes[user.role];
   const [isCategoriesOpen, onCategoriesClick] = useState(false);
@@ -79,14 +79,15 @@ const Header = ({ user, logout }) => {
           </div>
           {renderRightContainer()}
         </div>
-        {isCategoriesOpen && <CategoriesDropDown />}
+        {isCategoriesOpen && <CategoriesDropDown categories={categories} />}
       </AppBar>
     </>
   );
 };
 
-const mapStateToProps = ({ auth }) => ({
-  user: auth.user
+const mapStateToProps = ({ auth, posts: { categories } }) => ({
+  user: auth.user,
+  categories
 });
 
 const mapDispatchToProps = {
@@ -95,7 +96,8 @@ const mapDispatchToProps = {
 
 Header.propTypes = {
   user: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -11,13 +11,12 @@ const CategoriesTabs = ({ categories, selectedCategory, onCategoryClick }) => {
 
   return (
     <div className={classes.categoriesTabsContainer}>
-      {categories.map((name, i) => (
+      {categories.map(category => (
         <CategoryTab
-          key={name}
+          key={category._id}
           selectedCategory={selectedCategory}
-          currentCategory={i}
+          currentCategory={category}
           onCategoryClick={onCategoryClick}
-          name={name}
         />
       ))}
     </div>
@@ -26,7 +25,7 @@ const CategoriesTabs = ({ categories, selectedCategory, onCategoryClick }) => {
 
 CategoriesTabs.propTypes = {
   categories: PropTypes.array.isRequired,
-  selectedCategory: PropTypes.number.isRequired,
+  selectedCategory: PropTypes.object.isRequired,
   onCategoryClick: PropTypes.func.isRequired
 };
 
