@@ -32,8 +32,8 @@ export class ApiService {
       fetch(`${this.baseUrl}/${resource}`, {
         ...options,
         headers: {
-          ...options.headers,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          ...options.headers
         },
         method: "PUT",
         credentials: "include",
@@ -47,8 +47,8 @@ export class ApiService {
       fetch(`${this.baseUrl}/${resource}`, {
         ...options,
         headers: {
-          ...options.headers,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          ...options.headers
         },
         credentials: "include",
         method: "POST",
@@ -61,8 +61,8 @@ export class ApiService {
     const requestPromise = fetch(`${this.baseUrl}/${resource}`, {
       ...options,
       headers: {
-        ...options.headers,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        ...options.headers
       },
       credentials: "include",
       method: "GET"
