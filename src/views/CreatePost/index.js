@@ -16,6 +16,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
+let postData = new FormData();
 const fileReader = new FileReader();
 const useStyles = makeStyles(style);
 
@@ -34,6 +35,11 @@ const CreatePost = ({ categories = [] }) => {
     }
   };
 
+
+  const convertContentToHtml = editorState => {
+    return draftToHtml(convertToRaw(editorState.getCurrentContent()));
+  };
+
   const onEditorStateChange = editorState => {
     setEditorState(editorState);
   };
@@ -45,13 +51,20 @@ const CreatePost = ({ categories = [] }) => {
   const loadPhoto = ({ target }) => {
     const [photo] = target.files;
     fileReader.readAsDataURL(photo);
+    postData.append('img', photo);
+  };
+
+  const onPostCreate = () => {
+    postData.append("title", title);
+    postData.append("categoryId", category._id);
+    postData.append("content", convertContentToHtml(editorState));
   };
 
   return (
     <>
       <Grid container className={classes.gridContainer}>
-        <Grid item xs={0} sm={1} md={2} lg={2}></Grid>
-        <Grid item xs={11} sm={9} md={7} lg={7}>
+        <Grid item xs={1} sm={1} md={2} lg={2}></Grid>
+        <Grid item xs={10} sm={9} md={7} lg={7}>
           <div className={classes.container}>
             <div className={classes.categoryTitleContainer}>
               {!!categories.length && (
@@ -107,9 +120,19 @@ const CreatePost = ({ categories = [] }) => {
               onEditorStateChange={onEditorStateChange}
             />
             <Button
+              disabled={
+                (
+                  !title.length || !img.length || !category
+                  || convertContentToHtml(editorState) === "<p></p>\n"
+                )
+              }
               variant="contained"
               color="primary"
-              className={classes.button}
+              classes={{
+                root: classes.button,
+                disabled: classes.disabledButton
+              }}
+              onClick={onPostCreate}
             >
               Submit
             </Button>

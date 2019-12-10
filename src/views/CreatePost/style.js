@@ -1,4 +1,4 @@
-import { grayColor, primaryColor } from "../../constants/colors";
+import { dangerColor, grayColor, primaryColor, whiteColor } from "../../constants/colors";
 
 export default {
   categoryTitleContainer: {
@@ -34,6 +34,10 @@ export default {
     borderRadius: "0 !important",
     backgroundColor: `${primaryColor[0]} !important`,
     marginBottom: "3rem"
+  },
+  disabledButton: {
+    backgroundColor: `${dangerColor} !important`,
+    color: `${whiteColor} !important`
   },
   container: {
     marginTop: "2rem",
