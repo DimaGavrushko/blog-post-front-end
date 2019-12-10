@@ -4,7 +4,7 @@ import style from "./style";
 import * as PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { PROFILE_PATH } from "../../../constants/routes";
-import { toPostDate } from "../../../utils";
+import { toPostDate } from "../../../utils/posts";
 
 const useStyles = makeStyles(style);
 

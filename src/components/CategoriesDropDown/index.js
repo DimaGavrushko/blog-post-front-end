@@ -15,7 +15,9 @@ const CategoriesDropDown = ({ categories }) => {
 
   const onCategoryClick = (e, categoryId) => {
     e.preventDefault();
-    selectCategory(categories.find(el => el._id === categoryId) || categories[0]);
+    selectCategory(
+      categories.find(el => el._id === categoryId) || categories[0]
+    );
   };
 
   return (

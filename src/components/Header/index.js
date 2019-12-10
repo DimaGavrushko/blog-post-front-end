@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
@@ -16,10 +16,21 @@ import UserHeaderCard from "../UserHeaderCard";
 
 const useStyles = makeStyles(style);
 
-const Header = ({ user, logout, categories }) => {
+const Header = ({
+  user,
+  logout,
+  categories,
+  router: {
+    location: { pathname }
+  }
+}) => {
   const classes = useStyles();
   const routes = appRoutes[user.role];
-  const [isCategoriesOpen, onCategoriesClick] = useState(false);
+  const [isCategoriesOpen, toggleCategories] = useState(false);
+
+  useEffect(() => {
+    toggleCategories(false);
+  }, [pathname]);
 
   const renderRightContainer = () => {
     if (user.role === "guest") {
@@ -50,13 +61,11 @@ const Header = ({ user, logout, categories }) => {
                   name={name}
                   path={path}
                   onClickAway={
-                    name === "Categories"
-                      ? () => onCategoriesClick(false)
-                      : null
+                    name === "Categories" ? () => toggleCategories(false) : null
                   }
                   onCategoriesClick={
                     name === "Categories"
-                      ? () => onCategoriesClick(!isCategoriesOpen)
+                      ? () => toggleCategories(!isCategoriesOpen)
                       : null
                   }
                 />
@@ -85,9 +94,10 @@ const Header = ({ user, logout, categories }) => {
   );
 };
 
-const mapStateToProps = ({ auth, posts: { categories } }) => ({
+const mapStateToProps = ({ router, auth, posts: { categories } }) => ({
   user: auth.user,
-  categories
+  categories,
+  router
 });
 
 const mapDispatchToProps = {
@@ -97,7 +107,8 @@ const mapDispatchToProps = {
 Header.propTypes = {
   user: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
-  categories: PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired,
+  router: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -17,12 +17,12 @@ export const toPostDate = dateString => {
   return `${day} ${month},${year}`;
 };
 
-export const getDescription = text => {
+export const getPostDescription = text => {
   const subText = text.substring(0, 200);
   return subText.substring(0, subText.lastIndexOf(".") + 1 || subText.length);
 };
 
-export const getShortName = text => {
+export const getPostShortName = text => {
   let name;
   if (text.length > 50) {
     name = text.substring(0, 50);

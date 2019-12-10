@@ -67,11 +67,11 @@ const Profile = ({
                 <div className={classes.firstAndLast}>
                   <TextContainerWithLabel
                     label="first"
-                    text={selectedUser.first}
+                    text={selectedUser.firstName}
                   />
                   <TextContainerWithLabel
                     label="last"
-                    text={selectedUser.last}
+                    text={selectedUser.lastName}
                   />
                 </div>
                 <TextContainerWithLabel

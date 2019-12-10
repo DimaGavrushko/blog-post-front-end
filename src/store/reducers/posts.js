@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: true
-      }
+      };
     }
 
     case posts.HANDLE_SUCCESS_LOAD_CATEGORIES_AND_POSTS: {
@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         isLoading: false,
         categories,
         posts
-      }
+      };
     }
 
     case posts.CATCH_ERROR: {

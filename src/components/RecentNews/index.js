@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { POST_PATH } from "../../constants/routes";
 import Typography from "@material-ui/core/Typography";
-import { getDescription } from "../../utils";
+import { getPostDescription } from "../../utils/posts";
 import CategoryLabel from "../shared/CategoryLabel";
 import DateAndAuthor from "../shared/DateAndAuthor";
 import { grayColor } from "../../constants/colors";
@@ -32,7 +32,7 @@ const RecentNews = ({ post }) => {
           </NavLink>
         </div>
         <div className={classes.descriptionContainer}>
-          <p className={classes.description}>{getDescription(post.text)}</p>
+          <p className={classes.description}>{getPostDescription(post.text)}</p>
         </div>
         <div className={classes.additionalInfoContainer}>
           <CategoryLabel name={post.category} />

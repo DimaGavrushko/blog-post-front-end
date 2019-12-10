@@ -8,11 +8,11 @@ import {
 
 const apiService = new ApiService(API_URL + "/posts");
 
-export const loadCategoriesAndPosts = () => async dispatch => {
+export const loadInitData = () => async dispatch => {
   try {
     dispatch(startLoadCategoriesAndPosts());
-    const categories = await apiService.get('categories');
-    const posts = await apiService.get('approved');
+    const categories = await apiService.get("categories");
+    const posts = await apiService.get("approved");
     dispatch(handleSuccessLoadCategoriesAndPosts({ categories, posts }));
   } catch (error) {
     dispatch(catchError({ error }));

@@ -22,7 +22,7 @@ const UserHeaderCard = ({ user, logout }) => {
             className={classes.link}
           >
             <Typography variant="h6" className={classes.name}>
-              {user.first + " " + user.last}
+              {user.firstName + " " + user.lastName}
             </Typography>
           </NavLink>
           <div className={classes.roleContainer}>

@@ -18,7 +18,6 @@ const CategoriesTabsInfo = ({ selectedCategory }) => {
   );
 };
 
-CategoriesTabsInfo.propTypes = {
-};
+CategoriesTabsInfo.propTypes = {};
 
 export default CategoriesTabsInfo;

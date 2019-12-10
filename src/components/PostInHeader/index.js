@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { POST_PATH } from "../../constants/routes";
 import Typography from "@material-ui/core/Typography";
-import { getShortName } from "../../utils";
+import { getPostShortName } from "../../utils/posts";
 
 const useStyles = makeStyles(style);
 
@@ -17,14 +17,12 @@ const PostInHeader = ({ post }) => {
       <div className={classes.imageContainer}>
         <img alt="" className={classes.image} src={post.img} />
         <div className={classes.postBackground}>
-          <div className={classes.labelContainer}>
-            {post.category}
-          </div>
+          <div className={classes.labelContainer}>{post.category}</div>
         </div>
       </div>
       <NavLink to={POST_PATH.replace(":id", post.id)} className={classes.link}>
         <Typography variant="h4" className={classes.title}>
-          {getShortName(post.title)}
+          {getPostShortName(post.title)}
         </Typography>
       </NavLink>
     </div>
