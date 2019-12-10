@@ -7,7 +7,7 @@ import { CATEGORY_PATH } from "../../../constants/routes";
 
 const useStyles = makeStyles(style);
 
-const CategoryLabel = ({ name }) => {
+const CategoryLabel = ({ name = "" }) => {
   const classes = useStyles();
 
   return (
@@ -20,7 +20,7 @@ const CategoryLabel = ({ name }) => {
 };
 
 CategoryLabel.propTypes = {
-  name: PropTypes.string.isRequired
+  name: PropTypes.string
 };
 
 export default CategoryLabel;
