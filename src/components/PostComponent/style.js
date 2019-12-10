@@ -27,7 +27,7 @@ export default () => ({
   content: {
     padding: "0 5%",
     textAlign: "left",
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: "2rem"
   }
 });

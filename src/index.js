@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { store, history } from "./store";
 import * as serviceWorker from "./serviceWorker";
 import "./style.css";
+import "../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 ReactDOM.render(
   <Provider store={store}>
