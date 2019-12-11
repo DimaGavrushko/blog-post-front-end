@@ -6,6 +6,8 @@ import PostComponent from "../../components/PostComponent";
 import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { posts as _posts } from "../../constants";
+import { NEWS_PATH } from "../../constants/routes";
+import { Redirect } from "react-router";
 
 const useStyles = makeStyles(style);
 
@@ -23,18 +25,21 @@ const Post = ({
   }, [id]);
 
   return (
-    <Grid container>
-      <Grid item xs={1} sm={1} md={1} lg={1}></Grid>
-      <Grid item xs={10} sm={8} md={7} lg={7}>
-        <PostComponent post={post} />
+    !!post ? (
+      <Grid container>
+        <Grid item xs={1} sm={1} md={1} lg={1} />
+        <Grid item xs={10} sm={8} md={7} lg={7}>
+          <PostComponent post={post} />
+        </Grid>
+        <Grid item xs={1} sm={3} md={4} lg={4} />
       </Grid>
-      <Grid item xs={1} sm={3} md={4} lg={4}></Grid>
-    </Grid>
+    ) : (
+      <Redirect to={NEWS_PATH} />
+    )
   );
 };
 
-const mapStateToProps = ({ router, posts }) => ({
-  router,
+const mapStateToProps = ({ posts }) => ({
   posts
 });
 

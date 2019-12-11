@@ -44,6 +44,10 @@ export default {
     padding: "0.2rem",
     background: blackColor,
     color: whiteColor,
-    fontSize: 10
+    fontSize: 10,
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline"
+    }
   }
 };

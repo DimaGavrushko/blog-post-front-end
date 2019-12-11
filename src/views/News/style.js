@@ -1,5 +1,5 @@
-export default () => ({
+export default {
   container: {
     marginBottom: "5%"
   }
-});
+}
