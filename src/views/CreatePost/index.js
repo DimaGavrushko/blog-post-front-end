@@ -21,7 +21,7 @@ let postData;
 const fileReader = new FileReader();
 const useStyles = makeStyles(style);
 
-const CreatePost = ({ categories = [], createPost }) => {
+const CreatePost = ({ categories = [], createPost, author }) => {
   const classes = useStyles();
   const [category, setCategory] = useState(categories[0]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -62,6 +62,8 @@ const CreatePost = ({ categories = [], createPost }) => {
     postData.append("title", title);
     postData.append("categoryId", category._id);
     postData.append("content", convertContentToHtml(editorState));
+    postData.append("authorId", author._id);
+    postData.append("authorName", author.firstName);
     createPost(postData);
   };
 
@@ -148,8 +150,9 @@ const CreatePost = ({ categories = [], createPost }) => {
     </>
   );
 };
-const mapStateToProps = ({ posts: { categories } }) => ({
-  categories
+const mapStateToProps = ({ posts: { categories }, auth: { user } }) => ({
+  categories,
+  author: user
 });
 
 const mapDispatchToProps = {
@@ -158,7 +161,8 @@ const mapDispatchToProps = {
 
 CreatePost.propTypes = {
   categories: PropTypes.array.isRequired,
-  createPost: PropTypes.func.isRequired
+  createPost: PropTypes.func.isRequired,
+  author: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);
