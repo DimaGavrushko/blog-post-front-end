@@ -16,6 +16,20 @@ export default (state = initialState, action) => {
       };
     }
 
+    case posts.START_CREATE_POST: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+
+    case posts.HANDLE_SUCCESS_CREATE_POST: {
+      return {
+        ...state,
+        isLoading: false
+      };
+    }
+
     case posts.HANDLE_SUCCESS_LOAD_CATEGORIES_AND_POSTS: {
       const { posts, categories } = action.payload;
 

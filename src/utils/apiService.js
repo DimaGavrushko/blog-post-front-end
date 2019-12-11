@@ -27,17 +27,23 @@ export class ApiService {
     );
   }
 
-  async put(resource, data = {}, options = {}) {
+  async put(resource, data = {}, options = {}, isFormData = false) {
+    const headers = !isFormData
+      ? {
+          "Content-Type": "application/json"
+        }
+      : {};
+
     return ApiService.request(
       fetch(`${this.baseUrl}/${resource}`, {
-        ...options,
         headers: {
-          "Content-Type": "application/json",
+          ...headers,
           ...options.headers
         },
         method: "PUT",
         credentials: "include",
-        body: JSON.stringify(data)
+        body: isFormData ? data : JSON.stringify(data),
+        ...options
       })
     );
   }

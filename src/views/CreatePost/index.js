@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import * as PropTypes from "prop-types";
@@ -15,17 +15,22 @@ import style from "./style";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import { createPost } from "../../store/thunk/posts";
 
-let postData = new FormData();
+let postData;
 const fileReader = new FileReader();
 const useStyles = makeStyles(style);
 
-const CreatePost = ({ categories = [] }) => {
+const CreatePost = ({ categories = [], createPost }) => {
   const classes = useStyles();
   const [category, setCategory] = useState(categories[0]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState("");
   const [img, setImage] = useState("");
+
+  useEffect(() => {
+    postData = new FormData();
+  }, []);
 
   const onFieldChange = ({ target }) => {
     if (target.name === "title") {
@@ -34,7 +39,6 @@ const CreatePost = ({ categories = [] }) => {
       setCategory(target.value);
     }
   };
-
 
   const convertContentToHtml = editorState => {
     return draftToHtml(convertToRaw(editorState.getCurrentContent()));
@@ -51,19 +55,20 @@ const CreatePost = ({ categories = [] }) => {
   const loadPhoto = ({ target }) => {
     const [photo] = target.files;
     fileReader.readAsDataURL(photo);
-    postData.append('img', photo);
+    postData.append("img", photo);
   };
 
   const onPostCreate = () => {
     postData.append("title", title);
     postData.append("categoryId", category._id);
     postData.append("content", convertContentToHtml(editorState));
+    createPost(postData);
   };
 
   return (
     <>
       <Grid container className={classes.gridContainer}>
-        <Grid item xs={1} sm={1} md={2} lg={2}></Grid>
+        <Grid item xs={1} sm={1} md={2} lg={2} />
         <Grid item xs={10} sm={9} md={7} lg={7}>
           <div className={classes.container}>
             <div className={classes.categoryTitleContainer}>
@@ -121,10 +126,10 @@ const CreatePost = ({ categories = [] }) => {
             />
             <Button
               disabled={
-                (
-                  !title.length || !img.length || !category
-                  || convertContentToHtml(editorState) === "<p></p>\n"
-                )
+                !title.length ||
+                !img.length ||
+                !category ||
+                convertContentToHtml(editorState) === "<p></p>\n"
               }
               variant="contained"
               color="primary"
@@ -138,7 +143,7 @@ const CreatePost = ({ categories = [] }) => {
             </Button>
           </div>
         </Grid>
-        <Grid item xs={1} sm={2} md={3} lg={3}></Grid>
+        <Grid item xs={1} sm={2} md={3} lg={3} />
       </Grid>
     </>
   );
@@ -147,8 +152,13 @@ const mapStateToProps = ({ posts: { categories } }) => ({
   categories
 });
 
-CreatePost.propTypes = {
-  categories: PropTypes.array.isRequired
+const mapDispatchToProps = {
+  createPost
 };
 
-export default connect(mapStateToProps, null)(CreatePost);
+CreatePost.propTypes = {
+  categories: PropTypes.array.isRequired,
+  createPost: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);

@@ -18,3 +18,11 @@ export const handleSuccessLoadCategoriesAndPosts = ({ posts, categories }) => ({
     categories
   }
 });
+
+export const startCreatePost = () => ({
+  type: postsTypes.START_CREATE_POST
+});
+
+export const handleSuccessCreatePost = () => ({
+  type: postsTypes.HANDLE_SUCCESS_CREATE_POST
+});

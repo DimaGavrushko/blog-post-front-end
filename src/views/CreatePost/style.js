@@ -1,4 +1,9 @@
-import { dangerColor, grayColor, primaryColor, whiteColor } from "../../constants/colors";
+import {
+  dangerColor,
+  grayColor,
+  primaryColor,
+  whiteColor
+} from "../../constants/colors";
 
 export default {
   categoryTitleContainer: {
