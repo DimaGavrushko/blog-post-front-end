@@ -1,6 +1,8 @@
+import { blackColor, grayColor } from "../../constants/colors";
+
 export default () => ({
   container: {
-    marginTop: "3.5rem",
+    marginTop: "1.5rem",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -25,9 +27,21 @@ export default () => ({
     objectFit: "cover"
   },
   content: {
-    padding: "0 5%",
+    padding: "0 2%",
     textAlign: "left",
-    fontSize: 18,
-    marginBottom: "2rem"
+    fontSize: 18
+  },
+  options: {
+    display: "flex",
+    margin: "1.5rem 0"
+  },
+  editButton: {
+    width: 100,
+    borderRadius: "0 !important",
+    backgroundColor: `${grayColor[1]} !important`,
+    color: `${blackColor} !important`
+  },
+  editButtonLink: {
+    textDecoration: "none"
   }
 });

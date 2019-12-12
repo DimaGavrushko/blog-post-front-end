@@ -22,7 +22,7 @@ export default {
     minWidth: "20%"
   },
   input: {
-    minWidth: "50%",
+    width: "100%",
     "& label.Mui-focused": {
       color: primaryColor[0]
     },
@@ -30,7 +30,8 @@ export default {
       "&.Mui-focused fieldset": {
         borderColor: primaryColor[0]
       }
-    }
+    },
+    marginLeft: "2rem"
   },
   select: {},
   button: {

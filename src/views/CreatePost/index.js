@@ -34,7 +34,7 @@ function getInitialContent(content) {
   return EditorState.createEmpty();
 }
 
-const CreatePost = ({ categories = [], createPost, author, post }) => {
+const CreatePost = ({ categories = [], createPost, author, location: { post } }) => {
   const classes = useStyles();
   const [category, setCategory] = useState(
     post ? categories.find(el => el.name === post.category) : categories[0]
@@ -182,7 +182,7 @@ CreatePost.propTypes = {
   categories: PropTypes.array.isRequired,
   createPost: PropTypes.func.isRequired,
   author: PropTypes.object.isRequired,
-  post: PropTypes.object
+  location: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);

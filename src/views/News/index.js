@@ -5,10 +5,12 @@ import PopularPost from "../../components/PopularPost";
 import { popularPosts } from "../../constants";
 import style from "./style";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import { connect } from "react-redux";
+import * as PropTypes from "prop-types";
 
 const useStyles = makeStyles(style);
 
-const News = () => {
+const News = ({ posts }) => {
   const classes = useStyles();
 
   return (
@@ -24,9 +26,17 @@ const News = () => {
           <PopularPost post={popularPosts[2]} isFirst={false} />
         </Grid>
       </Grid>
-      <RecentNewsContainer />
+      <RecentNewsContainer posts={posts} />
     </>
   );
 };
 
-export default News;
+const mapStateToProps = ({ posts: { posts } }) => ({
+  posts
+});
+
+News.propTypes = {
+  posts: PropTypes.array.isRequired
+};
+
+export default connect(mapStateToProps)(News);

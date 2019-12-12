@@ -18,15 +18,15 @@ const DateAndAuthor = ({ post, color }) => {
       }}
       className={classes.dateAndAuthor}
     >
-      <p className={classes.date}>{toPostDate(post.date)}</p>/
+      <p className={classes.date}>{toPostDate(post.createdAt)}</p>/
       <NavLink
         style={{
           color
         }}
         className={classes.author}
-        to={PROFILE_PATH.replace(":id", post.id)}
+        to={PROFILE_PATH.replace(":id", post.authorId)}
       >
-        {post.author}
+        {post.authorId}
       </NavLink>
     </div>
   );

@@ -2,14 +2,15 @@ import React, { useRef, useState } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import Grid from "@material-ui/core/Grid/Grid";
-import { posts, RECENT_NEWS } from "../../constants";
+import { RECENT_NEWS } from "../../constants";
 import Typography from "@material-ui/core/Typography";
 import RecentNews from "../RecentNews";
 import Pagination from "../Pagination";
+import * as PropTypes from "prop-types";
 
 const useStyles = makeStyles(style);
 
-const RecentNewsContainer = () => {
+const RecentNewsContainer = ({ posts = [] }) => {
   const classes = useStyles();
   const [currentPage, setCurrentPage] = useState(0);
   const [postsPerPage] = useState(10);
@@ -34,7 +35,7 @@ const RecentNewsContainer = () => {
       <Grid container>
         <div ref={postsStartRef} />
         {selectedPosts.map(post => (
-          <Grid key={post.id} item xs={12} sm={12} md={12} lg={8}>
+          <Grid key={post._id} item xs={12} sm={12} md={12} lg={8}>
             <RecentNews post={post} />
           </Grid>
         ))}
@@ -53,6 +54,8 @@ const RecentNewsContainer = () => {
   );
 };
 
-RecentNewsContainer.propTypes = {};
+RecentNewsContainer.propTypes = {
+  posts: PropTypes.array.isRequired
+};
 
 export default RecentNewsContainer;

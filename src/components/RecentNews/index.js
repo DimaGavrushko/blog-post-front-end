@@ -18,12 +18,12 @@ const RecentNews = ({ post }) => {
   return (
     <div className={classes.container}>
       <div className={classes.imageContainer}>
-        <img alt="" className={classes.image} src={post.img} />
+        <img alt="" className={classes.image} src={post.url} />
       </div>
       <div className={classes.metaContainer}>
         <div className={classes.titleContainer}>
           <NavLink
-            to={POST_PATH.replace(":id", post.id)}
+            to={POST_PATH.replace(":id", post._id)}
             className={classes.link}
           >
             <Typography variant="h4" className={classes.title}>
@@ -34,11 +34,13 @@ const RecentNews = ({ post }) => {
         <div className={classes.descriptionContainer}>
           <p
             className={classes.description}
-            dangerouslySetInnerHTML={{ __html: getPostDescription(post.text) }}
+            dangerouslySetInnerHTML={{
+              __html: getPostDescription(post.content)
+            }}
           />
         </div>
         <div className={classes.additionalInfoContainer}>
-          <CategoryLabel name={post.category} />
+          <CategoryLabel name={post.categoryId} />
           <DateAndAuthor post={post} color={grayColor[0]} />
         </div>
       </div>
