@@ -15,5 +15,14 @@ export default {
     marginRight: "1rem",
     width: 36,
     height: 36
+  },
+  categoriesContainer: {
+    marginTop: "1rem"
+  },
+  postContainer: {
+    padding: "1rem"
+  },
+  paginationContainer: {
+    marginBottom: "2rem"
   }
 };

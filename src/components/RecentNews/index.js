@@ -32,10 +32,6 @@ const RecentNews = ({ post }) => {
           </NavLink>
         </div>
         <div className={classes.descriptionContainer}>
-          <div
-            className={classes.content}
-
-          />
           <p
             className={classes.description}
             dangerouslySetInnerHTML={{ __html: getPostDescription(post.text) }}

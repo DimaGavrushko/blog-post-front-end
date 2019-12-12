@@ -7,9 +7,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
-import { EditorState, convertToRaw } from "draft-js";
+import { ContentState, convertToRaw, EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
 
 import style from "./style";
 import TextField from "@material-ui/core/TextField";
@@ -21,12 +22,33 @@ let postData;
 const fileReader = new FileReader();
 const useStyles = makeStyles(style);
 
-const CreatePost = ({ categories = [], createPost, author }) => {
+function getInitialContent(content) {
+  const contentBlock = htmlToDraft(content);
+  if (contentBlock) {
+    const contentState = ContentState.createFromBlockArray(
+      contentBlock.contentBlocks
+    );
+    return EditorState.createWithContent(contentState);
+  }
+
+  return EditorState.createEmpty();
+}
+
+const CreatePost = ({
+  categories = [],
+  createPost,
+  author,
+  post
+}) => {
   const classes = useStyles();
-  const [category, setCategory] = useState(categories[0]);
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [title, setTitle] = useState("");
-  const [img, setImage] = useState("");
+  const [category, setCategory] = useState(
+    post ? categories.find(el => el.name === post.category) : categories[0]
+  );
+  const [editorState, setEditorState] = useState(
+    post ? getInitialContent(post.text) : EditorState.createEmpty()
+  );
+  const [title, setTitle] = useState(post ? post.title : "");
+  const [img, setImage] = useState(post ? post.img : "");
 
   useEffect(() => {
     postData = new FormData();
@@ -103,9 +125,11 @@ const CreatePost = ({ categories = [], createPost, author }) => {
                 value={title}
               />
             </div>
-            <div className={classes.imageContainer}>
-              <img alt="" className={classes.image} src={img} />
-            </div>
+            {!!img.length && (
+              <div className={classes.imageContainer}>
+                <img alt="" className={classes.image} src={img} />
+              </div>
+            )}
             <Button
               variant="contained"
               color="primary"
@@ -162,7 +186,8 @@ const mapDispatchToProps = {
 CreatePost.propTypes = {
   categories: PropTypes.array.isRequired,
   createPost: PropTypes.func.isRequired,
-  author: PropTypes.object.isRequired
+  author: PropTypes.object.isRequired,
+  post: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);

@@ -170,7 +170,7 @@ export const posts = [
   {
     id: "11",
     title: "Do not make mistakes when choosing web hosting",
-    category: "Technology",
+    category: "Technologies",
     date: "Mon Nov 18 2019",
     author: "Dmitry",
     img:

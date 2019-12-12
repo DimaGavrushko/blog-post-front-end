@@ -24,18 +24,16 @@ const Post = ({
     setPost(_posts.find(el => el.id === id));
   }, [id]);
 
-  return (
-    !!post ? (
-      <Grid container>
-        <Grid item xs={1} sm={1} md={1} lg={1} />
-        <Grid item xs={10} sm={8} md={7} lg={7}>
-          <PostComponent post={post} />
-        </Grid>
-        <Grid item xs={1} sm={3} md={4} lg={4} />
+  return post ? (
+    <Grid container>
+      <Grid item xs={1} sm={1} md={1} lg={1} />
+      <Grid item xs={10} sm={8} md={7} lg={7}>
+        <PostComponent post={post} />
       </Grid>
-    ) : (
-      <Redirect to={NEWS_PATH} />
-    )
+      <Grid item xs={1} sm={3} md={4} lg={4} />
+    </Grid>
+  ) : (
+    <Redirect to={NEWS_PATH} />
   );
 };
 
