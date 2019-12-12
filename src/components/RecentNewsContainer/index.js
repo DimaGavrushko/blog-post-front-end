@@ -39,14 +39,16 @@ const RecentNewsContainer = () => {
           </Grid>
         ))}
       </Grid>
-      <div className={classes.paginationContainer}>
-        <Pagination
-          current={currentPage}
-          count={postsPerPage}
-          total={posts.length}
-          onPaginationClick={onPaginationClick}
-        />
-      </div>
+      {posts.length > postsPerPage && (
+        <div className={classes.paginationContainer}>
+          <Pagination
+            current={currentPage}
+            count={postsPerPage}
+            total={posts.length}
+            onPaginationClick={onPaginationClick}
+          />
+        </div>
+      )}
     </>
   );
 };

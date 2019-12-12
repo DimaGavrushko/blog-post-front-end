@@ -34,12 +34,7 @@ function getInitialContent(content) {
   return EditorState.createEmpty();
 }
 
-const CreatePost = ({
-  categories = [],
-  createPost,
-  author,
-  post
-}) => {
+const CreatePost = ({ categories = [], createPost, author, post }) => {
   const classes = useStyles();
   const [category, setCategory] = useState(
     post ? categories.find(el => el.name === post.category) : categories[0]

@@ -20,7 +20,9 @@ const PostInHeader = ({ post }) => {
           <NavLink
             to={CATEGORY_PATH.replace(":id", post.id)}
             className={classes.labelContainer}
-          >{post.category}</NavLink>
+          >
+            {post.category}
+          </NavLink>
         </div>
       </div>
       <NavLink to={POST_PATH.replace(":id", post.id)} className={classes.link}>
