@@ -17,12 +17,13 @@ const Post = ({
     params: { id }
   }
 }) => {
+  // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const [post, setPost] = useState({});
 
   useEffect(() => {
     setPost(posts.find(el => el._id === id));
-  }, [id]);
+  }, [id, posts]);
 
   return post ? (
     <Grid container>

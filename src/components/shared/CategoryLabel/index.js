@@ -7,12 +7,12 @@ import { CATEGORY_PATH } from "../../../constants/routes";
 
 const useStyles = makeStyles(style);
 
-const CategoryLabel = ({ name = "" }) => {
+const CategoryLabel = ({ id = "", name = "" }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.labelContainer}>
-      <NavLink className={classes.link} to={CATEGORY_PATH}>
+      <NavLink className={classes.link} to={CATEGORY_PATH.replace(":id", id)}>
         {name}
       </NavLink>
     </div>
@@ -20,6 +20,7 @@ const CategoryLabel = ({ name = "" }) => {
 };
 
 CategoryLabel.propTypes = {
+  id: PropTypes.string,
   name: PropTypes.string
 };
 

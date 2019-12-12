@@ -40,7 +40,7 @@ const RecentNews = ({ post }) => {
           />
         </div>
         <div className={classes.additionalInfoContainer}>
-          <CategoryLabel name={post.categoryId} />
+          <CategoryLabel name={post.categoryName} id={post.categoryId} />
           <DateAndAuthor post={post} color={grayColor[0]} />
         </div>
       </div>

@@ -15,17 +15,17 @@ const PostInHeader = ({ post }) => {
   return (
     <div className={classes.container}>
       <div className={classes.imageContainer}>
-        <img alt="" className={classes.image} src={post.img} />
+        <img alt="" className={classes.image} src={post.url} />
         <div className={classes.postBackground}>
           <NavLink
-            to={CATEGORY_PATH.replace(":id", post.id)}
+            to={CATEGORY_PATH.replace(":id", post.categoryId)}
             className={classes.labelContainer}
           >
-            {post.category}
+            {post.categoryName}
           </NavLink>
         </div>
       </div>
-      <NavLink to={POST_PATH.replace(":id", post.id)} className={classes.link}>
+      <NavLink to={POST_PATH.replace(":id", post._id)} className={classes.link}>
         <Typography variant="h4" className={classes.title}>
           {getPostShortName(post.title)}
         </Typography>

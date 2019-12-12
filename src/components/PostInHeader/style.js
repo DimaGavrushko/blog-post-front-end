@@ -1,8 +1,8 @@
-import { blackColor, hexToRgb, whiteColor } from "../../constants/colors";
+import { blackColor, whiteColor } from "../../constants/colors";
 
 export default {
   container: {
-    width: "100%",
+    maxWidth: "25%",
     height: "160px",
     display: "flex",
     marginRight: "3rem",

@@ -17,10 +17,10 @@ const PopularPost = ({ post, isFirst = false }) => {
 
   return (
     <div className={classes.postContainer}>
-      <img alt="" className={classes.image} src={post.img} />
+      <img alt="" className={classes.image} src={post.url} />
       <div className={classes.postBackground}>
         <div className={classes.postInfoContainer}>
-          <CategoryLabel name={post.category} />
+          <CategoryLabel name={post.categoryName} id={post.categoryId} />
           <Typography
             className={classnames({
               [classes.title]: true,
@@ -30,7 +30,7 @@ const PopularPost = ({ post, isFirst = false }) => {
           >
             <NavLink
               className={classes.link}
-              to={POST_PATH.replace(":id", post.id)}
+              to={POST_PATH.replace(":id", post._id)}
             >
               {post.title}
             </NavLink>

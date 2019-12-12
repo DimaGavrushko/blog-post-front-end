@@ -20,6 +20,7 @@ const Header = ({
   user,
   logout,
   categories,
+  posts,
   router: {
     location: { pathname }
   }
@@ -88,16 +89,19 @@ const Header = ({
           </div>
           {renderRightContainer()}
         </div>
-        {isCategoriesOpen && <CategoriesDropDown categories={categories} />}
+        {isCategoriesOpen && (
+          <CategoriesDropDown posts={posts} categories={categories} />
+        )}
       </AppBar>
     </>
   );
 };
 
-const mapStateToProps = ({ router, auth, posts: { categories } }) => ({
+const mapStateToProps = ({ router, auth, posts: { categories, posts } }) => ({
   user: auth.user,
   categories,
-  router
+  router,
+  posts
 });
 
 const mapDispatchToProps = {
@@ -108,7 +112,8 @@ Header.propTypes = {
   user: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
-  router: PropTypes.object
+  router: PropTypes.object,
+  posts: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

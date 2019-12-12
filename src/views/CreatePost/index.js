@@ -34,16 +34,21 @@ function getInitialContent(content) {
   return EditorState.createEmpty();
 }
 
-const CreatePost = ({ categories = [], createPost, author, location: { post } }) => {
+const CreatePost = ({
+  categories = [],
+  createPost,
+  author,
+  location: { post }
+}) => {
   const classes = useStyles();
   const [category, setCategory] = useState(
-    post ? categories.find(el => el.name === post.category) : categories[0]
+    post ? categories.find(el => el._id === post.categoryId) : categories[0]
   );
   const [editorState, setEditorState] = useState(
-    post ? getInitialContent(post.text) : EditorState.createEmpty()
+    post ? getInitialContent(post.content) : EditorState.createEmpty()
   );
   const [title, setTitle] = useState(post ? post.title : "");
-  const [img, setImage] = useState(post ? post.img : "");
+  const [img, setImage] = useState(post ? post.url : "");
 
   useEffect(() => {
     postData = new FormData();

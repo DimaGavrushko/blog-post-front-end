@@ -31,7 +31,7 @@ const Profile = ({
       setSelectedUser(user);
       setIsOwnPage(auth.user._id === user._id);
     }
-  }, [instances, id, loadUser]);
+  }, [instances, id, loadUser, auth]);
 
   if (latestError) {
     return <h1>{latestError}</h1>;

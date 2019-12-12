@@ -32,3 +32,37 @@ export const getPostShortName = (text = "") => {
 
   return text;
 };
+
+export const stableSort = (array, cmp) => {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = cmp(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map(el => el[0]);
+};
+
+const sortByDateDesc = (a, b) => {
+  const dateA = new Date(a.createdAt);
+  const dateB = new Date(b.createdAt);
+
+  return dateB - dateA;
+};
+
+export const getRecentPosts = (posts = [], count = 3) => {
+  return stableSort(posts, sortByDateDesc).slice(0, count);
+};
+
+export const getPopularPosts = (posts = [], count = 3) => {
+  return posts
+    .filter(
+      post =>
+        Math.ceil(
+          Math.abs(Date.now() - new Date(post.createdAt).getTime()) /
+            (1000 * 3600 * 24)
+        ) < 7
+    )
+    .sort((a, b) => +b.likes - +a.likes)
+    .slice(0, count);
+};

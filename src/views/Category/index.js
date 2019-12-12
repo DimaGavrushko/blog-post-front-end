@@ -5,14 +5,15 @@ import Typography from "@material-ui/core/Typography/Typography";
 import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
-import { posts } from "../../constants";
 import PostInCategory from "../../components/PostInCategory";
 import Pagination from "../../components/Pagination";
+import { getRecentPosts } from "../../utils/posts";
 
 const useStyles = makeStyles(style);
 
 const Category = ({
-  posts: { categories },
+  categories,
+  posts,
   match: {
     params: { id }
   }
@@ -46,7 +47,7 @@ const Category = ({
           <Grid container>
             {selectedPosts.map(post => (
               <Grid
-                key={post.id}
+                key={post._id}
                 className={classes.postContainer}
                 item
                 xs={12}
@@ -74,12 +75,23 @@ const Category = ({
   );
 };
 
-const mapStateToProps = ({ posts }) => ({
-  posts
+const mapStateToProps = (
+  { posts: { categories, posts } },
+  {
+    match: {
+      params: { id }
+    }
+  }
+) => ({
+  posts: getRecentPosts(posts, posts.length).filter(
+    post => post.categoryId === id
+  ),
+  categories
 });
 
 Category.propTypes = {
-  posts: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
+  posts: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired
 };
 

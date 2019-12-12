@@ -3,20 +3,28 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import CategoriesTabs from "../CategoriesTabs";
 import CategoriesTabsInfo from "../CategoriesTabsInfo";
-import { categories } from "../../constants";
 import Fade from "@material-ui/core/Fade";
 import * as PropTypes from "prop-types";
+import { getRecentPosts } from "../../utils/posts";
 
 const useStyles = makeStyles(style);
 
-const CategoriesDropDown = ({ categories }) => {
+const CategoriesDropDown = ({ categories, posts }) => {
   const classes = useStyles();
   const [selectedCategory, selectCategory] = useState(categories[0]);
+  const [selectedPosts, setPosts] = useState(
+    getRecentPosts(posts, 4).filter(
+      post => post.categoryId === selectedCategory._id
+    )
+  );
 
   const onCategoryClick = (e, categoryId) => {
     e.preventDefault();
     selectCategory(
       categories.find(el => el._id === categoryId) || categories[0]
+    );
+    setPosts(
+      getRecentPosts(posts, 4).filter(post => post.categoryId === categoryId)
     );
   };
 
@@ -28,14 +36,15 @@ const CategoriesDropDown = ({ categories }) => {
           selectedCategory={selectedCategory}
           onCategoryClick={onCategoryClick}
         />
-        <CategoriesTabsInfo selectedCategory={selectedCategory} />
+        <CategoriesTabsInfo posts={selectedPosts} />
       </div>
     </Fade>
   );
 };
 
 CategoriesDropDown.propTypes = {
-  categories: PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired,
+  posts: PropTypes.array.isRequired
 };
 
 export default CategoriesDropDown;

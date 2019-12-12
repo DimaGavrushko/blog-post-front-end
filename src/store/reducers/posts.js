@@ -31,7 +31,15 @@ export default (state = initialState, action) => {
     }
 
     case posts.HANDLE_SUCCESS_LOAD_CATEGORIES_AND_POSTS: {
-      const { posts, categories } = action.payload;
+      let { posts, categories } = action.payload;
+      posts = posts.map(post => {
+        return {
+          ...post,
+          categoryName: (
+            categories.find(el => el._id === post.categoryId) || {}
+          ).name
+        };
+      });
 
       return {
         ...state,

@@ -18,7 +18,7 @@ const Post = ({ post, isOwnPost = false }) => {
   return (
     <>
       <div className={classes.container}>
-        <CategoryLabel name={post.categoryId} />
+        <CategoryLabel name={post.categoryName} id={post.categoryId} />
         <Typography className={classes.title} variant="h3">
           {post.title}
         </Typography>
