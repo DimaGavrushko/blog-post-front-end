@@ -11,11 +11,16 @@ export const startLoadCategoriesAndPosts = () => ({
   type: postsTypes.START_LOAD_CATEGORIES_AND_POSTS
 });
 
-export const handleSuccessLoadCategoriesAndPosts = ({ posts, categories }) => ({
+export const handleSuccessLoadCategoriesAndPosts = ({
+  posts,
+  notApprovedPosts,
+  categories
+}) => ({
   type: postsTypes.HANDLE_SUCCESS_LOAD_CATEGORIES_AND_POSTS,
   payload: {
     posts,
-    categories
+    categories,
+    notApprovedPosts
   }
 });
 

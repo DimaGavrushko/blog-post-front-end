@@ -2,6 +2,7 @@ import { grayColor, whiteColor } from "../../constants/colors";
 
 export default () => ({
   headerLinkContainer: {
+    position: "relative",
     color: `${whiteColor} !important`,
     fontSize: 13,
     fontWeight: 500,

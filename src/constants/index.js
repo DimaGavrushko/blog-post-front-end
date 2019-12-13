@@ -14,3 +14,5 @@ export const monthNames = [
 ];
 
 export const RECENT_NEWS = "Recent News";
+export const NOT_APPROVED_WARNING =
+  "This post hasn't been confirmed by the administration.";

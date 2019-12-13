@@ -1,16 +1,14 @@
 import React, { useRef, useState } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
-import Grid from "@material-ui/core/Grid/Grid";
-import { RECENT_NEWS } from "../../constants";
 import Typography from "@material-ui/core/Typography";
-import RecentNews from "../RecentNews";
+import HorizontalPost from "../HorizontalPost";
 import Pagination from "../Pagination";
 import * as PropTypes from "prop-types";
 
 const useStyles = makeStyles(style);
 
-const RecentNewsContainer = ({ posts = [] }) => {
+const HorizontalPostContainer = ({ posts = [], label, children }) => {
   const classes = useStyles();
   const [currentPage, setCurrentPage] = useState(0);
   const [postsPerPage] = useState(10);
@@ -28,18 +26,18 @@ const RecentNewsContainer = ({ posts = [] }) => {
   return (
     <>
       <div className={classes.blogTopContainer}>
-        <Typography className={classes.blogTop} variant="h4">
-          {RECENT_NEWS}
-        </Typography>
+        {!!label && (
+          <Typography className={classes.blogTop} variant="h4">
+            {label}
+          </Typography>
+        )}
       </div>
-      <Grid container>
-        <div ref={postsStartRef} />
-        {selectedPosts.map(post => (
-          <Grid key={post._id} item xs={12} sm={12} md={12} lg={8}>
-            <RecentNews post={post} />
-          </Grid>
-        ))}
-      </Grid>
+      <div ref={postsStartRef} />
+      {selectedPosts.map(post => (
+        <HorizontalPost key={post._id} post={post}>
+          {children}
+        </HorizontalPost>
+      ))}
       {posts.length > postsPerPage && (
         <div className={classes.paginationContainer}>
           <Pagination
@@ -54,8 +52,10 @@ const RecentNewsContainer = ({ posts = [] }) => {
   );
 };
 
-RecentNewsContainer.propTypes = {
-  posts: PropTypes.array.isRequired
+HorizontalPostContainer.propTypes = {
+  posts: PropTypes.array.isRequired,
+  label: PropTypes.string,
+  children: PropTypes.object
 };
 
-export default RecentNewsContainer;
+export default HorizontalPostContainer;

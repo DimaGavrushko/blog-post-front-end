@@ -2,6 +2,7 @@ import { posts } from "../actions/types";
 
 const initialState = {
   posts: [],
+  notApprovedPosts: [],
   categories: [],
   latestAuthError: null,
   isLoading: null
@@ -31,8 +32,18 @@ export default (state = initialState, action) => {
     }
 
     case posts.HANDLE_SUCCESS_LOAD_CATEGORIES_AND_POSTS: {
-      let { posts, categories } = action.payload;
+      let { posts, categories, notApprovedPosts } = action.payload;
+
       posts = posts.map(post => {
+        return {
+          ...post,
+          categoryName: (
+            categories.find(el => el._id === post.categoryId) || {}
+          ).name
+        };
+      });
+
+      notApprovedPosts = notApprovedPosts.map(post => {
         return {
           ...post,
           categoryName: (
@@ -43,6 +54,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
+        notApprovedPosts,
         isLoading: false,
         categories,
         posts

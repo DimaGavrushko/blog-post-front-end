@@ -21,6 +21,7 @@ const Header = ({
   logout,
   categories,
   posts,
+  notApprovedPosts,
   router: {
     location: { pathname }
   }
@@ -69,7 +70,13 @@ const Header = ({
                       ? () => toggleCategories(!isCategoriesOpen)
                       : null
                   }
-                />
+                >
+                  {name === "Posts approval" && !!notApprovedPosts.length ? (
+                    <span className={classes.dot} />
+                  ) : (
+                    <></>
+                  )}
+                </HeaderLink>
               )
           )}
         </div>
@@ -97,11 +104,16 @@ const Header = ({
   );
 };
 
-const mapStateToProps = ({ router, auth, posts: { categories, posts } }) => ({
+const mapStateToProps = ({
+  router,
+  auth,
+  posts: { categories, posts, notApprovedPosts }
+}) => ({
   user: auth.user,
   categories,
   router,
-  posts
+  posts,
+  notApprovedPosts
 });
 
 const mapDispatchToProps = {
@@ -113,7 +125,8 @@ Header.propTypes = {
   logout: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   router: PropTypes.object,
-  posts: PropTypes.array.isRequired
+  posts: PropTypes.array.isRequired,
+  notApprovedPosts: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

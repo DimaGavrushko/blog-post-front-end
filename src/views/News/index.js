@@ -1,5 +1,5 @@
 import React from "react";
-import RecentNewsContainer from "../../components/RecentNewsContainer";
+import HorizontalPostContainer from "../../components/HorizontalPostContainer";
 import Grid from "@material-ui/core/Grid/Grid";
 import PopularPost from "../../components/PopularPost";
 import style from "./style";
@@ -7,6 +7,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
 import { getPopularPosts, getRecentPosts } from "../../utils/posts";
+import { RECENT_NEWS } from "../../constants";
 
 const useStyles = makeStyles(style);
 
@@ -29,7 +30,11 @@ const News = ({ popularPosts, posts }) => {
           </Grid>
         ))}
       </Grid>
-      <RecentNewsContainer posts={posts} />
+      <Grid container>
+        <Grid item xs={12} sm={12} md={12} lg={8}>
+          <HorizontalPostContainer posts={posts} label={RECENT_NEWS} />
+        </Grid>
+      </Grid>
     </>
   );
 };

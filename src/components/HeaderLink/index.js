@@ -8,12 +8,19 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const useStyles = makeStyles(style);
 
-const HeaderLink = ({ name, path, onClickAway, onCategoriesClick }) => {
+const HeaderLink = ({
+  name,
+  path,
+  onClickAway,
+  onCategoriesClick,
+  children
+}) => {
   const classes = useStyles();
 
   return name !== "Categories" ? (
     <NavLink to={path} className={classes.headerLinkContainer}>
       {name}
+      {children}
     </NavLink>
   ) : (
     <ClickAwayListener onClickAway={onClickAway}>
@@ -29,7 +36,8 @@ HeaderLink.propTypes = {
   name: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   onCategoriesClick: PropTypes.func,
-  onClickAway: PropTypes.func
+  onClickAway: PropTypes.func,
+  children: PropTypes.object
 };
 
 export default HeaderLink;

@@ -9,6 +9,7 @@ import {
 import { API_URL } from "../../constants/api";
 import { ApiService } from "../../utils/apiService";
 import { NEWS_PATH, PATH_INDEX } from "../../constants/routes";
+import { loadInitData } from "./posts";
 
 const apiService = new ApiService(API_URL + "/auth");
 
@@ -29,6 +30,7 @@ export const tryAuthentication = () => async dispatch => {
     const user = (await apiService.get("tryAuth")) || {
       role: "guest"
     };
+    dispatch(loadInitData(user));
     dispatch(handleSuccessLogin({ user }));
   } catch (error) {
     dispatch(catchTryAuthError());

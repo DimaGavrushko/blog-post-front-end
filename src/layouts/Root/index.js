@@ -37,11 +37,9 @@ const tryAuth = () => WrappedComponent => {
     componentDidMount = () => {
       const {
         auth: { user },
-        tryAuthentication,
-        loadInitData
+        tryAuthentication
       } = this.props;
 
-      loadInitData();
       if (user && user.role === "guest") {
         tryAuthentication();
       }
@@ -61,12 +59,11 @@ const tryAuth = () => WrappedComponent => {
   TryAuth.propTypes = {
     auth: PropTypes.object.isRequired,
     posts: PropTypes.object.isRequired,
-    tryAuthentication: PropTypes.func.isRequired,
-    loadInitData: PropTypes.func.isRequired
+    tryAuthentication: PropTypes.func.isRequired
   };
 
   const mapStateToProps = ({ auth, posts }) => ({ auth, posts });
-  const mapDispatchToProps = { tryAuthentication, loadInitData };
+  const mapDispatchToProps = { tryAuthentication };
 
   return connect(mapStateToProps, mapDispatchToProps)(TryAuth);
 };

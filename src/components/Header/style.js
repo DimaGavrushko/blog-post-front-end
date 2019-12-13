@@ -1,4 +1,4 @@
-import { primaryColor, whiteColor } from "../../constants/colors";
+import { dangerColor, primaryColor, whiteColor } from "../../constants/colors";
 import { fade } from "@material-ui/core/styles";
 
 export default () => ({
@@ -41,5 +41,14 @@ export default () => ({
     padding: 10,
     paddingLeft: "25%",
     width: "100%"
+  },
+  dot: {
+    borderRadius: "50%",
+    width: 6,
+    height: 6,
+    backgroundColor: dangerColor,
+    position: "absolute",
+    left: "95%",
+    bottom: "60%"
   }
 });

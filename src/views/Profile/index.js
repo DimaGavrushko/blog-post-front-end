@@ -10,11 +10,13 @@ import * as PropTypes from "prop-types";
 import defaultAvatar from "../../assets/images/default-avatar.png";
 import TextContainerWithLabel from "../../components/shared/TextContainerWithLabel";
 import Button from "@material-ui/core/Button";
+import HorizontalPostContainer from "../../components/HorizontalPostContainer";
 
 const useStyles = makeStyles(style);
 
 const Profile = ({
   users: { instances, isLoading, latestError },
+  posts,
   auth,
   loadUser
 }) => {
@@ -86,14 +88,22 @@ const Profile = ({
             </div>
           </DashedContainer>
         )}
+        {!!posts.length && <HorizontalPostContainer posts={posts} />}
       </Grid>
     </Grid>
   );
 };
 
-const mapStateToProps = ({ users, auth }) => ({
+const mapStateToProps = ({
+  posts: { posts, notApprovedPosts },
   users,
   auth
+}) => ({
+  users,
+  auth,
+  posts: [...posts, ...notApprovedPosts].filter(
+    el => el.authorId === auth.user._id
+  )
 });
 
 const mapDispatchToProps = {
@@ -103,7 +113,8 @@ const mapDispatchToProps = {
 Profile.propTypes = {
   users: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  loadUser: PropTypes.func.isRequired
+  loadUser: PropTypes.func.isRequired,
+  posts: PropTypes.array
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -9,6 +9,7 @@ import { grayColor } from "../../constants/colors";
 import Button from "@material-ui/core/Button";
 import { NavLink } from "react-router-dom";
 import { CREATE_POST_PATH } from "../../constants/routes";
+import { NOT_APPROVED_WARNING } from "../../constants";
 
 const useStyles = makeStyles(style);
 
@@ -18,6 +19,11 @@ const Post = ({ post, isOwnPost = false }) => {
   return (
     <>
       <div className={classes.container}>
+        {!post.isApproved && (
+          <Typography className={classes.warning} variant="h3">
+            {NOT_APPROVED_WARNING}
+          </Typography>
+        )}
         <CategoryLabel name={post.categoryName} id={post.categoryId} />
         <Typography className={classes.title} variant="h3">
           {post.title}
@@ -33,24 +39,36 @@ const Post = ({ post, isOwnPost = false }) => {
       </div>
       <div className={classes.options}>
         {isOwnPost && (
-          <NavLink
-            className={classes.editButtonLink}
-            to={{
-              pathname: CREATE_POST_PATH,
-              post
-            }}
-          >
+          <div className={classes.buttonsBar}>
+            <NavLink
+              className={classes.editButtonLink}
+              to={{
+                pathname: CREATE_POST_PATH,
+                post
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                classes={{
+                  root: classes.editButton
+                }}
+              >
+                Edit post
+              </Button>
+            </NavLink>
             <Button
               variant="contained"
               color="primary"
               size="small"
               classes={{
-                root: classes.editButton
+                root: classes.deleteButton
               }}
             >
-              Edit post
+              Delete post
             </Button>
-          </NavLink>
+          </div>
         )}
       </div>
     </>

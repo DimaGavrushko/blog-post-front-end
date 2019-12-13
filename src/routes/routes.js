@@ -59,7 +59,7 @@ const journalistRoutes = [
 ];
 
 const adminRoutes = [
-  ...guestRoutes,
+  ...journalistRoutes,
   {
     path: POSTS_APPROVAL_PATH,
     name: "Posts approval",

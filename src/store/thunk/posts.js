@@ -12,12 +12,22 @@ import { NEWS_PATH } from "../../constants/routes";
 
 const apiService = new ApiService(API_URL + "/posts");
 
-export const loadInitData = () => async dispatch => {
+export const loadInitData = loggedUser => async dispatch => {
   try {
     dispatch(startLoadCategoriesAndPosts());
     const categories = await apiService.get("categories");
     const posts = await apiService.get("approved");
-    dispatch(handleSuccessLoadCategoriesAndPosts({ categories, posts }));
+    let notApprovedPosts = [];
+    if (loggedUser.role === "admin" || loggedUser.role === "journalist") {
+      notApprovedPosts = await apiService.get("notApproved");
+    }
+    dispatch(
+      handleSuccessLoadCategoriesAndPosts({
+        categories,
+        posts,
+        notApprovedPosts
+      })
+    );
   } catch (error) {
     dispatch(catchError({ error }));
   }

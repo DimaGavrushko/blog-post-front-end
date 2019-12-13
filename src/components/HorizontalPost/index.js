@@ -12,7 +12,7 @@ import { grayColor } from "../../constants/colors";
 
 const useStyles = makeStyles(style);
 
-const RecentNews = ({ post }) => {
+const HorizontalPost = ({ post, children }) => {
   const classes = useStyles();
 
   return (
@@ -48,8 +48,9 @@ const RecentNews = ({ post }) => {
   );
 };
 
-RecentNews.propTypes = {
-  post: PropTypes.object.isRequired
+HorizontalPost.propTypes = {
+  post: PropTypes.object.isRequired,
+  children: PropTypes.object
 };
 
-export default RecentNews;
+export default HorizontalPost;
