@@ -8,7 +8,12 @@ import * as PropTypes from "prop-types";
 
 const useStyles = makeStyles(style);
 
-const HorizontalPostContainer = ({ posts = [], label, children }) => {
+const HorizontalPostContainer = ({
+  posts = [],
+  label,
+  children,
+  editButton
+}) => {
   const classes = useStyles();
   const [currentPage, setCurrentPage] = useState(0);
   const [postsPerPage] = useState(10);
@@ -34,7 +39,7 @@ const HorizontalPostContainer = ({ posts = [], label, children }) => {
       </div>
       <div ref={postsStartRef} />
       {selectedPosts.map(post => (
-        <HorizontalPost key={post._id} post={post}>
+        <HorizontalPost key={post._id} post={post} editButton={editButton}>
           {children}
         </HorizontalPost>
       ))}
@@ -55,7 +60,8 @@ const HorizontalPostContainer = ({ posts = [], label, children }) => {
 HorizontalPostContainer.propTypes = {
   posts: PropTypes.array.isRequired,
   label: PropTypes.string,
-  children: PropTypes.object
+  children: PropTypes.object,
+  editButton: PropTypes.any
 };
 
 export default HorizontalPostContainer;

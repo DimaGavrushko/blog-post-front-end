@@ -3,7 +3,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import * as PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import { POST_PATH } from "../../constants/routes";
+import { CREATE_POST_PATH, POST_PATH } from "../../constants/routes";
 import Typography from "@material-ui/core/Typography";
 import { getPostDescription } from "../../utils/posts";
 import CategoryLabel from "../shared/CategoryLabel";
@@ -12,7 +12,7 @@ import { grayColor } from "../../constants/colors";
 
 const useStyles = makeStyles(style);
 
-const HorizontalPost = ({ post, children }) => {
+const HorizontalPost = ({ post, children, editButton }) => {
   const classes = useStyles();
 
   return (
@@ -44,6 +44,18 @@ const HorizontalPost = ({ post, children }) => {
           <DateAndAuthor post={post} color={grayColor[0]} />
         </div>
       </div>
+      {!!editButton && (
+        <NavLink
+          className={classes.editButtonLink}
+          to={{
+            pathname: CREATE_POST_PATH,
+            post
+          }}
+        >
+          {editButton}
+        </NavLink>
+      )}
+      {children}
     </div>
   );
 };

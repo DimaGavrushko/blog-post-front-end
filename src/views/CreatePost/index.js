@@ -81,6 +81,7 @@ const CreatePost = ({
   };
 
   const onPostCreate = () => {
+    postData.append("id", (post && post._id) || "");
     postData.append("title", title);
     postData.append("categoryId", category._id);
     postData.append("content", convertContentToHtml(editorState));

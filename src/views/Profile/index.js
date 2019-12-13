@@ -11,6 +11,11 @@ import defaultAvatar from "../../assets/images/default-avatar.png";
 import TextContainerWithLabel from "../../components/shared/TextContainerWithLabel";
 import Button from "@material-ui/core/Button";
 import HorizontalPostContainer from "../../components/HorizontalPostContainer";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import { NavLink } from "react-router-dom";
+import { CREATE_POST_PATH } from "../../constants/routes";
 
 const useStyles = makeStyles(style);
 
@@ -88,7 +93,22 @@ const Profile = ({
             </div>
           </DashedContainer>
         )}
-        {!!posts.length && <HorizontalPostContainer posts={posts} />}
+        {!!posts.length && (
+          <HorizontalPostContainer
+            posts={posts}
+            editButton={
+              <IconButton size="small" className={classes.editIcon}>
+                <EditIcon fontSize="small" />
+              </IconButton>
+            }
+          >
+            <div className={classes.buttonsBar}>
+              <IconButton size="small" className={classes.deleteIcon}>
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </div>
+          </HorizontalPostContainer>
+        )}
       </Grid>
     </Grid>
   );

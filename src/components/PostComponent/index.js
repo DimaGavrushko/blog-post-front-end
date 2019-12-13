@@ -55,7 +55,7 @@ const Post = ({ post, isOwnPost = false }) => {
                   root: classes.editButton
                 }}
               >
-                Edit post
+                Edit
               </Button>
             </NavLink>
             <Button
@@ -66,7 +66,7 @@ const Post = ({ post, isOwnPost = false }) => {
                 root: classes.deleteButton
               }}
             >
-              Delete post
+              Delete
             </Button>
           </div>
         )}

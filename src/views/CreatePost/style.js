@@ -35,7 +35,7 @@ export default {
   },
   select: {},
   button: {
-    width: "20%",
+    minWidth: "20%",
     marginTop: "1rem",
     borderRadius: "0 !important",
     backgroundColor: `${primaryColor[0]} !important`,

@@ -6,8 +6,6 @@ import Logo from "../shared/Logo";
 import appRoutes from "../../routes/routes";
 import layouts from "../../routes";
 import HeaderLink from "../HeaderLink";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
 import CategoriesDropDown from "../CategoriesDropDown";
 import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
@@ -81,19 +79,6 @@ const Header = ({
           )}
         </div>
         <div className={classes.headerPartContainer}>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
           {renderRightContainer()}
         </div>
         {isCategoriesOpen && (
