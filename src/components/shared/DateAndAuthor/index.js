@@ -26,7 +26,7 @@ const DateAndAuthor = ({ post, color }) => {
         className={classes.author}
         to={PROFILE_PATH.replace(":id", post.authorId)}
       >
-        {post.authorId}
+        {post.authorName}
       </NavLink>
     </div>
   );
