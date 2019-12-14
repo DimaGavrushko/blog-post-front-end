@@ -24,6 +24,13 @@ export const handleSuccessLoadCategoriesAndPosts = ({
   }
 });
 
+export const handleLoadNotApprovedPosts = ({ notApprovedPosts }) => ({
+  type: postsTypes.HANDLE_LOAD_NOT_APPROVED_POSTS,
+  payload: {
+    notApprovedPosts
+  }
+});
+
 export const startCreatePost = () => ({
   type: postsTypes.START_CREATE_POST
 });

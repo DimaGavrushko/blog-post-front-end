@@ -6,6 +6,9 @@ const optionsButton = {
 };
 
 export default {
+  messageContainer: {
+    marginTop: "2rem"
+  },
   buttonsBar: {
     display: "flex",
     flexDirection: "column"

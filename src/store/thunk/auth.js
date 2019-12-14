@@ -10,13 +10,20 @@ import { API_URL } from "../../constants/api";
 import { ApiService } from "../../utils/apiService";
 import { NEWS_PATH, PATH_INDEX } from "../../constants/routes";
 import { loadInitData } from "./posts";
+import { handleLoadNotApprovedPosts } from "../actions/posts";
 
-const apiService = new ApiService(API_URL + "/auth");
+const authApiService = new ApiService(API_URL + "/auth");
+const postsApiService = new ApiService(API_URL + "/posts");
 
 export const login = ({ email, password }) => async dispatch => {
   try {
     dispatch(startLogin());
-    const user = await apiService.post("login", { email, password });
+    const user = await authApiService.post("login", { email, password });
+    let notApprovedPosts = [];
+    if (user.role === "admin" || user.role === "journalist") {
+      notApprovedPosts = await postsApiService.get("notApproved");
+      dispatch(handleLoadNotApprovedPosts({ notApprovedPosts }));
+    }
     dispatch(handleSuccessLogin({ user }));
     dispatch(push(NEWS_PATH));
   } catch (error) {
@@ -25,21 +32,22 @@ export const login = ({ email, password }) => async dispatch => {
 };
 
 export const tryAuthentication = () => async dispatch => {
+  let user = { role: "guest" };
+
   try {
     dispatch(startLogin());
-    const user = (await apiService.get("tryAuth")) || {
-      role: "guest"
-    };
-    dispatch(loadInitData(user));
+    user = (await authApiService.get("tryAuth"));
     dispatch(handleSuccessLogin({ user }));
   } catch (error) {
     dispatch(catchTryAuthError());
+  } finally {
+    dispatch(loadInitData(user));
   }
 };
 
 export const logout = () => async dispatch => {
   try {
-    await apiService.get("logout", {}, false);
+    await authApiService.get("logout", {}, false);
     dispatch(handleSuccessLogout());
     dispatch(push(PATH_INDEX));
   } catch (error) {

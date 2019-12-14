@@ -26,7 +26,7 @@ const News = ({ popularPosts, posts }) => {
             md={i === 0 ? 6 : 3}
             lg={i === 0 ? 6 : 3}
           >
-            <PopularPost post={popularPosts[0]} isFirst={i === 0} />
+            <PopularPost post={post} isFirst={i === 0} />
           </Grid>
         ))}
       </Grid>

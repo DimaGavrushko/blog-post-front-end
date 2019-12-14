@@ -6,14 +6,20 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
 import { getRecentPosts } from "../../utils/posts";
-import { NavLink } from "react-router-dom";
-import { CREATE_POST_PATH } from "../../constants/routes";
 import Button from "@material-ui/core/Button/Button";
+import Typography from "@material-ui/core/Typography/Typography";
+import { NO_CONFIRMATION_POSTS } from "../../constants";
 
 const useStyles = makeStyles(style);
 
 const PostsApproval = ({ notApprovedPosts }) => {
   const classes = useStyles();
+
+  if (!notApprovedPosts.length) {
+    return  <Typography className={classes.messageContainer} variant="h5">
+      {NO_CONFIRMATION_POSTS}
+    </Typography>;
+  }
 
   return (
     <>

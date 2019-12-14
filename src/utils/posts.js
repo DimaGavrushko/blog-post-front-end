@@ -55,7 +55,7 @@ export const getRecentPosts = (posts = [], count = 3) => {
 };
 
 export const getPopularPosts = (posts = [], count = 3) => {
-  return posts
+  return getRecentPosts(posts
     .filter(
       post =>
         Math.ceil(
@@ -63,6 +63,6 @@ export const getPopularPosts = (posts = [], count = 3) => {
             (1000 * 3600 * 24)
         ) < 7
     )
-    .sort((a, b) => +b.likes - +a.likes)
-    .slice(0, count);
+    .sort((a, b) => +b.likes.length - +a.likes.length)
+    .slice(0, Math.max(count, posts.length)), count);
 };

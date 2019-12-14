@@ -31,6 +31,24 @@ export default (state = initialState, action) => {
       };
     }
 
+    case posts.HANDLE_LOAD_NOT_APPROVED_POSTS: {
+      let { notApprovedPosts } = action.payload;
+
+      notApprovedPosts = notApprovedPosts.map(post => {
+        return {
+          ...post,
+          categoryName: (
+            state.categories.find(el => el._id === post.categoryId) || {}
+          ).name
+        };
+      });
+
+      return {
+        ...state,
+        notApprovedPosts
+      }
+    }
+
     case posts.HANDLE_SUCCESS_LOAD_CATEGORIES_AND_POSTS: {
       let { posts, categories, notApprovedPosts } = action.payload;
 
