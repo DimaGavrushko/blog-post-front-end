@@ -2,7 +2,6 @@ import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import * as PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(style);
 
@@ -11,9 +10,7 @@ const DashedContainer = ({ children, label }) => {
 
   return (
     <div className={classes.container}>
-      <Typography className={classes.label} variant="h4">
-        {label}
-      </Typography>
+      <h4 className={classes.label}>{label}</h4>
       {children}
     </div>
   );

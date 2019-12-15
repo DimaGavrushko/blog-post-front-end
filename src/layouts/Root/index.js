@@ -11,7 +11,6 @@ import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { tryAuthentication } from "../../store/thunk/auth";
 import { compose } from "redux";
-import { loadInitData } from "../../store/thunk/posts";
 
 const useStyles = makeStyles(style);
 

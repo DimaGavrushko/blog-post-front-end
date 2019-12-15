@@ -20,6 +20,7 @@ const HorizontalPost = ({
   post,
   isApprovePage,
   isProfilePage,
+  isOwnPage,
   onApprove,
   onNotApprovedDelete,
   onApprovedDelete
@@ -57,7 +58,7 @@ const HorizontalPost = ({
         </div>
       </div>
       <div className={classes.buttonsBar}>
-        {isProfilePage && (
+        {isProfilePage && isOwnPage && (
           <>
             <IconButton
               size="small"
@@ -118,6 +119,7 @@ HorizontalPost.propTypes = {
   post: PropTypes.object.isRequired,
   isApprovePage: PropTypes.bool.isRequired,
   isProfilePage: PropTypes.bool.isRequired,
+  isOwnPage: PropTypes.bool,
   onApprove: PropTypes.func,
   onNotApprovedDelete: PropTypes.func,
   onApprovedDelete: PropTypes.func

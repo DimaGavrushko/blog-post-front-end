@@ -22,4 +22,11 @@ export const handleSuccessLogout = () => ({
   type: auth.HANDLE_SUCCESS_LOG_OUT
 });
 
+export const handleChangeAuthUserInfo = ({ user }) => ({
+  type: auth.HANDLE_CHANGE_AUTH_USER_INFO,
+  payload: {
+    user
+  }
+});
+
 export const startLogin = () => ({ type: auth.START_LOGIN });

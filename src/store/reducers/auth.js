@@ -60,6 +60,15 @@ export default (state = initialState, action) => {
       };
     }
 
+    case auth.HANDLE_CHANGE_AUTH_USER_INFO: {
+      const { user } = action.payload;
+
+      return {
+        ...state,
+        user
+      };
+    }
+
     default:
       return state;
   }

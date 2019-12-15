@@ -13,6 +13,7 @@ const HorizontalPostContainer = ({
   label,
   isApprovePage = false,
   isProfilePage = false,
+  isOwnPage,
   onApprove,
   onNotApprovedDelete,
   onApprovedDelete
@@ -28,7 +29,7 @@ const HorizontalPostContainer = ({
   useEffect(() => {
     setCurrentPage(0);
     setPosts(posts.slice(0, postsPerPage));
-  }, [posts]);
+  }, [posts, postsPerPage]);
 
   const onPaginationClick = page => {
     setCurrentPage(page);
@@ -52,6 +53,7 @@ const HorizontalPostContainer = ({
           post={post}
           isApprovePage={isApprovePage}
           isProfilePage={isProfilePage}
+          isOwnPage={isOwnPage}
           onApprove={onApprove}
           onNotApprovedDelete={onNotApprovedDelete}
           onApprovedDelete={onApprovedDelete}
@@ -76,6 +78,7 @@ HorizontalPostContainer.propTypes = {
   label: PropTypes.string,
   isApprovePage: PropTypes.bool,
   isProfilePage: PropTypes.bool,
+  isOwnPage: PropTypes.bool,
   onApprove: PropTypes.func,
   onNotApprovedDelete: PropTypes.func,
   onApprovedDelete: PropTypes.func

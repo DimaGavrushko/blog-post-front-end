@@ -15,3 +15,14 @@ export const handleSuccessLoadUser = ({ user }) => ({
     user
   }
 });
+
+export const handleSuccessChangeUserInfo = ({ user }) => ({
+  type: users.HANDLE_SUCCESS_CHANGE_USER_INFO,
+  payload: {
+    user
+  }
+});
+
+export const dismissError = () => ({
+  type: users.DISMISS_ERROR
+});

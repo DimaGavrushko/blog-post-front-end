@@ -25,6 +25,13 @@ export default (state = initialState, action) => {
       };
     }
 
+    case users.DISMISS_ERROR: {
+      return {
+        ...state,
+        latestError: null
+      };
+    }
+
     case users.HANDLE_SUCCESS_LOAD_USER: {
       const { user } = action.payload;
       const idx = state.instances.findIndex(el => el._id === user._id);
@@ -37,6 +44,24 @@ export default (state = initialState, action) => {
         isLoading: false,
         latestError: null,
         instances: [...state.instances]
+      };
+    }
+
+    case users.HANDLE_SUCCESS_CHANGE_USER_INFO: {
+      const { user } = action.payload;
+      const instances = [...state.instances];
+      const idx = instances.findIndex(el => el._id === user._id);
+
+      if (idx !== -1) {
+        instances.splice(idx, 1);
+      }
+
+      instances.push(user);
+
+      return {
+        ...state,
+        instances,
+        latestError: null
       };
     }
 

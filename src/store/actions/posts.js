@@ -35,8 +35,11 @@ export const startCreatePost = () => ({
   type: postsTypes.START_CREATE_POST
 });
 
-export const handleSuccessCreatePost = () => ({
-  type: postsTypes.HANDLE_SUCCESS_CREATE_POST
+export const handleSuccessCreatePost = ({ post }) => ({
+  type: postsTypes.HANDLE_SUCCESS_CREATE_POST,
+  payload: {
+    post
+  }
 });
 
 export const handleSuccessReactToPost = ({ post }) => ({

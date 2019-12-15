@@ -53,17 +53,23 @@ export class ApiService {
     );
   }
 
-  async post(resource, data = {}, options = {}) {
+  async post(resource, data = {}, options = {}, isFormData = false) {
+    const headers = !isFormData
+      ? {
+          "Content-Type": "application/json"
+        }
+      : {};
+
     return ApiService.request(
       fetch(`${this.baseUrl}/${resource}`, {
-        ...options,
         headers: {
-          "Content-Type": "application/json",
+          ...headers,
           ...options.headers
         },
-        credentials: "include",
         method: "POST",
-        body: JSON.stringify(data)
+        credentials: "include",
+        body: isFormData ? data : JSON.stringify(data),
+        ...options
       })
     );
   }

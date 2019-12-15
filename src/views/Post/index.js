@@ -58,7 +58,7 @@ const Post = ({
         })
       );
     }
-  }, [id, posts]);
+  }, [id, posts, notApprovedPosts, user]);
 
   return post &&
     (post.isApproved || (!post.isApproved && isCanEdit(post.authorId))) ? (

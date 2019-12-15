@@ -34,7 +34,8 @@ export default {
     }
   },
   button: {
-    width: "30%",
+    minWidth: "30%",
+    maxWidth: "50%",
     marginTop: "1rem",
     borderRadius: "0 !important",
     backgroundColor: `${primaryColor[0]} !important`

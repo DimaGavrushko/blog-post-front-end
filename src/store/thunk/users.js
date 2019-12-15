@@ -1,10 +1,12 @@
 import {
   startLoadUser,
   catchError,
-  handleSuccessLoadUser
+  handleSuccessLoadUser,
+  handleSuccessChangeUserInfo
 } from "../actions/users";
 import { API_URL } from "../../constants/api";
 import { ApiService } from "../../utils/apiService";
+import { handleChangeAuthUserInfo } from "../actions/auth";
 
 const apiService = new ApiService(API_URL + "/users");
 
@@ -13,6 +15,60 @@ export const loadUser = ({ id }) => async dispatch => {
     dispatch(startLoadUser());
     const user = await apiService.get(`${id}`);
     dispatch(handleSuccessLoadUser({ user }));
+  } catch (error) {
+    dispatch(catchError({ error }));
+  }
+};
+
+export const changeUserInfo = (
+  loggedUserId,
+  userId,
+  name,
+  value
+) => async dispatch => {
+  try {
+    const user = await apiService.post("updateProfile", {
+      userId,
+      name,
+      value
+    });
+    if (userId === loggedUserId) {
+      dispatch(handleChangeAuthUserInfo({ user }));
+    }
+    dispatch(handleSuccessChangeUserInfo({ user }));
+  } catch (error) {
+    dispatch(catchError({ error }));
+  }
+};
+
+export const changePassword = (
+  loggedUserId,
+  userId,
+  currentPassword,
+  newPassword
+) => async dispatch => {
+  try {
+    const user = await apiService.post("updatePassword", {
+      userId,
+      currentPassword,
+      newPassword
+    });
+    if (userId === loggedUserId) {
+      dispatch(handleChangeAuthUserInfo({ user }));
+    }
+    dispatch(handleSuccessChangeUserInfo({ user }));
+  } catch (error) {
+    dispatch(catchError({ error }));
+  }
+};
+
+export const changeUserPhoto = (loggedUserId, formData) => async dispatch => {
+  try {
+    const user = await apiService.post("updateAvatar", formData, {}, true);
+    if (formData.get("userId") === loggedUserId) {
+      dispatch(handleChangeAuthUserInfo({ user }));
+    }
+    dispatch(handleSuccessChangeUserInfo({ user }));
   } catch (error) {
     dispatch(catchError({ error }));
   }

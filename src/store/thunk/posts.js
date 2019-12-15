@@ -11,7 +11,7 @@ import {
   handleDeletePost
 } from "../actions/posts";
 import { push } from "connected-react-router";
-import { NEWS_PATH, PROFILE_PATH } from "../../constants/routes";
+import { PROFILE_PATH } from "../../constants/routes";
 
 const apiService = new ApiService(API_URL + "/posts");
 
@@ -83,10 +83,8 @@ export const undislike = (postId, userId) => async dispatch => {
 export const createPost = postData => async dispatch => {
   try {
     dispatch(startCreatePost());
-    await apiService.put("createPost", postData, {}, true);
-    const notApprovedPosts = await apiService.get("notApproved");
-    dispatch(handleLoadNotApprovedPosts({ notApprovedPosts }));
-    dispatch(handleSuccessCreatePost());
+    const post = await apiService.put("createPost", postData, {}, true);
+    dispatch(handleSuccessCreatePost({ post }));
     dispatch(push(PROFILE_PATH.replace(":id", postData.get("authorId"))));
   } catch (error) {
     dispatch(catchError({ error }));

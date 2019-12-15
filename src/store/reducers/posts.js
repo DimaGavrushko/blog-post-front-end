@@ -25,9 +25,34 @@ export default (state = initialState, action) => {
     }
 
     case posts.HANDLE_SUCCESS_CREATE_POST: {
+      let { post } = action.payload;
+
+      post = {
+        ...post,
+        categoryName: (
+          state.categories.find(el => el._id === post.categoryId) || {}
+        ).name
+      };
+      const posts = [...state.posts];
+      const notApprovedPosts = [...state.notApprovedPosts];
+      let idx = posts.findIndex(el => el._id === post._id);
+
+      if (idx !== -1) {
+        posts.splice(idx, 1);
+      } else {
+        idx = notApprovedPosts.findIndex(el => el._id === post._id);
+        if (idx !== -1) {
+          notApprovedPosts.splice(idx, 1);
+        }
+      }
+
+      notApprovedPosts.push(post);
+
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
+        posts,
+        notApprovedPosts
       };
     }
 
