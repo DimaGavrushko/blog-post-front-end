@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import Typography from "@material-ui/core/Typography";
@@ -11,8 +11,11 @@ const useStyles = makeStyles(style);
 const HorizontalPostContainer = ({
   posts = [],
   label,
-  children,
-  editButton
+  isApprovePage = false,
+  isProfilePage = false,
+  onApprove,
+  onNotApprovedDelete,
+  onApprovedDelete
 }) => {
   const classes = useStyles();
   const [currentPage, setCurrentPage] = useState(0);
@@ -21,6 +24,11 @@ const HorizontalPostContainer = ({
     posts.slice(currentPage * postsPerPage, (currentPage + 1) * postsPerPage)
   );
   const postsStartRef = useRef(null);
+
+  useEffect(() => {
+    setCurrentPage(0);
+    setPosts(posts.slice(0, postsPerPage));
+  }, [posts]);
 
   const onPaginationClick = page => {
     setCurrentPage(page);
@@ -39,9 +47,15 @@ const HorizontalPostContainer = ({
       </div>
       <div ref={postsStartRef} />
       {selectedPosts.map(post => (
-        <HorizontalPost key={post._id} post={post} editButton={editButton}>
-          {children}
-        </HorizontalPost>
+        <HorizontalPost
+          key={post._id}
+          post={post}
+          isApprovePage={isApprovePage}
+          isProfilePage={isProfilePage}
+          onApprove={onApprove}
+          onNotApprovedDelete={onNotApprovedDelete}
+          onApprovedDelete={onApprovedDelete}
+        />
       ))}
       {posts.length > postsPerPage && (
         <div className={classes.paginationContainer}>
@@ -60,8 +74,11 @@ const HorizontalPostContainer = ({
 HorizontalPostContainer.propTypes = {
   posts: PropTypes.array.isRequired,
   label: PropTypes.string,
-  children: PropTypes.object,
-  editButton: PropTypes.any
+  isApprovePage: PropTypes.bool,
+  isProfilePage: PropTypes.bool,
+  onApprove: PropTypes.func,
+  onNotApprovedDelete: PropTypes.func,
+  onApprovedDelete: PropTypes.func
 };
 
 export default HorizontalPostContainer;

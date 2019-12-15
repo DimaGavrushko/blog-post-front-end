@@ -5,7 +5,7 @@ export default () => ({
     fontWeight: 500,
     textTransform: "uppercase",
     fontSize: "0.7rem",
-    padding: "0 1rem"
+    padding: 0
   },
   date: {
     marginRight: "0.7rem"

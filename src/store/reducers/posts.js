@@ -46,7 +46,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         notApprovedPosts
-      }
+      };
+    }
+
+    case posts.HANDLE_SUCCESS_REACT_TO_POST: {
+      const { post } = action.payload;
+
+      let idx = state.posts.findIndex(el => el._id === post._id);
+      state.posts[idx].likes = post.likes;
+      state.posts[idx].dislikes = post.dislikes;
+
+      return {
+        ...state,
+        posts: [...state.posts]
+      };
     }
 
     case posts.HANDLE_SUCCESS_LOAD_CATEGORIES_AND_POSTS: {
@@ -76,6 +89,28 @@ export default (state = initialState, action) => {
         isLoading: false,
         categories,
         posts
+      };
+    }
+
+    case posts.HANDLE_DELETE_POST: {
+      const { postId } = action.payload;
+      const posts = [...state.posts];
+      const notApprovedPosts = [...state.notApprovedPosts];
+      const idx = posts.findIndex(el => el._id === postId);
+
+      if (idx !== -1) {
+        posts.splice(idx, 1);
+      } else {
+        notApprovedPosts.splice(
+          notApprovedPosts.findIndex(el => el._id === postId),
+          1
+        );
+      }
+
+      return {
+        ...state,
+        posts,
+        notApprovedPosts
       };
     }
 

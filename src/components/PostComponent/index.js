@@ -6,15 +6,45 @@ import CategoryLabel from "../shared/CategoryLabel";
 import Typography from "@material-ui/core/Typography";
 import DateAndAuthor from "../shared/DateAndAuthor";
 import { grayColor } from "../../constants/colors";
-import Button from "@material-ui/core/Button";
-import { NavLink } from "react-router-dom";
-import { CREATE_POST_PATH } from "../../constants/routes";
 import { NOT_APPROVED_WARNING } from "../../constants";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 
 const useStyles = makeStyles(style);
 
-const Post = ({ post, isOwnPost = false }) => {
+const Post = ({
+  post,
+  loggedUser,
+  isOwnPost = false,
+  onLike,
+  onUnLike,
+  onDislike,
+  onUnDislike
+}) => {
   const classes = useStyles();
+  const hasLike = !!(post && post.likes && post.likes.includes(loggedUser._id));
+  const hasDislike = !!(
+    post &&
+    post.dislikes &&
+    post.dislikes.includes(loggedUser._id)
+  );
+
+  const onLikeClick = () => {
+    if (hasLike) {
+      onUnLike(hasDislike);
+    } else {
+      onLike(hasDislike);
+    }
+  };
+
+  const onDislikeClick = () => {
+    if (hasDislike) {
+      onUnDislike();
+    } else {
+      onDislike(hasLike);
+    }
+  };
 
   return (
     <>
@@ -38,36 +68,24 @@ const Post = ({ post, isOwnPost = false }) => {
         />
       </div>
       <div className={classes.options}>
-        {isOwnPost && (
-          <div className={classes.buttonsBar}>
-            <NavLink
-              className={classes.editButtonLink}
-              to={{
-                pathname: CREATE_POST_PATH,
-                post
-              }}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                classes={{
-                  root: classes.editButton
-                }}
-              >
-                Edit
-              </Button>
-            </NavLink>
-            <Button
-              variant="contained"
-              color="primary"
+        {loggedUser.role !== "guest" && post.isApproved && (
+          <div className={classes.likesContainer}>
+            <IconButton
               size="small"
-              classes={{
-                root: classes.deleteButton
-              }}
+              className={hasLike ? classes.like : ""}
+              onClick={onLikeClick}
             >
-              Delete
-            </Button>
+              <ThumbUpIcon fontSize="small" />
+            </IconButton>
+            <div className={classes.countLikes}>{post.likes.length}</div>
+            <IconButton
+              size="small"
+              className={hasDislike ? classes.like : ""}
+              onClick={onDislikeClick}
+            >
+              <ThumbDownIcon fontSize="small" />
+            </IconButton>
+            <div className={classes.countLikes}>{post.dislikes.length}</div>
           </div>
         )}
       </div>
@@ -77,7 +95,13 @@ const Post = ({ post, isOwnPost = false }) => {
 
 Post.propTypes = {
   post: PropTypes.object.isRequired,
-  isOwnPost: PropTypes.bool.isRequired
+  loggedUser: PropTypes.object.isRequired,
+  isOwnPost: PropTypes.bool.isRequired,
+  onLike: PropTypes.func.isRequired,
+  onUnLike: PropTypes.func.isRequired,
+  onDislike: PropTypes.func.isRequired,
+  onUnDislike: PropTypes.func.isRequired,
+  onApprovedDelete: PropTypes.func
 };
 
 export default Post;

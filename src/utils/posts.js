@@ -55,14 +55,16 @@ export const getRecentPosts = (posts = [], count = 3) => {
 };
 
 export const getPopularPosts = (posts = [], count = 3) => {
-  return getRecentPosts(posts
-    .filter(
-      post =>
-        Math.ceil(
-          Math.abs(Date.now() - new Date(post.createdAt).getTime()) /
-            (1000 * 3600 * 24)
-        ) < 7
-    )
-    .sort((a, b) => +b.likes.length - +a.likes.length)
-    .slice(0, Math.max(count, posts.length)), count);
+  return getRecentPosts(
+    posts
+      .filter(
+        post =>
+          Math.ceil(
+            Math.abs(Date.now() - new Date(post.createdAt).getTime()) /
+              (1000 * 3600 * 24)
+          ) < 7
+      )
+      .slice(0, Math.max(count, posts.length)),
+    count
+  ).sort((a, b) => b.likes.length - a.likes.length);
 };

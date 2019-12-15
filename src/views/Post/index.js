@@ -5,6 +5,14 @@ import Grid from "@material-ui/core/Grid";
 import PostComponent from "../../components/PostComponent";
 import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
+import {
+  deleteApprovedPost,
+  deleteNotApprovedPost,
+  dislike,
+  like,
+  undislike,
+  unlike
+} from "../../store/thunk/posts";
 
 const useStyles = makeStyles(style);
 
@@ -14,7 +22,13 @@ const Post = ({
   user,
   match: {
     params: { id }
-  }
+  },
+  like,
+  unlike,
+  dislike,
+  undislike,
+  deleteApprovedPost,
+  deleteNotApprovedPost
 }) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
@@ -24,6 +38,14 @@ const Post = ({
     return (
       user.role === "admin" || (user.role === "journalist" && user._id === id)
     );
+  };
+
+  const onApprovedDelete = postId => {
+    deleteApprovedPost(postId);
+  };
+
+  const onNotApprovedDelete = postId => {
+    deleteNotApprovedPost(postId);
   };
 
   useEffect(() => {
@@ -43,7 +65,16 @@ const Post = ({
     <Grid container>
       <Grid item xs={1} sm={1} md={1} lg={1} />
       <Grid item xs={10} sm={8} md={7} lg={7}>
-        <PostComponent post={post} isOwnPost={isCanEdit(post.authorId)} />
+        <PostComponent
+          post={post}
+          isOwnPost={isCanEdit(post.authorId)}
+          loggedUser={user}
+          onLike={hasDislike => like(post._id, user._id, hasDislike)}
+          onUnLike={() => unlike(post._id, user._id)}
+          onDislike={hasLike => dislike(post._id, user._id, hasLike)}
+          onUnDislike={() => undislike(post._id, user._id)}
+          onDelete={post.isApproved ? onApprovedDelete : onNotApprovedDelete}
+        />
       </Grid>
       <Grid item xs={1} sm={3} md={4} lg={4} />
     </Grid>
@@ -61,11 +92,25 @@ const mapStateToProps = ({
   user
 });
 
+const mapDispatchToProps = {
+  like,
+  unlike,
+  dislike,
+  undislike,
+  deleteApprovedPost,
+  deleteNotApprovedPost
+};
+
 Post.propTypes = {
   posts: PropTypes.array.isRequired,
   notApprovedPosts: PropTypes.array.isRequired,
   match: PropTypes.object,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  like: PropTypes.func.isRequired,
+  dislike: PropTypes.func.isRequired,
+  undislike: PropTypes.func.isRequired,
+  deleteApprovedPost: PropTypes.func,
+  deleteNotApprovedPost: PropTypes.func
 };
 
-export default connect(mapStateToProps, null)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

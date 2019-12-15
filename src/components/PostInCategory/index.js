@@ -21,7 +21,7 @@ const PostInCategory = ({ post }) => {
         <img alt="" className={classes.image} src={post.url} />
       </div>
       <CategoryLabel name={post.categoryName} id={post.categoryId} />
-      <NavLink to={POST_PATH.replace(":id", post.id)} className={classes.link}>
+      <NavLink to={POST_PATH.replace(":id", post._id)} className={classes.link}>
         <Typography variant="h4" className={classes.title}>
           {post.title}
         </Typography>

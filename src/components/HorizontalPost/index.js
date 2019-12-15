@@ -9,10 +9,21 @@ import { getPostDescription } from "../../utils/posts";
 import CategoryLabel from "../shared/CategoryLabel";
 import DateAndAuthor from "../shared/DateAndAuthor";
 import { grayColor } from "../../constants/colors";
+import Button from "@material-ui/core/Button/Button";
+import EditIcon from "@material-ui/icons/Edit";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles(style);
 
-const HorizontalPost = ({ post, children, editButton }) => {
+const HorizontalPost = ({
+  post,
+  isApprovePage,
+  isProfilePage,
+  onApprove,
+  onNotApprovedDelete,
+  onApprovedDelete
+}) => {
   const classes = useStyles();
 
   return (
@@ -41,28 +52,75 @@ const HorizontalPost = ({ post, children, editButton }) => {
         </div>
         <div className={classes.additionalInfoContainer}>
           <CategoryLabel name={post.categoryName} id={post.categoryId} />
+          <div className={classes.separator} />
           <DateAndAuthor post={post} color={grayColor[0]} />
         </div>
       </div>
-      {!!editButton && (
-        <NavLink
-          className={classes.editButtonLink}
-          to={{
-            pathname: CREATE_POST_PATH,
-            post
-          }}
-        >
-          {editButton}
-        </NavLink>
-      )}
-      {children}
+      <div className={classes.buttonsBar}>
+        {isProfilePage && (
+          <>
+            <IconButton
+              size="small"
+              className={classes.deleteIcon}
+              onClick={() =>
+                post.isApproved
+                  ? onApprovedDelete(post._id)
+                  : onNotApprovedDelete(post._id)
+              }
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+            <NavLink
+              className={classes.editButtonLink}
+              to={{
+                pathname: CREATE_POST_PATH,
+                post
+              }}
+            >
+              <IconButton size="small" className={classes.editIcon}>
+                <EditIcon fontSize="small" />
+              </IconButton>
+            </NavLink>
+          </>
+        )}
+        {isApprovePage && (
+          <>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              classes={{
+                root: classes.noButton
+              }}
+              onClick={() => onNotApprovedDelete(post._id)}
+            >
+              No
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              classes={{
+                root: classes.yesButton
+              }}
+              onClick={() => onApprove(post._id)}
+            >
+              Yes
+            </Button>
+          </>
+        )}
+      </div>
     </div>
   );
 };
 
 HorizontalPost.propTypes = {
   post: PropTypes.object.isRequired,
-  children: PropTypes.object
+  isApprovePage: PropTypes.bool.isRequired,
+  isProfilePage: PropTypes.bool.isRequired,
+  onApprove: PropTypes.func,
+  onNotApprovedDelete: PropTypes.func,
+  onApprovedDelete: PropTypes.func
 };
 
 export default HorizontalPost;

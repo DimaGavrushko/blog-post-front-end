@@ -17,12 +17,17 @@ export class ApiService {
       });
   }
 
-  async delete(resource, options = {}) {
+  async delete(resource, data = {}, options = {}) {
     return ApiService.request(
       fetch(`${this.baseUrl}/${resource}`, {
         ...options,
+        headers: {
+          "Content-Type": "application/json",
+          ...options.headers
+        },
         credentials: "include",
-        method: "DELETE"
+        method: "DELETE",
+        body: JSON.stringify(data)
       })
     );
   }

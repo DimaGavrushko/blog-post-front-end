@@ -1,4 +1,4 @@
-import { blackColor, dangerColor, grayColor } from "../../constants/colors";
+import { grayColor } from "../../constants/colors";
 
 export default {
   gridContainer: {
@@ -42,15 +42,5 @@ export default {
     fontWeight: 600,
     borderRadius: "0 !important",
     border: `2px solid ${grayColor[1]} !important`
-  },
-  buttonsBar: {
-    display: "flex",
-    flexDirection: "column"
-  },
-  editIcon: {
-    color: `${blackColor} !important`
-  },
-  deleteIcon: {
-    color: `${dangerColor} !important`
   }
 };

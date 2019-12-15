@@ -38,3 +38,17 @@ export const startCreatePost = () => ({
 export const handleSuccessCreatePost = () => ({
   type: postsTypes.HANDLE_SUCCESS_CREATE_POST
 });
+
+export const handleSuccessReactToPost = ({ post }) => ({
+  type: postsTypes.HANDLE_SUCCESS_REACT_TO_POST,
+  payload: {
+    post
+  }
+});
+
+export const handleDeletePost = ({ postId }) => ({
+  type: postsTypes.HANDLE_DELETE_POST,
+  payload: {
+    postId
+  }
+});

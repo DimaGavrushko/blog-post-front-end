@@ -1,4 +1,9 @@
-import { blackColor, dangerColor, grayColor } from "../../constants/colors";
+import {
+  blackColor,
+  dangerColor,
+  grayColor,
+  primaryColor
+} from "../../constants/colors";
 
 export default () => ({
   container: {
@@ -43,7 +48,8 @@ export default () => ({
   },
   options: {
     display: "flex",
-    margin: "1.5rem 0"
+    margin: "1.5rem 0",
+    justifyContent: "space-between"
   },
   buttonsBar: {
     display: "flex"
@@ -55,8 +61,19 @@ export default () => ({
     ...optionsButton,
     marginLeft: "0.7rem"
   },
-  editButtonLink: {
-    textDecoration: "none"
+  likesContainer: {
+    display: "flex",
+    position: "relative"
+  },
+  like: {
+    color: `${primaryColor[0]} !important`
+  },
+  countLikes: {
+    position: "relative",
+    top: "15%",
+    fontSize: 14,
+    margin: "0 2rem 0 0.5rem",
+    color: grayColor[0]
   }
 });
 

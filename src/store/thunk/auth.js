@@ -36,7 +36,7 @@ export const tryAuthentication = () => async dispatch => {
 
   try {
     dispatch(startLogin());
-    user = (await authApiService.get("tryAuth"));
+    user = await authApiService.get("tryAuth");
     dispatch(handleSuccessLogin({ user }));
   } catch (error) {
     dispatch(catchTryAuthError());

@@ -11,11 +11,11 @@ import defaultAvatar from "../../assets/images/default-avatar.png";
 import TextContainerWithLabel from "../../components/shared/TextContainerWithLabel";
 import Button from "@material-ui/core/Button";
 import HorizontalPostContainer from "../../components/HorizontalPostContainer";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import { NavLink } from "react-router-dom";
-import { CREATE_POST_PATH } from "../../constants/routes";
+import {
+  deleteApprovedPost,
+  deleteNotApprovedPost
+} from "../../store/thunk/posts";
+import { getRecentPosts } from "../../utils/posts";
 
 const useStyles = makeStyles(style);
 
@@ -23,7 +23,9 @@ const Profile = ({
   users: { instances, isLoading, latestError },
   posts,
   auth,
-  loadUser
+  loadUser,
+  deleteApprovedPost,
+  deleteNotApprovedPost
 }) => {
   const classes = useStyles();
   const { id } = useParams();
@@ -39,6 +41,14 @@ const Profile = ({
       setIsOwnPage(auth.user._id === user._id);
     }
   }, [instances, id, loadUser, auth]);
+
+  const onApprovedDelete = postId => {
+    deleteApprovedPost(postId, selectedUser._id);
+  };
+
+  const onNotApprovedDelete = postId => {
+    deleteNotApprovedPost(postId, selectedUser._id);
+  };
 
   if (latestError) {
     return <h1>{latestError}</h1>;
@@ -96,18 +106,10 @@ const Profile = ({
         {!!posts.length && (
           <HorizontalPostContainer
             posts={posts}
-            editButton={
-              <IconButton size="small" className={classes.editIcon}>
-                <EditIcon fontSize="small" />
-              </IconButton>
-            }
-          >
-            <div className={classes.buttonsBar}>
-              <IconButton size="small" className={classes.deleteIcon}>
-                <DeleteIcon fontSize="small" />
-              </IconButton>
-            </div>
-          </HorizontalPostContainer>
+            isProfilePage={true}
+            onApprovedDelete={onApprovedDelete}
+            onNotApprovedDelete={onNotApprovedDelete}
+          />
         )}
       </Grid>
     </Grid>
@@ -121,20 +123,24 @@ const mapStateToProps = ({
 }) => ({
   users,
   auth,
-  posts: [...posts, ...notApprovedPosts].filter(
-    el => el.authorId === auth.user._id
+  posts: getRecentPosts(
+    [...posts, ...notApprovedPosts].filter(el => el.authorId === auth.user._id)
   )
 });
 
 const mapDispatchToProps = {
-  loadUser
+  loadUser,
+  deleteApprovedPost,
+  deleteNotApprovedPost
 };
 
 Profile.propTypes = {
   users: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   loadUser: PropTypes.func.isRequired,
-  posts: PropTypes.array
+  posts: PropTypes.array,
+  deleteApprovedPost: PropTypes.func,
+  deleteNotApprovedPost: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -1,4 +1,16 @@
-import { blackColor, grayColor, whiteColor } from "../../constants/colors";
+import {
+  blackColor,
+  dangerColor,
+  grayColor,
+  greenColor,
+  redColor,
+  whiteColor
+} from "../../constants/colors";
+
+const optionsButton = {
+  borderRadius: "0 !important",
+  color: `${whiteColor} !important`
+};
 
 export default () => ({
   container: {
@@ -51,9 +63,31 @@ export default () => ({
   },
   additionalInfoContainer: {
     display: "flex",
-    alignItems: "center",
-    "&:> *": {
-      marginRight: "1rem"
-    }
+    alignItems: "center"
+  },
+  separator: {
+    width: "1rem"
+  },
+  buttonsBar: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  yesButton: {
+    ...optionsButton,
+    backgroundColor: `${greenColor} !important`
+  },
+  noButton: {
+    ...optionsButton,
+    backgroundColor: `${redColor} !important`,
+    marginBottom: "0.5rem"
+  },
+  editButtonLink: {
+    textDecoration: "none"
+  },
+  editIcon: {
+    color: `${blackColor} !important`
+  },
+  deleteIcon: {
+    color: `${dangerColor} !important`
   }
 });

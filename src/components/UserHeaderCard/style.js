@@ -69,6 +69,7 @@ export default () => ({
   link: {
     textDecoration: "none",
     color: whiteColor,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    textAlign: "right"
   }
 });
