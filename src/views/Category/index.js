@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import Typography from "@material-ui/core/Typography/Typography";
@@ -25,6 +25,12 @@ const Category = ({
     posts.slice(currentPage * postsPerPage, (currentPage + 1) * postsPerPage)
   );
   const postsStartRef = useRef(null);
+
+  useEffect(() => {
+    const p = getRecentPosts(posts, posts.length).filter(post => post.categoryId === id);
+    setCurrentPage(0);
+    setPosts(p.slice(0, postsPerPage));
+  }, [id, posts, postsPerPage]);
 
   const onPaginationClick = page => {
     setCurrentPage(page);

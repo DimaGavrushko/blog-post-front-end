@@ -32,6 +32,8 @@ const ChangePasswordModal = ({
       case "new-password-repeat":
         setNewPasswordRepeat(value);
         break;
+      default:
+        break;
     }
   };
 
