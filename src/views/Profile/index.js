@@ -246,9 +246,13 @@ const Profile = ({
                 ? getRecentPosts(
                     [...posts, ...notApprovedPosts].filter(
                       el => el.authorId === id
-                    )
+                    ),
+                    [...posts, ...notApprovedPosts].length
                   )
-                : getRecentPosts([...posts].filter(el => el.authorId === id))
+                : getRecentPosts(
+                    [...posts].filter(el => el.authorId === id),
+                    [...posts].length
+                  )
             }
             isProfilePage={true}
             isOwnPage={isOwnPage}
