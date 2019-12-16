@@ -31,11 +31,17 @@ const Footer = ({ posts }) => {
           <p className={classes.contactUsText}>Contact us:</p>
           <div className={classes.logoWithLink}>
             <img alt="" className={classes.logoImg} src={VK_logo} />
-            <p className={classes.link}>https://vk.com/gavrushko_dima</p>
+            <div>
+              <p className={classes.link}>https://vk.com/gavrushko_dima</p>
+              <p className={classes.link}>https://vk.com/id157416358</p>
+            </div>
           </div>
           <div className={classes.logoWithLink}>
             <img alt="" className={classes.logoImg} src={GMAIL_logo} />
-            <p className={classes.link}>gavrushko98@gmail.com</p>
+            <div>
+              <p className={classes.link}>gavrushko98@gmail.com</p>
+              <p className={classes.link}>ya.pryshchep@yandex.by</p>
+            </div>
           </div>
           <div className={classes.logoWithLink}>
             <img alt="" className={classes.logoImg} src={LINKED_logo} />
