@@ -95,7 +95,7 @@ const CreatePost = ({
 
   return (
     <>
-      <Grid container className={classes.gridContainer}>
+      <Grid container>
         <Grid item xs={1} sm={1} md={2} lg={2} />
         <Grid item xs={10} sm={9} md={7} lg={7}>
           <div className={classes.container}>

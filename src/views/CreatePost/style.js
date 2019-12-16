@@ -51,9 +51,6 @@ export default {
     flexDirection: "column",
     alignItems: "flex-start"
   },
-  gridContainer: {
-    height: "80vh"
-  },
   editor: {
     overflow: "auto",
     minHeight: "25vh",
