@@ -100,11 +100,14 @@ export const approvePost = postId => async dispatch => {
   }
 };
 
-export const deletePost = postId => async dispatch => {
+export const deletePost = (postId, authorId = "") => async dispatch => {
   try {
     const res = await apiService.delete("", { postId });
     if (res) {
       dispatch(handleDeletePost({ postId }));
+      if (authorId) {
+        dispatch(push(PROFILE_PATH.replace(":id", authorId)));
+      }
     } else {
       throw new Error(`Can not delete post with id=${postId}`);
     }

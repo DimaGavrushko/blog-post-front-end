@@ -9,6 +9,7 @@ import DateAndAuthor from "../shared/DateAndAuthor";
 import { whiteColor } from "../../constants/colors";
 import * as classnames from "classnames";
 import CategoryLabel from "../shared/CategoryLabel";
+import { getPostShortName } from "../../utils/posts";
 
 const useStyles = makeStyles(style);
 
@@ -32,7 +33,7 @@ const PopularPost = ({ post, isFirst = false }) => {
               className={classes.link}
               to={POST_PATH.replace(":id", post._id)}
             >
-              {post.title}
+              {getPostShortName(post.title, 100)}
             </NavLink>
           </Typography>
           <DateAndAuthor post={post} color={whiteColor} />

@@ -18,16 +18,26 @@ export const toPostDate = dateString => {
 };
 
 export const getPostDescription = (text = "") => {
-  const subText = text.substring(0, 200);
-  return subText.substring(0, subText.lastIndexOf(".") + 1 || subText.length);
+  const subText = text.substring(0, 300);
+  return (
+    subText.substring(
+      0,
+      subText.lastIndexOf(".") + 1 ||
+        subText.lastIndexOf(" ") + 1 ||
+        subText.length
+    ) + " ..."
+  );
 };
 
-export const getPostShortName = (text = "") => {
+export const getPostShortName = (text = "", length = 50) => {
   let name;
-  if (text.length > 50) {
-    name = text.substring(0, 50);
-    name = name.substring(0, name.lastIndexOf(" ") + 1);
-    return name + "...";
+  if (text.length > length) {
+    name = text.substring(0, length);
+    name = name.substring(
+      0,
+      name.lastIndexOf(".") + 1 || name.lastIndexOf(" ") + 1
+    );
+    return name + " ...";
   }
 
   return text;
@@ -55,16 +65,15 @@ export const getRecentPosts = (posts = [], count = 3) => {
 };
 
 export const getPopularPosts = (posts = [], count = 3) => {
-  return getRecentPosts(
-    posts
-      .filter(
-        post =>
-          Math.ceil(
-            Math.abs(Date.now() - new Date(post.createdAt).getTime()) /
-              (1000 * 3600 * 24)
-          ) < 7
-      )
-      .slice(0, Math.max(count, posts.length)),
-    count
-  ).sort((a, b) => b.likes.length - a.likes.length);
+  const filteredPosts = posts.filter(
+    post =>
+      Math.ceil(
+        Math.abs(Date.now() - new Date(post.createdAt).getTime()) /
+          (1000 * 3600 * 24)
+      ) < 7
+  );
+
+  return getRecentPosts(filteredPosts, filteredPosts.length)
+    .sort((a, b) => b.likes.length - a.likes.length)
+    .slice(0, Math.min(count, filteredPosts.length));
 };

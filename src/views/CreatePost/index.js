@@ -85,8 +85,11 @@ const CreatePost = ({
     postData.append("title", title);
     postData.append("categoryId", category._id);
     postData.append("content", convertContentToHtml(editorState));
-    postData.append("authorId", author._id);
-    postData.append("authorName", author.firstName);
+    postData.append("authorId", (post && post.authorId) || author._id);
+    postData.append(
+      "authorName",
+      (post && post.authorName) || author.firstName
+    );
     createPost(postData);
   };
 

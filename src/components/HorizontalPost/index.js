@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { CREATE_POST_PATH, POST_PATH } from "../../constants/routes";
 import Typography from "@material-ui/core/Typography";
-import { getPostDescription } from "../../utils/posts";
+import { getPostDescription, getPostShortName } from "../../utils/posts";
 import CategoryLabel from "../shared/CategoryLabel";
 import DateAndAuthor from "../shared/DateAndAuthor";
 import { grayColor } from "../../constants/colors";
@@ -38,7 +38,7 @@ const HorizontalPost = ({
             className={classes.link}
           >
             <Typography variant="h4" className={classes.title}>
-              {post.title}
+              {getPostShortName(post.title, 120)}
             </Typography>
           </NavLink>
         </div>

@@ -20,7 +20,8 @@ const Post = ({
   onLike,
   onUnLike,
   onDislike,
-  onUnDislike
+  onUnDislike,
+  children
 }) => {
   const classes = useStyles();
   const hasLike = !!(post && post.likes && post.likes.includes(loggedUser._id));
@@ -88,6 +89,7 @@ const Post = ({
             <div className={classes.countLikes}>{post.dislikes.length}</div>
           </div>
         )}
+        {children}
       </div>
     </>
   );
@@ -101,7 +103,8 @@ Post.propTypes = {
   onUnLike: PropTypes.func.isRequired,
   onDislike: PropTypes.func.isRequired,
   onUnDislike: PropTypes.func.isRequired,
-  onApprovedDelete: PropTypes.func
+  onApprovedDelete: PropTypes.func,
+  children: PropTypes.object
 };
 
 export default Post;

@@ -12,6 +12,11 @@ import {
   undislike,
   unlike
 } from "../../store/thunk/posts";
+import EditIcon from "@material-ui/icons/Edit";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { NavLink } from "react-router-dom";
+import { CREATE_POST_PATH } from "../../constants/routes";
 
 const useStyles = makeStyles(style);
 
@@ -31,6 +36,7 @@ const Post = ({
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const [post, setPost] = useState(null);
+  const [isOwnPage, setIsOwnPage] = useState(user.role === "admin");
 
   const isCanEdit = id => {
     return (
@@ -38,19 +44,22 @@ const Post = ({
     );
   };
 
-  const onDelete = postId => {
-    deletePost(postId);
+  const onDelete = (postId, authorId) => {
+    deletePost(postId, authorId);
   };
 
   useEffect(() => {
+    let _post;
     if (user.role === "admin" || user.role === "journalist") {
-      setPost([...posts, ...notApprovedPosts].find(el => el._id === id));
+      _post = [...posts, ...notApprovedPosts].find(el => el._id === id);
+      setPost(_post);
     } else {
-      setPost(
-        posts.find(el => {
-          return el._id === id;
-        })
-      );
+      _post = posts.find(el => el._id === id);
+      setPost(_post);
+    }
+
+    if (_post) {
+      setIsOwnPage(_post.authorId === user._id || user.role === "admin");
     }
   }, [id, posts, notApprovedPosts, user]);
 
@@ -68,7 +77,30 @@ const Post = ({
           onDislike={hasLike => dislike(post._id, user._id, hasLike)}
           onUnDislike={() => undislike(post._id, user._id)}
           onDelete={onDelete}
-        />
+        >
+          {isOwnPage && (
+            <div>
+              <IconButton
+                size="small"
+                className={classes.deleteIcon}
+                onClick={() => onDelete(post._id, post.authorId)}
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+              <NavLink
+                className={classes.editButtonLink}
+                to={{
+                  pathname: CREATE_POST_PATH,
+                  post
+                }}
+              >
+                <IconButton size="small" className={classes.editIcon}>
+                  <EditIcon fontSize="small" />
+                </IconButton>
+              </NavLink>
+            </div>
+          )}
+        </PostComponent>
       </Grid>
       <Grid item xs={1} sm={3} md={4} lg={4} />
     </Grid>

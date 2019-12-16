@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { POST_PATH } from "../../constants/routes";
 import Typography from "@material-ui/core/Typography";
-import { getPostDescription } from "../../utils/posts";
+import { getPostDescription, getPostShortName } from "../../utils/posts";
 import CategoryLabel from "../shared/CategoryLabel";
 import DateAndAuthor from "../shared/DateAndAuthor";
 import { grayColor } from "../../constants/colors";
@@ -23,13 +23,13 @@ const PostInCategory = ({ post }) => {
       <CategoryLabel name={post.categoryName} id={post.categoryId} />
       <NavLink to={POST_PATH.replace(":id", post._id)} className={classes.link}>
         <Typography variant="h4" className={classes.title}>
-          {post.title}
+          {getPostShortName(post.title, 120)}
         </Typography>
       </NavLink>
       <div className={classes.descriptionContainer}>
         <p
           className={classes.description}
-          dangerouslySetInnerHTML={{ __html: getPostDescription(post.text) }}
+          dangerouslySetInnerHTML={{ __html: getPostDescription(post.content) }}
         />
       </div>
       <DateAndAuthor post={post} color={grayColor[0]} />
