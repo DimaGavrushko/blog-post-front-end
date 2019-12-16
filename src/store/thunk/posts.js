@@ -7,7 +7,7 @@ import {
   startCreatePost,
   handleSuccessCreatePost,
   handleSuccessReactToPost,
-  handleLoadNotApprovedPosts,
+  handleSuccessApprovePost,
   handleDeletePost
 } from "../actions/posts";
 import { push } from "connected-react-router";
@@ -93,29 +93,14 @@ export const createPost = postData => async dispatch => {
 
 export const approvePost = postId => async dispatch => {
   try {
-    await apiService.post("approve", { postId });
-    const notApprovedPosts = await apiService.get("notApproved");
-    dispatch(handleLoadNotApprovedPosts({ notApprovedPosts }));
+    const post = await apiService.post("approve", { postId });
+    dispatch(handleSuccessApprovePost({ post }));
   } catch (error) {
     dispatch(catchError({ error }));
   }
 };
 
-export const deleteNotApprovedPost = postId => async dispatch => {
-  try {
-    const res = await apiService.delete("", { postId });
-    if (res) {
-      const notApprovedPosts = await apiService.get("notApproved");
-      dispatch(handleLoadNotApprovedPosts({ notApprovedPosts }));
-    } else {
-      throw new Error(`Can not delete post with id=${postId}`);
-    }
-  } catch (error) {
-    dispatch(catchError({ error }));
-  }
-};
-
-export const deleteApprovedPost = postId => async dispatch => {
+export const deletePost = postId => async dispatch => {
   try {
     const res = await apiService.delete("", { postId });
     if (res) {

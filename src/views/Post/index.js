@@ -6,8 +6,7 @@ import PostComponent from "../../components/PostComponent";
 import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
-  deleteApprovedPost,
-  deleteNotApprovedPost,
+  deletePost,
   dislike,
   like,
   undislike,
@@ -27,8 +26,7 @@ const Post = ({
   unlike,
   dislike,
   undislike,
-  deleteApprovedPost,
-  deleteNotApprovedPost
+  deletePost
 }) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
@@ -40,12 +38,8 @@ const Post = ({
     );
   };
 
-  const onApprovedDelete = postId => {
-    deleteApprovedPost(postId);
-  };
-
-  const onNotApprovedDelete = postId => {
-    deleteNotApprovedPost(postId);
+  const onDelete = postId => {
+    deletePost(postId);
   };
 
   useEffect(() => {
@@ -73,7 +67,7 @@ const Post = ({
           onUnLike={() => unlike(post._id, user._id)}
           onDislike={hasLike => dislike(post._id, user._id, hasLike)}
           onUnDislike={() => undislike(post._id, user._id)}
-          onDelete={post.isApproved ? onApprovedDelete : onNotApprovedDelete}
+          onDelete={onDelete}
         />
       </Grid>
       <Grid item xs={1} sm={3} md={4} lg={4} />
@@ -97,8 +91,7 @@ const mapDispatchToProps = {
   unlike,
   dislike,
   undislike,
-  deleteApprovedPost,
-  deleteNotApprovedPost
+  deletePost
 };
 
 Post.propTypes = {
@@ -107,10 +100,10 @@ Post.propTypes = {
   match: PropTypes.object,
   user: PropTypes.object.isRequired,
   like: PropTypes.func.isRequired,
+  unlike: PropTypes.func.isRequired,
   dislike: PropTypes.func.isRequired,
   undislike: PropTypes.func.isRequired,
-  deleteApprovedPost: PropTypes.func,
-  deleteNotApprovedPost: PropTypes.func
+  deletePost: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

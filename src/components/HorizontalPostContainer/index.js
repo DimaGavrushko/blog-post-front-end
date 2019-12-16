@@ -15,8 +15,7 @@ const HorizontalPostContainer = ({
   isProfilePage = false,
   isOwnPage,
   onApprove,
-  onNotApprovedDelete,
-  onApprovedDelete
+  onDelete
 }) => {
   const classes = useStyles();
   const [currentPage, setCurrentPage] = useState(0);
@@ -55,8 +54,7 @@ const HorizontalPostContainer = ({
           isProfilePage={isProfilePage}
           isOwnPage={isOwnPage}
           onApprove={onApprove}
-          onNotApprovedDelete={onNotApprovedDelete}
-          onApprovedDelete={onApprovedDelete}
+          onDelete={onDelete}
         />
       ))}
       {posts.length > postsPerPage && (
@@ -80,8 +78,7 @@ HorizontalPostContainer.propTypes = {
   isProfilePage: PropTypes.bool,
   isOwnPage: PropTypes.bool,
   onApprove: PropTypes.func,
-  onNotApprovedDelete: PropTypes.func,
-  onApprovedDelete: PropTypes.func
+  onDelete: PropTypes.func
 };
 
 export default HorizontalPostContainer;

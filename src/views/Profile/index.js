@@ -16,10 +16,7 @@ import defaultAvatar from "../../assets/images/default-avatar.png";
 import TextContainerWithLabel from "../../components/shared/TextContainerWithLabel";
 import Button from "@material-ui/core/Button";
 import HorizontalPostContainer from "../../components/HorizontalPostContainer";
-import {
-  deleteApprovedPost,
-  deleteNotApprovedPost
-} from "../../store/thunk/posts";
+import { deletePost } from "../../store/thunk/posts";
 import { getRecentPosts } from "../../utils/posts";
 import ChangePasswordModal from "../../components/ChangePasswordModal";
 import { dismissError } from "../../store/actions/users";
@@ -36,8 +33,7 @@ const Profile = ({
   changeUserPhoto,
   changePassword,
   dismissError,
-  deleteApprovedPost,
-  deleteNotApprovedPost
+  deletePost
 }) => {
   const classes = useStyles();
   const { id } = useParams();
@@ -52,6 +48,7 @@ const Profile = ({
   const [openModal, setOpenModal] = React.useState(false);
 
   useEffect(() => {
+    onModalClose();
     const user = instances.find(el => el._id === id);
     if (!user) {
       loadUser({ id });
@@ -67,16 +64,11 @@ const Profile = ({
   }, [instances, id, loadUser, auth]);
 
   useEffect(() => {
-    onModalClose();
     formData = new FormData();
   }, []);
 
-  const onApprovedDelete = postId => {
-    deleteApprovedPost(postId, selectedUser._id);
-  };
-
-  const onNotApprovedDelete = postId => {
-    deleteNotApprovedPost(postId, selectedUser._id);
+  const onDelete = postId => {
+    deletePost(postId);
   };
 
   const onEditClick = name => {
@@ -187,13 +179,15 @@ const Profile = ({
                         onChange={loadPhoto}
                       />
                     </Button>
-                    <Button
-                      variant="outlined"
-                      className={classes.button}
-                      onClick={() => setOpenModal(true)}
-                    >
-                      Change password
-                    </Button>
+                    {selectedUser._id === auth.user._id && (
+                      <Button
+                        variant="outlined"
+                        className={classes.button}
+                        onClick={() => setOpenModal(true)}
+                      >
+                        Change password
+                      </Button>
+                    )}
                   </>
                 )}
               </div>
@@ -224,7 +218,7 @@ const Profile = ({
                   label="email"
                   name="email"
                   text={email}
-                  isOwnPage={isOwnPage}
+                  isOwnPage={selectedUser._id === auth.user._id}
                   isEditMode={currentEdit === "email"}
                   onChange={onChange}
                   onEditClick={onEditClick}
@@ -249,8 +243,7 @@ const Profile = ({
             posts={posts}
             isProfilePage={true}
             isOwnPage={isOwnPage}
-            onApprovedDelete={onApprovedDelete}
-            onNotApprovedDelete={onNotApprovedDelete}
+            onDelete={onDelete}
           />
         )}
       </Grid>
@@ -275,8 +268,7 @@ const mapStateToProps = (
 
 const mapDispatchToProps = {
   loadUser,
-  deleteApprovedPost,
-  deleteNotApprovedPost,
+  deletePost,
   changeUserInfo,
   changeUserPhoto,
   changePassword,
@@ -288,8 +280,7 @@ Profile.propTypes = {
   auth: PropTypes.object.isRequired,
   loadUser: PropTypes.func.isRequired,
   posts: PropTypes.array,
-  deleteApprovedPost: PropTypes.func,
-  deleteNotApprovedPost: PropTypes.func,
+  deletePost: PropTypes.func,
   changeUserPhoto: PropTypes.func.isRequired,
   changeUserInfo: PropTypes.func.isRequired,
   changePassword: PropTypes.func.isRequired,

@@ -22,8 +22,7 @@ const HorizontalPost = ({
   isProfilePage,
   isOwnPage,
   onApprove,
-  onNotApprovedDelete,
-  onApprovedDelete
+  onDelete
 }) => {
   const classes = useStyles();
 
@@ -63,11 +62,7 @@ const HorizontalPost = ({
             <IconButton
               size="small"
               className={classes.deleteIcon}
-              onClick={() =>
-                post.isApproved
-                  ? onApprovedDelete(post._id)
-                  : onNotApprovedDelete(post._id)
-              }
+              onClick={() => onDelete(post._id)}
             >
               <DeleteIcon fontSize="small" />
             </IconButton>
@@ -93,7 +88,7 @@ const HorizontalPost = ({
               classes={{
                 root: classes.noButton
               }}
-              onClick={() => onNotApprovedDelete(post._id)}
+              onClick={() => onDelete(post._id)}
             >
               No
             </Button>
@@ -121,8 +116,7 @@ HorizontalPost.propTypes = {
   isProfilePage: PropTypes.bool.isRequired,
   isOwnPage: PropTypes.bool,
   onApprove: PropTypes.func,
-  onNotApprovedDelete: PropTypes.func,
-  onApprovedDelete: PropTypes.func
+  onDelete: PropTypes.func
 };
 
 export default HorizontalPost;

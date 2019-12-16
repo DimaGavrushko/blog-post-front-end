@@ -87,6 +87,31 @@ export default (state = initialState, action) => {
       };
     }
 
+    case posts.HANDLE_SUCCESS_APPROVE_POST: {
+      let { post } = action.payload;
+
+      const posts = [...state.posts];
+      const notApprovedPosts = [...state.notApprovedPosts];
+      const idx = notApprovedPosts.findIndex(el => el._id === post._id);
+
+      if (idx !== -1) {
+        notApprovedPosts.splice(idx, 1);
+      }
+
+      posts.push({
+        ...post,
+        categoryName: (
+          state.categories.find(el => el._id === post.categoryId) || {}
+        ).name
+      });
+
+      return {
+        ...state,
+        posts,
+        notApprovedPosts
+      };
+    }
+
     case posts.HANDLE_SUCCESS_LOAD_CATEGORIES_AND_POSTS: {
       let { posts, categories, notApprovedPosts } = action.payload;
 
@@ -121,15 +146,15 @@ export default (state = initialState, action) => {
       const { postId } = action.payload;
       const posts = [...state.posts];
       const notApprovedPosts = [...state.notApprovedPosts];
-      const idx = posts.findIndex(el => el._id === postId);
+      let idx = posts.findIndex(el => el._id === postId);
 
       if (idx !== -1) {
         posts.splice(idx, 1);
       } else {
-        notApprovedPosts.splice(
-          notApprovedPosts.findIndex(el => el._id === postId),
-          1
-        );
+        idx = notApprovedPosts.findIndex(el => el._id === postId);
+        if (idx !== -1) {
+          notApprovedPosts.splice(idx, 1);
+        }
       }
 
       return {

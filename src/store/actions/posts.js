@@ -55,3 +55,10 @@ export const handleDeletePost = ({ postId }) => ({
     postId
   }
 });
+
+export const handleSuccessApprovePost = ({ post }) => ({
+  type: postsTypes.HANDLE_SUCCESS_APPROVE_POST,
+  payload: {
+    post
+  }
+});

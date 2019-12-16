@@ -8,15 +8,11 @@ import * as PropTypes from "prop-types";
 import { getRecentPosts } from "../../utils/posts";
 import Typography from "@material-ui/core/Typography/Typography";
 import { NO_CONFIRMATION_POSTS } from "../../constants";
-import { approvePost, deleteNotApprovedPost } from "../../store/thunk/posts";
+import { approvePost, deletePost } from "../../store/thunk/posts";
 
 const useStyles = makeStyles(style);
 
-const PostsApproval = ({
-  notApprovedPosts,
-  approvePost,
-  deleteNotApprovedPost
-}) => {
+const PostsApproval = ({ notApprovedPosts, approvePost, deletePost }) => {
   const classes = useStyles();
 
   if (!notApprovedPosts.length) {
@@ -31,8 +27,8 @@ const PostsApproval = ({
     approvePost(postId);
   };
 
-  const onNotApprovedDelete = postId => {
-    deleteNotApprovedPost(postId);
+  const onDelete = postId => {
+    deletePost(postId);
   };
 
   return (
@@ -43,7 +39,7 @@ const PostsApproval = ({
             posts={notApprovedPosts}
             isApprovePage={true}
             onApprove={onApprove}
-            onNotApprovedDelete={onNotApprovedDelete}
+            onDelete={onDelete}
           />
         </Grid>
       </Grid>
@@ -57,12 +53,12 @@ const mapStateToProps = ({ posts: { notApprovedPosts } }) => ({
 
 const mapDispatchToProps = {
   approvePost,
-  deleteNotApprovedPost
+  deletePost
 };
 
 PostsApproval.propTypes = {
   notApprovedPosts: PropTypes.array.isRequired,
-  deleteNotApprovedPost: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
   approvePost: PropTypes.func.isRequired
 };
 
