@@ -27,6 +27,7 @@ const useStyles = makeStyles(style);
 const Profile = ({
   users: { instances, isLoading, latestError },
   posts,
+  notApprovedPosts,
   auth,
   loadUser,
   changeUserInfo,
@@ -240,7 +241,15 @@ const Profile = ({
         )}
         {!!posts.length && (
           <HorizontalPostContainer
-            posts={posts}
+            posts={
+              isOwnPage
+                ? getRecentPosts(
+                    [...posts, ...notApprovedPosts].filter(
+                      el => el.authorId === id
+                    )
+                  )
+                : getRecentPosts([...posts].filter(el => el.authorId === id))
+            }
             isProfilePage={true}
             isOwnPage={isOwnPage}
             onDelete={onDelete}
@@ -251,19 +260,15 @@ const Profile = ({
   );
 };
 
-const mapStateToProps = (
-  { posts: { posts, notApprovedPosts }, users, auth },
-  {
-    match: {
-      params: { id }
-    }
-  }
-) => ({
+const mapStateToProps = ({
+  posts: { posts, notApprovedPosts },
+  users,
+  auth
+}) => ({
   users,
   auth,
-  posts: getRecentPosts(
-    [...posts, ...notApprovedPosts].filter(el => el.authorId === id)
-  )
+  notApprovedPosts,
+  posts
 });
 
 const mapDispatchToProps = {
@@ -280,6 +285,7 @@ Profile.propTypes = {
   auth: PropTypes.object.isRequired,
   loadUser: PropTypes.func.isRequired,
   posts: PropTypes.array,
+  notApprovedPosts: PropTypes.array,
   deletePost: PropTypes.func,
   changeUserPhoto: PropTypes.func.isRequired,
   changeUserInfo: PropTypes.func.isRequired,

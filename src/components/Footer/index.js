@@ -39,7 +39,9 @@ const Footer = ({ posts }) => {
           </div>
           <div className={classes.logoWithLink}>
             <img alt="" className={classes.logoImg} src={LINKED_logo} />
-            <p className={classes.link}>linkedin.com/in/dmitry-gavrushko-a19447169</p>
+            <p className={classes.link}>
+              linkedin.com/in/dmitry-gavrushko-a19447169
+            </p>
           </div>
         </div>
       </div>
@@ -47,7 +49,9 @@ const Footer = ({ posts }) => {
         <p className={classes.rightContainerTitle}>Categories</p>
         {Object.entries(categories).map(([key, value]) => (
           <div className={classes.category} key={key}>
-            <p className={classes.link}>{key} ({value.length})</p>
+            <p className={classes.link}>
+              {key} ({value.length})
+            </p>
           </div>
         ))}
       </div>

@@ -27,7 +27,9 @@ const Category = ({
   const postsStartRef = useRef(null);
 
   useEffect(() => {
-    const p = getRecentPosts(posts, posts.length).filter(post => post.categoryId === id);
+    const p = getRecentPosts(posts, posts.length).filter(
+      post => post.categoryId === id
+    );
     setCurrentPage(0);
     setPosts(p.slice(0, postsPerPage));
   }, [id, posts, postsPerPage]);
