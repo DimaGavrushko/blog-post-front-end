@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import PostInCategory from "../../components/PostInCategory";
 import Pagination from "../../components/Pagination";
 import { getRecentPosts } from "../../utils/posts";
+import { useLocation } from "react-router";
 
 const useStyles = makeStyles(style);
 
@@ -19,12 +20,17 @@ const Category = ({
   }
 }) => {
   const classes = useStyles();
+  const { pathname } = useLocation();
   const [currentPage, setCurrentPage] = useState(0);
   const [postsPerPage] = useState(10);
   const [selectedPosts, setPosts] = useState(
     posts.slice(currentPage * postsPerPage, (currentPage + 1) * postsPerPage)
   );
   const postsStartRef = useRef(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     const p = getRecentPosts(posts, posts.length).filter(

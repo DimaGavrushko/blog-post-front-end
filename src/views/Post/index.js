@@ -15,7 +15,7 @@ import {
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { CREATE_POST_PATH } from "../../constants/routes";
 
 const useStyles = makeStyles(style);
@@ -35,8 +35,14 @@ const Post = ({
 }) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
+  const { pathname } = useLocation();
+
   const [post, setPost] = useState(null);
   const [isOwnPage, setIsOwnPage] = useState(user.role === "admin");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const isCanEdit = id => {
     return (

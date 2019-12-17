@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import DashedContainer from "../../components/DashedContainer";
 import Grid from "@material-ui/core/Grid";
 import {
@@ -38,6 +38,8 @@ const Profile = ({
 }) => {
   const classes = useStyles();
   const { id } = useParams();
+  const { pathname } = useLocation();
+
   const [selectedUser, setSelectedUser] = useState(null);
   const [isOwnPage, setIsOwnPage] = useState(auth.user.role === "admin");
   const [first, setFirst] = useState("");
@@ -46,7 +48,11 @@ const Profile = ({
   const [description, setDescription] = useState("");
   const [currentEdit, setCurrentEdit] = useState("");
   const [img, setImage] = useState("");
-  const [openModal, setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     onModalClose();

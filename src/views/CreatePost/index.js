@@ -17,6 +17,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { createPost } from "../../store/thunk/posts";
+import { useLocation } from "react-router";
 
 let postData;
 const fileReader = new FileReader();
@@ -41,6 +42,8 @@ const CreatePost = ({
   location: { post }
 }) => {
   const classes = useStyles();
+  const { pathname } = useLocation();
+
   const [category, setCategory] = useState(
     post ? categories.find(el => el._id === post.categoryId) : categories[0]
   );
@@ -49,6 +52,10 @@ const CreatePost = ({
   );
   const [title, setTitle] = useState(post ? post.title : "");
   const [img, setImage] = useState(post ? post.url : "");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     postData = new FormData();
