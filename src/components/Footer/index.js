@@ -27,8 +27,8 @@ const Footer = ({ posts }) => {
         <p className={classes.footerText}>{FOOTER_TEXT}</p>
         <a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/blogpost-bsu.herokuapp.com">
           <img
-            src="https://seal.beyondsecurity.com/verification-images/blogpost-bsu.herokuapp.com/vulnerability-scanner-2.gif"
-            alt="Website Security Test"
+            src="https://seal.beyondsecurity.com/verification-images/blogpost-bsu.herokuapp.com/vulnerability-scanner-8.gif"
+            alt="Vulnerability Scanner"
             border="0"
           />
         </a>
