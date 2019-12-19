@@ -169,7 +169,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        isLoadingCategories: false,
+        isLoading: false,
         latestError: error.message
       };
     }

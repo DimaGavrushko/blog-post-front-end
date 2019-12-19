@@ -11,6 +11,7 @@ import * as PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { tryAuthentication } from "../../store/thunk/auth";
 import { compose } from "redux";
+import Notifications from "../../components/Notifications";
 
 const useStyles = makeStyles(style);
 
@@ -73,7 +74,10 @@ const Root = ({ user }) => {
   return (
     <div>
       <Header />
-      <main className={classes.mainContainer}>{chooseRoutes(user)}</main>
+      <main className={classes.mainContainer}>
+        <Notifications place="tc" />
+        {chooseRoutes(user)}
+      </main>
       <Footer />
     </div>
   );

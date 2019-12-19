@@ -7,6 +7,8 @@ import {
 import { API_URL } from "../../constants/api";
 import { ApiService } from "../../utils/apiService";
 import { handleChangeAuthUserInfo } from "../actions/auth";
+import { addNotification } from "../actions/notifications";
+import { TYPE_DANGER, TYPE_SUCCESS } from "../../constants/notifications";
 
 const apiService = new ApiService(API_URL + "/users");
 
@@ -17,6 +19,10 @@ export const loadUser = ({ id }) => async dispatch => {
     dispatch(handleSuccessLoadUser({ user }));
   } catch (error) {
     dispatch(catchError({ error }));
+    dispatch(addNotification({
+      message: error.message,
+      notificationType: TYPE_DANGER
+    }));
   }
 };
 
@@ -38,6 +44,10 @@ export const changeUserInfo = (
     dispatch(handleSuccessChangeUserInfo({ user }));
   } catch (error) {
     dispatch(catchError({ error }));
+    dispatch(addNotification({
+      message: error.message,
+      notificationType: TYPE_DANGER
+    }));
   }
 };
 
@@ -57,6 +67,12 @@ export const changePassword = (
       dispatch(handleChangeAuthUserInfo({ user }));
     }
     dispatch(handleSuccessChangeUserInfo({ user }));
+    dispatch(
+      addNotification({
+        message: `Password successfully changed.`,
+        notificationType: TYPE_SUCCESS
+      })
+    );
   } catch (error) {
     dispatch(catchError({ error }));
   }
@@ -71,5 +87,9 @@ export const changeUserPhoto = (loggedUserId, formData) => async dispatch => {
     dispatch(handleSuccessChangeUserInfo({ user }));
   } catch (error) {
     dispatch(catchError({ error }));
+    dispatch(addNotification({
+      message: error.message,
+      notificationType: TYPE_DANGER
+    }));
   }
 };
