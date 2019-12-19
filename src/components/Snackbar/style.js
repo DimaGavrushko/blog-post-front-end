@@ -27,7 +27,6 @@ const snackbarContentStyle = theme => ({
     opacity: "0.9"
   },
   root: {
-    fontFamily: '"Open Sans", sans-serif',
     width: "100%",
     flexWrap: "unset",
     position: "relative",
