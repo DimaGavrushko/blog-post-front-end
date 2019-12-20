@@ -13,8 +13,9 @@ const CategoriesDropDown = ({ categories, posts }) => {
   const classes = useStyles();
   const [selectedCategory, selectCategory] = useState(categories[0]);
   const [selectedPosts, setPosts] = useState(
-    getRecentPosts(posts, 4).filter(
-      post => post.categoryId === selectedCategory._id
+    getRecentPosts(
+      posts.filter(post => post.categoryId === selectedCategory._id),
+      4
     )
   );
 
@@ -24,7 +25,10 @@ const CategoriesDropDown = ({ categories, posts }) => {
       categories.find(el => el._id === categoryId) || categories[0]
     );
     setPosts(
-      getRecentPosts(posts, 4).filter(post => post.categoryId === categoryId)
+      getRecentPosts(
+        posts.filter(post => post.categoryId === categoryId),
+        4
+      )
     );
   };
 

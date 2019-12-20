@@ -19,10 +19,12 @@ export const loadUser = ({ id }) => async dispatch => {
     dispatch(handleSuccessLoadUser({ user }));
   } catch (error) {
     dispatch(catchError({ error }));
-    dispatch(addNotification({
-      message: error.message,
-      notificationType: TYPE_DANGER
-    }));
+    dispatch(
+      addNotification({
+        message: error.message,
+        notificationType: TYPE_DANGER
+      })
+    );
   }
 };
 
@@ -44,10 +46,12 @@ export const changeUserInfo = (
     dispatch(handleSuccessChangeUserInfo({ user }));
   } catch (error) {
     dispatch(catchError({ error }));
-    dispatch(addNotification({
-      message: error.message,
-      notificationType: TYPE_DANGER
-    }));
+    dispatch(
+      addNotification({
+        message: error.message,
+        notificationType: TYPE_DANGER
+      })
+    );
   }
 };
 
@@ -87,9 +91,11 @@ export const changeUserPhoto = (loggedUserId, formData) => async dispatch => {
     dispatch(handleSuccessChangeUserInfo({ user }));
   } catch (error) {
     dispatch(catchError({ error }));
-    dispatch(addNotification({
-      message: error.message,
-      notificationType: TYPE_DANGER
-    }));
+    dispatch(
+      addNotification({
+        message: error.message,
+        notificationType: TYPE_DANGER
+      })
+    );
   }
 };

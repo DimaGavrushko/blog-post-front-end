@@ -96,10 +96,12 @@ export const createPost = postData => async dispatch => {
     );
   } catch (error) {
     dispatch(catchError({ error }));
-    dispatch(addNotification({
-      message: error.message,
-      notificationType: TYPE_DANGER
-    }));
+    dispatch(
+      addNotification({
+        message: error.message,
+        notificationType: TYPE_DANGER
+      })
+    );
   }
 };
 
@@ -115,10 +117,12 @@ export const approvePost = postId => async dispatch => {
     );
   } catch (error) {
     dispatch(catchError({ error }));
-    dispatch(addNotification({
-      message: error.message,
-      notificationType: TYPE_DANGER
-    }));
+    dispatch(
+      addNotification({
+        message: error.message,
+        notificationType: TYPE_DANGER
+      })
+    );
   }
 };
 
@@ -141,9 +145,11 @@ export const deletePost = (postId, authorId = "") => async dispatch => {
     }
   } catch (error) {
     dispatch(catchError({ error }));
-    dispatch(addNotification({
-      message: error.message,
-      notificationType: TYPE_DANGER
-    }));
+    dispatch(
+      addNotification({
+        message: error.message,
+        notificationType: TYPE_DANGER
+      })
+    );
   }
 };
