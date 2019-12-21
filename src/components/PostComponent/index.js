@@ -69,9 +69,10 @@ const Post = ({
         />
       </div>
       <div className={classes.options}>
-        {loggedUser.role !== "guest" && post.isApproved && (
+        {post.isApproved && (
           <div className={classes.likesContainer}>
             <IconButton
+              disabled={loggedUser.role === "guest"}
               size="small"
               className={hasLike ? classes.like : ""}
               onClick={onLikeClick}
@@ -80,6 +81,7 @@ const Post = ({
             </IconButton>
             <div className={classes.countLikes}>{post.likes.length}</div>
             <IconButton
+              disabled={loggedUser.role === "guest"}
               size="small"
               className={hasDislike ? classes.like : ""}
               onClick={onDislikeClick}
