@@ -84,16 +84,16 @@ const CreatePost = ({
   const loadPhoto = ({ target }) => {
     const [photo] = target.files;
     fileReader.readAsDataURL(photo);
-    postData.append("img", photo);
+    postData.set("img", photo);
   };
 
   const onPostCreate = () => {
-    postData.append("id", (post && post._id) || "");
-    postData.append("title", title);
-    postData.append("categoryId", category._id);
-    postData.append("content", convertContentToHtml(editorState));
-    postData.append("authorId", (post && post.authorId) || author._id);
-    postData.append(
+    postData.set("id", (post && post._id) || "");
+    postData.set("title", title);
+    postData.set("categoryId", category._id);
+    postData.set("content", convertContentToHtml(editorState));
+    postData.set("authorId", (post && post.authorId) || author._id);
+    postData.set(
       "authorName",
       (post && post.authorName) || author.firstName
     );

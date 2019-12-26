@@ -130,8 +130,8 @@ const Profile = ({
 
   const loadPhoto = ({ target }) => {
     const [photo] = target.files;
-    formData.append("img", photo);
-    formData.append("userId", selectedUser._id);
+    formData.set("img", photo);
+    formData.set("userId", selectedUser._id);
     changeUserPhoto(auth.user._id, formData);
   };
 
