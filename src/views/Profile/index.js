@@ -68,7 +68,7 @@ const Profile = ({
       setImage(user.url);
       setIsOwnPage(auth.user._id === user._id || auth.user.role === "admin");
     }
-  }, [instances, id, loadUser, auth]);
+  }, [instances, latestError, id, loadUser, auth]);
 
   useEffect(() => {
     formData = new FormData();
@@ -221,6 +221,13 @@ const Profile = ({
                     onClickAway={onClickAway}
                   />
                 </div>
+                <TextContainerWithLabel
+                  label="Role"
+                  name="role"
+                  text={selectedUser.role}
+                  isOwnPage={false}
+                  isEditMode={false}
+                />
                 <TextContainerWithLabel
                   label="email"
                   name="email"
