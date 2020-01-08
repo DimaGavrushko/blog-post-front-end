@@ -16,12 +16,15 @@ export default (state = initialState, action) => {
     }
 
     case users.CATCH_ERROR: {
-      const { error } = action.payload;
+      const { error, errorType } = action.payload;
 
       return {
         ...state,
         isLoading: false,
-        latestError: error.message
+        latestError: {
+          message: error.message,
+          type: errorType
+        }
       };
     }
 

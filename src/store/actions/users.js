@@ -2,10 +2,11 @@ import { users } from "./types";
 
 export const startLoadUser = () => ({ type: users.START_LOAD_USER });
 
-export const catchError = ({ error }) => ({
+export const catchError = ({ error, errorType = "" }) => ({
   type: users.CATCH_ERROR,
   payload: {
-    error
+    error,
+    errorType
   }
 });
 

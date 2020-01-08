@@ -20,6 +20,7 @@ import { deletePost } from "../../store/thunk/posts";
 import { getRecentPosts } from "../../utils/posts";
 import ChangePasswordModal from "../../components/ChangePasswordModal";
 import { dismissError } from "../../store/actions/users";
+import { UPDATE_PASSWORD_ERROR } from "../../constants/errors";
 
 let formData;
 const useStyles = makeStyles(style);
@@ -55,7 +56,6 @@ const Profile = ({
   }, [pathname]);
 
   useEffect(() => {
-    onModalClose();
     const user = instances.find(el => el._id === id);
     if (!user) {
       loadUser({ id });
@@ -68,7 +68,11 @@ const Profile = ({
       setImage(user.url);
       setIsOwnPage(auth.user._id === user._id || auth.user.role === "admin");
     }
-  }, [instances, latestError, id, loadUser, auth]);
+
+    if (latestError && latestError.type !== UPDATE_PASSWORD_ERROR) {
+      onModalClose();
+    }
+  }, [instances, latestError, id, auth]);
 
   useEffect(() => {
     formData = new FormData();

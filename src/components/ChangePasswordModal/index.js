@@ -59,7 +59,7 @@ const ChangePasswordModal = ({
               color="error"
               className={classes.sizeLetter}
             >
-              {latestError}
+              {latestError.message}
             </Typography>
           </div>
         )}
