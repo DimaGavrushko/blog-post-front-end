@@ -73,7 +73,7 @@ const Post = ({
     (post.isApproved || (!post.isApproved && isCanEdit(post.authorId))) ? (
     <Grid container>
       <Grid item xs={1} sm={1} md={1} lg={1} />
-      <Grid item xs={10} sm={8} md={7} lg={7}>
+      <Grid item xs={10} sm={8} md={8} lg={8}>
         <PostComponent
           post={post}
           isOwnPost={isCanEdit(post.authorId)}
@@ -84,7 +84,7 @@ const Post = ({
           onUnDislike={() => undislike(post._id, user._id)}
           onDelete={onDelete}
         >
-          {isOwnPage && (
+          {isOwnPage ? (
             <div>
               <IconButton
                 size="small"
@@ -105,10 +105,10 @@ const Post = ({
                 </IconButton>
               </NavLink>
             </div>
-          )}
+          ) : null}
         </PostComponent>
       </Grid>
-      <Grid item xs={1} sm={3} md={4} lg={4} />
+      <Grid item xs={1} sm={3} md={3} lg={3} />
     </Grid>
   ) : (
     <></>

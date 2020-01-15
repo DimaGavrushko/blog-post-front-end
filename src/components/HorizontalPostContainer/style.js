@@ -1,3 +1,5 @@
+import { blackColor } from "../../constants/colors";
+
 export default () => ({
   blogTop: {
     margin: 0,
@@ -8,9 +10,18 @@ export default () => ({
     fontSize: 21
   },
   blogTopContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
     paddingBottom: "4rem"
   },
   paginationContainer: {
     marginBottom: "2rem"
+  },
+  square: {
+    marginRight: 7,
+    width: 10,
+    height: 10,
+    backgroundColor: blackColor
   }
 });

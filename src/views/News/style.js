@@ -1,5 +1,5 @@
 export default {
   container: {
-    marginBottom: "5%"
+    marginBottom: "3rem"
   }
 };
