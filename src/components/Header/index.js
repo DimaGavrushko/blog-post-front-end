@@ -70,6 +70,7 @@ const Header = ({
                   key={name}
                   name={name}
                   path={path}
+                  isMobile={isMobile}
                   onClickAway={
                     name === "Categories" ? () => toggleCategories(false) : null
                   }
