@@ -8,6 +8,7 @@ import DashedContainer from "../../components/DashedContainer";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 
 const useStyles = makeStyles(style);
 
@@ -15,6 +16,7 @@ const Login = ({ auth: { latestAuthError, isLoading }, login }) => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const isMobile = useMediaQuery("(max-width:990px)");
 
   const handleInputChange = ({ target: { name, value } }) => {
     if (name === "email") {
@@ -31,7 +33,11 @@ const Login = ({ auth: { latestAuthError, isLoading }, login }) => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.loginContainer}>
+      <div
+        className={
+          isMobile ? classes.mobileLoginContainer : classes.loginContainer
+        }
+      >
         <DashedContainer label={"Log in"}>
           <form className={classes.formContainer} onSubmit={onSubmit}>
             {!!latestAuthError && !isLoading && (

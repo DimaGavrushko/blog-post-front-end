@@ -1,11 +1,19 @@
 import { blackColor, grayColor, whiteColor } from "../../constants/colors";
 
+const footerContainer = {
+  background: blackColor,
+  padding: "1rem 10%",
+  display: "flex",
+  justifyContent: "space-between"
+};
+
 export default () => ({
   footerContainer: {
-    background: blackColor,
-    padding: "1rem 10%",
-    display: "flex",
-    justifyContent: "space-between"
+    ...footerContainer
+  },
+  footerContainerMobile: {
+    ...footerContainer,
+    flexDirection: "column"
   },
   leftContainer: {
     display: "flex",

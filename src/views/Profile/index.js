@@ -21,6 +21,7 @@ import { getRecentPosts } from "../../utils/posts";
 import ChangePasswordModal from "../../components/ChangePasswordModal";
 import { dismissError } from "../../store/actions/users";
 import { UPDATE_PASSWORD_ERROR } from "../../constants/errors";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 
 let formData;
 const useStyles = makeStyles(style);
@@ -40,6 +41,7 @@ const Profile = ({
   const classes = useStyles();
   const { id } = useParams();
   const { pathname } = useLocation();
+  const isMobile = useMediaQuery("(max-width:990px)");
 
   const [selectedUser, setSelectedUser] = useState(null);
   const [isOwnPage, setIsOwnPage] = useState(auth.user.role === "admin");
@@ -165,7 +167,9 @@ const Profile = ({
         />
         {!!selectedUser && !isLoading && (
           <DashedContainer label="Profile">
-            <div className={classes.container}>
+            <div
+              className={isMobile ? classes.mobileContainer : classes.container}
+            >
               <div className={classes.leftContainer}>
                 <div className={classes.imageContainer}>
                   <img
@@ -202,7 +206,13 @@ const Profile = ({
                   </>
                 )}
               </div>
-              <div className={classes.rightContainer}>
+              <div
+                className={
+                  isMobile
+                    ? classes.rightContainerMobile
+                    : classes.rightContainer
+                }
+              >
                 <div className={classes.firstAndLast}>
                   <TextContainerWithLabel
                     label="first"

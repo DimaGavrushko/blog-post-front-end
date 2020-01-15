@@ -1,5 +1,16 @@
 import { dangerColor, primaryColor } from "../../constants/colors";
 
+const loginContainer = {
+  width: "25vw",
+  height: "30vh",
+  position: "absolute",
+  top: "25vh",
+  right: 0,
+  bottom: 0,
+  left: 0,
+  margin: "0 auto"
+};
+
 export default {
   container: {
     width: "100%",
@@ -10,14 +21,11 @@ export default {
     overflow: "auto"
   },
   loginContainer: {
-    width: "25vw",
-    height: "30vh",
-    position: "absolute",
-    top: "25vh",
-    right: 0,
-    bottom: 0,
-    left: 0,
-    margin: "0 auto"
+    ...loginContainer
+  },
+  mobileLoginContainer: {
+    ...loginContainer,
+    width: "50%"
   },
   formContainer: {
     display: "flex",

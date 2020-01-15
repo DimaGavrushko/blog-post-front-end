@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 
 const useStyles = makeStyles(style);
 
@@ -25,14 +26,27 @@ const HorizontalPost = ({
   onDelete
 }) => {
   const classes = useStyles();
+  const isMobile = useMediaQuery("(max-width:767px)");
 
   return (
-    <div className={classes.container}>
-      <div className={classes.imageContainer}>
+    <div className={isMobile ? classes.mobileContainer : classes.container}>
+      <div
+        className={
+          isMobile ? classes.mobileImageContainer : classes.imageContainer
+        }
+      >
         <img alt="" className={classes.image} src={post.url} />
       </div>
-      <div className={classes.metaContainer}>
-        <div className={classes.titleContainer}>
+      <div
+        className={
+          isMobile ? classes.metaContainerMobile : classes.metaContainer
+        }
+      >
+        <div
+          className={
+            isMobile ? classes.mobileTitleContainer : classes.titleContainer
+          }
+        >
           <NavLink
             to={POST_PATH.replace(":id", post._id)}
             className={classes.link}
@@ -56,7 +70,7 @@ const HorizontalPost = ({
           <DateAndAuthor post={post} color={grayColor[0]} />
         </div>
       </div>
-      <div className={classes.buttonsBar}>
+      <div className={isMobile ? classes.mobileButtonsBar : classes.buttonsBar}>
         {isProfilePage && isOwnPage && (
           <>
             <IconButton
@@ -86,7 +100,7 @@ const HorizontalPost = ({
               color="primary"
               size="small"
               classes={{
-                root: classes.noButton
+                root: isMobile ? classes.mobileNoButton : classes.noButton
               }}
               onClick={() => onDelete(post._id)}
             >

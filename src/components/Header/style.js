@@ -15,6 +15,12 @@ export default () => ({
     justifyContent: "flex-start",
     alignItems: "center"
   },
+  headerPartContainerMobile: {
+    display: "flex",
+    justifyContent: "flex-start",
+    flexDirection: "column",
+    alignItems: "start"
+  },
   search: {
     position: "relative",
     borderRadius: 3,

@@ -12,16 +12,42 @@ const optionsButton = {
   color: `${whiteColor} !important`
 };
 
+const imageContainer = {
+  width: "35%",
+  height: "25vh",
+  paddingRight: 15
+};
+const container = {
+  display: "flex",
+  width: "100%",
+  marginBottom: "2rem"
+};
+
+const mobileTitleContainer = {
+  marginTop: "1rem",
+  backgroundColor: whiteColor
+};
+
+const metaContainerMobile = {
+  display: "flex",
+  flexDirection: "column",
+  width: "100%"
+};
+
 export default () => ({
   container: {
-    display: "flex",
-    width: "100%",
-    marginBottom: "2rem"
+    ...container
+  },
+  mobileContainer: {
+    ...container,
+    display: "block"
   },
   imageContainer: {
-    width: "35%",
-    height: "25vh",
-    paddingRight: 15
+    ...imageContainer
+  },
+  mobileImageContainer: {
+    ...imageContainer,
+    width: "100%"
   },
   image: {
     width: "100%",
@@ -29,17 +55,20 @@ export default () => ({
     objectFit: "cover"
   },
   metaContainer: {
-    display: "flex",
-    flexDirection: "column",
+    ...metaContainerMobile,
     paddingRight: "0.2rem",
-    paddingLeft: 15,
-    width: "100%"
+    paddingLeft: 15
+  },
+  metaContainerMobile: {
+    ...metaContainerMobile
   },
   titleContainer: {
-    backgroundColor: whiteColor,
+    ...mobileTitleContainer,
     padding: "1rem 1.5rem 1rem",
-    marginLeft: "-20%",
-    marginTop: "1rem"
+    marginLeft: "-20%"
+  },
+  mobileTitleContainer: {
+    ...mobileTitleContainer
   },
   link: {
     textDecoration: "none",
@@ -68,6 +97,9 @@ export default () => ({
   separator: {
     width: "1rem"
   },
+  mobileButtonsBar: {
+    marginTop: "0.5rem"
+  },
   buttonsBar: {
     display: "flex",
     flexDirection: "column"
@@ -75,6 +107,11 @@ export default () => ({
   yesButton: {
     ...optionsButton,
     backgroundColor: `${greenColor} !important`
+  },
+  mobileNoButton: {
+    ...optionsButton,
+    backgroundColor: `${redColor} !important`,
+    marginRight: "0.5rem"
   },
   noButton: {
     ...optionsButton,

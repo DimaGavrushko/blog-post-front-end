@@ -1,13 +1,27 @@
 import { grayColor } from "../../constants/colors";
 
+const container = {
+  display: "flex",
+  alignItems: "flex-start"
+};
+
+const rightContainerMobile = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start"
+};
+
 export default {
   gridContainer: {
     marginTop: "5rem",
     position: "relative"
   },
   container: {
-    display: "flex",
-    alignItems: "flex-start"
+    ...container
+  },
+  mobileContainer: {
+    ...container,
+    flexDirection: "column"
   },
   leftContainer: {
     maxWidth: "9rem",
@@ -17,10 +31,11 @@ export default {
     marginRight: "1rem"
   },
   rightContainer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
+    ...rightContainerMobile,
     marginLeft: "1rem"
+  },
+  rightContainerMobile: {
+    ...rightContainerMobile
   },
   imageContainer: {
     width: "9rem",
