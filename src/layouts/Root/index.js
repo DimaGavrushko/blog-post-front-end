@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { tryAuthentication } from "../../store/thunk/auth";
 import { compose } from "redux";
 import Notifications from "../../components/Notifications";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 
 const useStyles = makeStyles(style);
 
@@ -70,11 +71,16 @@ const tryAuth = () => WrappedComponent => {
 
 const Root = ({ user }) => {
   const classes = useStyles();
+  const isMobile = useMediaQuery("(max-width:767px)");
 
   return (
     <div>
       <Header />
-      <main className={classes.mainContainer}>
+      <main
+        className={
+          isMobile ? classes.mainContainerMobile : classes.mainContainer
+        }
+      >
         <Notifications place="tc" />
         {chooseRoutes(user)}
       </main>

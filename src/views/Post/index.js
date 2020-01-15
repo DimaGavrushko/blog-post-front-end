@@ -73,7 +73,7 @@ const Post = ({
     (post.isApproved || (!post.isApproved && isCanEdit(post.authorId))) ? (
     <Grid container>
       <Grid item xs={1} sm={1} md={1} lg={1} />
-      <Grid item xs={10} sm={8} md={8} lg={8}>
+      <Grid item xs={10} sm={10} md={8} lg={8}>
         <PostComponent
           post={post}
           isOwnPost={isCanEdit(post.authorId)}
@@ -108,7 +108,7 @@ const Post = ({
           ) : null}
         </PostComponent>
       </Grid>
-      <Grid item xs={1} sm={3} md={3} lg={3} />
+      <Grid item xs={1} sm={1} md={3} lg={3} />
     </Grid>
   ) : (
     <></>

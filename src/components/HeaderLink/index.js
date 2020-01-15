@@ -13,12 +13,20 @@ const HeaderLink = ({
   path,
   onClickAway,
   onCategoriesClick,
+  isMobile = false,
   children
 }) => {
   const classes = useStyles();
 
   return name !== "Categories" ? (
-    <NavLink to={path} className={classes.headerLinkContainer}>
+    <NavLink
+      to={path}
+      className={
+        isMobile
+          ? classes.headerLinkContainerMobile
+          : classes.headerLinkContainer
+      }
+    >
       {name}
       {children}
     </NavLink>
@@ -37,7 +45,8 @@ HeaderLink.propTypes = {
   path: PropTypes.string.isRequired,
   onCategoriesClick: PropTypes.func,
   onClickAway: PropTypes.func,
-  children: PropTypes.object
+  children: PropTypes.object,
+  isMobile: PropTypes.bool
 };
 
 export default HeaderLink;

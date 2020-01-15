@@ -15,8 +15,7 @@ export default () => ({
   },
   logoContainerMobile: {
     ...logoContainer,
-    marginRight: 0,
-    marginLeft: "0.8rem"
+    marginRight: 0
   },
   bold: {
     fontWeight: "bold"

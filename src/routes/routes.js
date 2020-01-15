@@ -20,7 +20,7 @@ const guestRoutes = [
     name: "News",
     component: News,
     layout: PATH_INDEX,
-    inHeader: true
+    inHeader: false
   },
   {
     path: CATEGORY_PATH,
