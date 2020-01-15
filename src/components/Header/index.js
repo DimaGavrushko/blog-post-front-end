@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
 import { logout } from "../../store/thunk/auth";
 import UserHeaderCard from "../UserHeaderCard";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles(style);
 
@@ -27,6 +28,7 @@ const Header = ({
   const classes = useStyles();
   const routes = appRoutes[user.role];
   const [isCategoriesOpen, toggleCategories] = useState(false);
+  const isMobile = useMediaQuery("(max-width:990px)");
 
   useEffect(() => {
     toggleCategories(false);
@@ -51,11 +53,19 @@ const Header = ({
           root: classes.headerContainer
         }}
       >
-        <div className={classes.headerPartContainer}>
-          <Logo />
+        <div
+          className={
+            !isMobile
+              ? classes.headerPartContainer
+              : classes.headerPartContainerMobile
+          }
+        >
+          <Logo isMobile={isMobile} />
           {routes.map(
             ({ name, path, inHeader }) =>
-              inHeader && (
+              inHeader &&
+              ((name === "Categories" && !isMobile) ||
+                name !== "Categories") && (
                 <HeaderLink
                   key={name}
                   name={name}

@@ -8,30 +8,29 @@ import GMAIL_logo from "../../assets/images/email-5-32.png";
 import LINKED_logo from "../../assets/images/linkedin-6-32.png";
 import { connect } from "react-redux";
 import * as PropTypes from "prop-types";
-import _ from "lodash";
+import groupBy from "lodash/groupBy";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 
 const useStyles = makeStyles(style);
 
 const Footer = ({ posts }) => {
   const classes = useStyles();
   const [categories, setCategories] = useState({});
+  const isMobile = useMediaQuery("(max-width:990px)");
 
   useEffect(() => {
-    setCategories(_.groupBy(posts, item => item.categoryName));
+    setCategories(groupBy(posts, item => item.categoryName));
   }, [posts]);
 
   return (
-    <div className={classes.footerContainer}>
+    <div
+      className={
+        isMobile ? classes.footerContainerMobile : classes.footerContainer
+      }
+    >
       <div className={classes.leftContainer}>
         <Logo />
         <p className={classes.footerText}>{FOOTER_TEXT}</p>
-        <a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/blogpost-bsu.herokuapp.com">
-          <img
-            src="https://seal.beyondsecurity.com/verification-images/blogpost-bsu.herokuapp.com/vulnerability-scanner-8.gif"
-            alt="Vulnerability Scanner"
-            border="0"
-          />
-        </a>
       </div>
       <div>
         <div className={classes.contactUs}>
@@ -58,16 +57,18 @@ const Footer = ({ posts }) => {
           </div>
         </div>
       </div>
-      <div className={classes.rightContainer}>
-        <p className={classes.rightContainerTitle}>Categories</p>
-        {Object.entries(categories).map(([key, value]) => (
-          <div className={classes.category} key={key}>
-            <p className={classes.link}>
-              {key} ({value.length})
-            </p>
-          </div>
-        ))}
-      </div>
+      {!isMobile && (
+        <div className={classes.rightContainer}>
+          <p className={classes.rightContainerTitle}>Categories</p>
+          {Object.entries(categories).map(([key, value]) => (
+            <div className={classes.category} key={key}>
+              <p className={classes.link}>
+                {key} ({value.length})
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
