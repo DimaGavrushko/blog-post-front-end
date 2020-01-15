@@ -122,6 +122,7 @@ const ChangePasswordModal = ({
 ChangePasswordModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  latestError: PropTypes.object,
   onChangePassword: PropTypes.func.isRequired
 };
 

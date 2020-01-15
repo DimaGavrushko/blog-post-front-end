@@ -72,6 +72,7 @@ const Login = ({ auth: { latestAuthError, isLoading }, login }) => {
               color="primary"
               className={classes.button}
               onClick={onSubmit}
+              disabled={isLoading}
             >
               Log in
             </Button>

@@ -93,10 +93,7 @@ const CreatePost = ({
     postData.set("categoryId", category._id);
     postData.set("content", convertContentToHtml(editorState));
     postData.set("authorId", (post && post.authorId) || author._id);
-    postData.set(
-      "authorName",
-      (post && post.authorName) || author.firstName
-    );
+    postData.set("authorName", (post && post.authorName) || author.firstName);
     createPost(postData);
   };
 
