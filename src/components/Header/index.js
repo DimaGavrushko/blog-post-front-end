@@ -48,7 +48,7 @@ const Header = ({
   return (
     <>
       <AppBar
-        position="sticky"
+        position={isMobile ? "static" : "sticky"}
         classes={{
           root: classes.headerContainer
         }}

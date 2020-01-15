@@ -40,9 +40,12 @@ const HorizontalPostContainer = ({
     <>
       <div className={classes.blogTopContainer}>
         {!!label && (
-          <Typography className={classes.blogTop} variant="h4">
-            {label}
-          </Typography>
+          <>
+            <div className={classes.square} />
+            <Typography className={classes.blogTop} variant="h4">
+              {label}
+            </Typography>
+          </>
         )}
       </div>
       <div ref={postsStartRef} />

@@ -10,6 +10,7 @@ import { NOT_APPROVED_WARNING } from "../../constants";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 
 const useStyles = makeStyles(style);
 
@@ -24,6 +25,8 @@ const Post = ({
   children
 }) => {
   const classes = useStyles();
+  const isMobile = useMediaQuery("(max-width:767px)");
+
   const hasLike = !!(post && post.likes && post.likes.includes(loggedUser._id));
   const hasDislike = !!(
     post &&
@@ -56,7 +59,10 @@ const Post = ({
           </Typography>
         )}
         <CategoryLabel name={post.categoryName} id={post.categoryId} />
-        <Typography className={classes.title} variant="h3">
+        <Typography
+          className={isMobile ? classes.mobileTitle : classes.title}
+          variant="h3"
+        >
           {post.title}
         </Typography>
         <DateAndAuthor post={post} color={grayColor[0]} />

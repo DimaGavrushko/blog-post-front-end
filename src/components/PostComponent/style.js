@@ -21,6 +21,13 @@ export default () => ({
     fontWeight: "bold",
     overflowWrap: "break-word"
   },
+  mobileTitle: {
+    fontSize: 24,
+    lineHeight: "40px",
+    marginTop: "0.5rem",
+    fontWeight: "bold",
+    overflowWrap: "break-word"
+  },
   warning: {
     border: `1px solid ${dangerColor}`,
     padding: "0.5rem",
@@ -42,9 +49,11 @@ export default () => ({
     objectFit: "cover"
   },
   content: {
+    width: "100%",
     padding: "0 2%",
     textAlign: "left",
-    fontSize: 18
+    fontSize: 18,
+    overflowX: "hidden"
   },
   options: {
     display: "flex",
