@@ -7,7 +7,8 @@ export const grayColor = [
   "#a3a5a8",
   "#e1e3e6",
   "#5e5e5e",
-  "#e2e2e2"
+  "#e2e2e2",
+  "#fcfcfc"
 ];
 
 export const whiteColor = "#ffffff";

@@ -104,7 +104,7 @@ const HorizontalPost = ({
               }}
               onClick={() => onDelete(post._id)}
             >
-              No
+              Delete
             </Button>
             <Button
               variant="contained"
@@ -115,7 +115,7 @@ const HorizontalPost = ({
               }}
               onClick={() => onApprove(post._id)}
             >
-              Yes
+              Approve
             </Button>
           </>
         )}

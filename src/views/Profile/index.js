@@ -15,7 +15,7 @@ import * as PropTypes from "prop-types";
 import defaultAvatar from "../../assets/images/default-avatar.png";
 import TextContainerWithLabel from "../../components/shared/TextContainerWithLabel";
 import Button from "@material-ui/core/Button";
-import HorizontalPostContainer from "../../components/HorizontalPostContainer";
+import HorizontalPostsContainer from "../../components/HorizontalPostsContainer";
 import { deletePost } from "../../store/thunk/posts";
 import { getRecentPosts } from "../../utils/posts";
 import ChangePasswordModal from "../../components/ChangePasswordModal";
@@ -267,7 +267,7 @@ const Profile = ({
           </DashedContainer>
         )}
         {!!posts.length && (
-          <HorizontalPostContainer
+          <HorizontalPostsContainer
             posts={
               isOwnPage
                 ? getRecentPosts(

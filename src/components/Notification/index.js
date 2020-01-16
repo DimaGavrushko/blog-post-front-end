@@ -25,6 +25,7 @@ const variantIcon = {
 
 const Notification = ({
   isOpen,
+  isMobile,
   message,
   notificationType,
   removeNotification,
@@ -44,12 +45,14 @@ const Notification = ({
       place={place}
       timer={timer}
       closeSnackbar={removeNotification}
+      isMobile={isMobile}
     />
   );
 };
 
 Notification.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool,
   message: PropTypes.node.isRequired,
   notificationType: PropTypes.oneOf(TYPES).isRequired,
   place: PropTypes.oneOf(POSITIONS),

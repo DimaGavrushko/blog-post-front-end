@@ -8,7 +8,10 @@ import {
 } from "../../constants/colors";
 
 const optionsButton = {
-  borderRadius: "0 !important",
+  minWidth: 50,
+  padding: "0.4rem",
+  fontSize: 12,
+  borderRadius: 2,
   color: `${whiteColor} !important`
 };
 
@@ -20,7 +23,7 @@ const imageContainer = {
 const container = {
   display: "flex",
   width: "100%",
-  marginBottom: "2rem"
+  marginBottom: "3rem"
 };
 
 const mobileTitleContainer = {

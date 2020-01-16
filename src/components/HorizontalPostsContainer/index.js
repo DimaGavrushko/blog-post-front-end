@@ -8,7 +8,7 @@ import * as PropTypes from "prop-types";
 
 const useStyles = makeStyles(style);
 
-const HorizontalPostContainer = ({
+const HorizontalPostsContainer = ({
   posts = [],
   label,
   isApprovePage = false,
@@ -74,7 +74,7 @@ const HorizontalPostContainer = ({
   );
 };
 
-HorizontalPostContainer.propTypes = {
+HorizontalPostsContainer.propTypes = {
   posts: PropTypes.array.isRequired,
   label: PropTypes.string,
   isApprovePage: PropTypes.bool,
@@ -84,4 +84,4 @@ HorizontalPostContainer.propTypes = {
   onDelete: PropTypes.func
 };
 
-export default HorizontalPostContainer;
+export default HorizontalPostsContainer;
