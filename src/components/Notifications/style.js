@@ -9,7 +9,7 @@ const notificationsStyles = {
   mobileContainer: {
     position: "fixed",
     width: "100%",
-    top: "20vh",
+    bottom: 0,
     left: 0,
     zIndex: 1500
   }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import HorizontalPostContainer from "../../components/HorizontalPostContainer";
+import HorizontalPostsContainer from "../../components/HorizontalPostsContainer";
 import Grid from "@material-ui/core/Grid/Grid";
 import PopularPost from "../../components/PopularPost";
 import style from "./style";
@@ -38,7 +38,7 @@ const News = ({ popularPosts, posts }) => {
       </Grid>
       <Grid container>
         <Grid item xs={12} sm={12} md={12} lg={8}>
-          <HorizontalPostContainer posts={posts} label={RECENT_NEWS} />
+          <HorizontalPostsContainer posts={posts} label={RECENT_NEWS} />
         </Grid>
       </Grid>
     </>

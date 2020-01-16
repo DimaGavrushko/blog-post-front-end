@@ -21,6 +21,7 @@ const Notifications = props => {
         const { id } = notification;
         return (
           <Notification
+            isMobile={isMobile}
             key={id}
             queueIndex={index}
             removeNotification={() => removeNotification(id)}

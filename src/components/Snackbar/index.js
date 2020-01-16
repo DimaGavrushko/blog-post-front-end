@@ -6,9 +6,7 @@ import Snack from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
 
-import snackbarContentStyle from "./style";
-
-const useStyles = makeStyles(snackbarContentStyle);
+import { snackbarContentStyle, snackbarContentMobileStyle } from "./style";
 
 function Snackbar({ ...props }) {
   const {
@@ -19,8 +17,10 @@ function Snackbar({ ...props }) {
     place,
     open,
     timer,
-    closeSnackbar
+    closeSnackbar,
+    isMobile
   } = props;
+  const useStyles = makeStyles(isMobile ? snackbarContentMobileStyle : snackbarContentStyle);
   const classes = useStyles();
   let action = [];
   const messageClasses = classNames({
@@ -86,7 +86,8 @@ Snackbar.propTypes = {
   open: PropTypes.bool.isRequired,
   closeSnackbar: PropTypes.func.isRequired,
   timer: PropTypes.number.isRequired,
-  index: PropTypes.number
+  index: PropTypes.number,
+  isMobile: PropTypes.bool
 };
 
 Snackbar.defaultProps = {

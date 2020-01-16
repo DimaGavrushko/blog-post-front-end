@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import HorizontalPostContainer from "../../components/HorizontalPostContainer";
+import HorizontalPostsContainer from "../../components/HorizontalPostsContainer";
 import Grid from "@material-ui/core/Grid/Grid";
 import style from "./style";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -41,7 +41,7 @@ const PostsApproval = ({ notApprovedPosts, approvePost, deletePost }) => {
     <>
       <Grid container>
         <Grid item xs={12} sm={12} md={12} lg={8}>
-          <HorizontalPostContainer
+          <HorizontalPostsContainer
             posts={notApprovedPosts}
             isApprovePage={true}
             onApprove={onApprove}
