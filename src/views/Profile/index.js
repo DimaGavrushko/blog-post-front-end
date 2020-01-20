@@ -22,8 +22,8 @@ import ChangePasswordModal from "../../components/ChangePasswordModal";
 import { dismissError } from "../../store/actions/users";
 import { UPDATE_PASSWORD_ERROR } from "../../constants/errors";
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
+import { useScrollToTop } from "../../utils/hooks";
 
-let formData;
 const useStyles = makeStyles(style);
 
 const Profile = ({
@@ -38,6 +38,8 @@ const Profile = ({
   dismissError,
   deletePost
 }) => {
+  const formData = new FormData();
+
   const classes = useStyles();
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -45,17 +47,10 @@ const Profile = ({
 
   const [selectedUser, setSelectedUser] = useState(null);
   const [isOwnPage, setIsOwnPage] = useState(auth.user.role === "admin");
-  const [first, setFirst] = useState("");
-  const [last, setLast] = useState("");
-  const [email, setEmail] = useState("");
-  const [description, setDescription] = useState("");
   const [currentEdit, setCurrentEdit] = useState("");
-  const [img, setImage] = useState("");
-  const [openModal, setOpenModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  useScrollToTop(pathname);
 
   useEffect(() => {
     const user = instances.find(el => el._id === id);
@@ -63,12 +58,9 @@ const Profile = ({
       loadUser({ id });
     } else {
       setSelectedUser(user);
-      setFirst(user.firstName);
-      setLast(user.lastName);
-      setEmail(user.email);
-      setDescription(user.description);
-      setImage(user.url);
-      setIsOwnPage(auth.user._id === user._id || auth.user.role === "admin");
+      setIsOwnPage(
+        (auth.user && auth.user._id === user._id) || auth.user.role === "admin"
+      );
     }
 
     if (latestError && latestError.type !== UPDATE_PASSWORD_ERROR) {
@@ -76,32 +68,13 @@ const Profile = ({
     }
   }, [instances, latestError, id, auth]);
 
-  useEffect(() => {
-    formData = new FormData();
-  }, []);
-
   const onDelete = postId => {
     deletePost(postId);
   };
 
   const onEditClick = name => {
     if (currentEdit !== "") {
-      switch (currentEdit) {
-        case "firstName":
-          onChangeUserInfo(currentEdit, first);
-          break;
-        case "lastName":
-          onChangeUserInfo(currentEdit, last);
-          break;
-        case "email":
-          onChangeUserInfo(currentEdit, email);
-          break;
-        case "description":
-          onChangeUserInfo(currentEdit, description);
-          break;
-        default:
-          break;
-      }
+      onChangeUserInfo(currentEdit, selectedUser[name]);
     }
     setCurrentEdit(name);
   };
@@ -111,23 +84,11 @@ const Profile = ({
     onChangeUserInfo(name, value);
   };
 
-  const onChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case "firstName":
-        setFirst(value);
-        break;
-      case "lastName":
-        setLast(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "description":
-        setDescription(value);
-        break;
-      default:
-        break;
-    }
+  const onTextFieldChange = ({ target: { name, value } }) => {
+    setSelectedUser({
+      ...selectedUser,
+      [name]: value
+    });
   };
 
   const onChangeUserInfo = (name, value) => {
@@ -142,7 +103,7 @@ const Profile = ({
   };
 
   const onModalClose = () => {
-    setOpenModal(false);
+    setIsModalOpen(false);
     dismissError();
   };
 
@@ -161,7 +122,7 @@ const Profile = ({
       <Grid item xs={12} sm={9} md={8} lg={7}>
         <ChangePasswordModal
           onClose={onModalClose}
-          open={openModal}
+          open={isModalOpen}
           latestError={latestError}
           onChangePassword={onChangePassword}
         />
@@ -175,7 +136,7 @@ const Profile = ({
                   <img
                     alt=""
                     className={classes.image}
-                    src={img || defaultAvatar}
+                    src={selectedUser.url || defaultAvatar}
                   />
                 </div>
                 {isOwnPage && (
@@ -198,7 +159,7 @@ const Profile = ({
                       <Button
                         variant="outlined"
                         className={classes.button}
-                        onClick={() => setOpenModal(true)}
+                        onClick={() => setIsModalOpen(true)}
                       >
                         Change password
                       </Button>
@@ -217,20 +178,20 @@ const Profile = ({
                   <TextContainerWithLabel
                     label="first"
                     name="firstName"
-                    text={first}
+                    text={selectedUser.firstName}
                     isOwnPage={isOwnPage}
                     isEditMode={currentEdit === "firstName"}
-                    onChange={onChange}
+                    onChange={onTextFieldChange}
                     onEditClick={onEditClick}
                     onClickAway={onClickAway}
                   />
                   <TextContainerWithLabel
                     label="last"
                     name="lastName"
-                    text={last}
+                    text={selectedUser.lastName}
                     isOwnPage={isOwnPage}
                     isEditMode={currentEdit === "lastName"}
-                    onChange={onChange}
+                    onChange={onTextFieldChange}
                     onEditClick={onEditClick}
                     onClickAway={onClickAway}
                   />
@@ -245,20 +206,20 @@ const Profile = ({
                 <TextContainerWithLabel
                   label="email"
                   name="email"
-                  text={email}
+                  text={selectedUser.email}
                   isOwnPage={selectedUser._id === auth.user._id}
                   isEditMode={currentEdit === "email"}
-                  onChange={onChange}
+                  onChange={onTextFieldChange}
                   onEditClick={onEditClick}
                   onClickAway={onClickAway}
                 />
                 <TextContainerWithLabel
                   label="about"
                   name="description"
-                  text={description}
+                  text={selectedUser.description}
                   isOwnPage={isOwnPage}
                   isEditMode={currentEdit === "description"}
-                  onChange={onChange}
+                  onChange={onTextFieldChange}
                   onEditClick={onEditClick}
                   onClickAway={onClickAway}
                 />

@@ -2,7 +2,7 @@ const notificationsStyles = {
   container: {
     position: "fixed",
     width: "100%",
-    top: "10vh",
+    top: "8vh",
     left: 0,
     zIndex: 1500
   },

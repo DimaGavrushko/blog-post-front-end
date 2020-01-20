@@ -1,12 +1,12 @@
 /**
  * All valid positions of notifications.
  */
-export const POSITON_BR = "br";
-export const POSITON_BC = "bc";
-export const POSITON_BL = "bl";
-export const POSITON_TR = "tr";
-export const POSITON_TC = "tc";
-export const POSITON_TL = "tl";
+export const POSITION_BR = "br";
+export const POSITION_BC = "bc";
+export const POSITION_BL = "bl";
+export const POSITION_TR = "tr";
+export const POSITION_TC = "tc";
+export const POSITION_TL = "tl";
 
 /**
  * All valid types of notifications.
@@ -27,19 +27,19 @@ export const TIMER = 4000;
  * Default position of notifications to show.
  * Can be changed to one of: 'br', 'bl', 'bc'.
  */
-export const DEFAULT_POSITION = POSITON_BR;
+export const DEFAULT_POSITION = POSITION_BR;
 
 /**
  * All valid positions for notifications.
  * Can not be changed.
  */
 export const POSITIONS = [
-  POSITON_BR,
-  POSITON_BC,
-  POSITON_BL,
-  POSITON_TR,
-  POSITON_TC,
-  POSITON_TL
+  POSITION_BR,
+  POSITION_BC,
+  POSITION_BL,
+  POSITION_TR,
+  POSITION_TC,
+  POSITION_TL
 ];
 
 /**
@@ -53,14 +53,3 @@ export const TYPES = [
   TYPE_SUCCESS,
   TYPE_WARNING
 ];
-
-/**
- * messages of notifications.
- */
-export const MSG = {
-  USER_AUTH_SUCCESS: "user login is successful",
-  USER_PROFILE_UPDATE_SUCCESS: "user profile is updated",
-  USER_NOT_AUTHORIZED: "user not authorized",
-  USER_AUTH_ERROR: "user login is not successful",
-  USER_PAGE_ACCESS_ERROR: "page access error"
-};

@@ -12,7 +12,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 
 const useStyles = makeStyles(style);
 
-const Login = ({ auth: { latestAuthError, isLoading }, login }) => {
+const Login = ({ auth: { latestAuthError, isLoading }, categories, login }) => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ const Login = ({ auth: { latestAuthError, isLoading }, login }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    login({ email, password });
+    login({ email, password, categories });
   };
 
   return (
@@ -76,7 +76,10 @@ const Login = ({ auth: { latestAuthError, isLoading }, login }) => {
             <Button
               variant="contained"
               color="primary"
-              className={classes.button}
+              classes={{
+                root: classes.button,
+                disabled: classes.disabledButton
+              }}
               onClick={onSubmit}
               disabled={isLoading}
             >
@@ -89,8 +92,9 @@ const Login = ({ auth: { latestAuthError, isLoading }, login }) => {
   );
 };
 
-const mapStateToProps = ({ auth }) => ({
-  auth
+const mapStateToProps = ({ auth, posts: { categories } }) => ({
+  auth,
+  categories
 });
 
 const mapDispatchToProps = {
@@ -99,7 +103,8 @@ const mapDispatchToProps = {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  categories: PropTypes.array
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,4 +1,10 @@
-import { blackColor, dangerColor, greenColor, primaryColor, whiteColor } from "../../constants/colors";
+import {
+  blackColor,
+  dangerColor,
+  greenColor,
+  primaryColor,
+  whiteColor
+} from "../../constants/colors";
 
 const primaryBoxShadow = {
   boxShadow:
@@ -129,7 +135,7 @@ export const snackbarContentMobileStyle = theme => ({
     top: 0,
     left: 0,
     transform: "none",
-    position: "relative",
+    position: "relative"
   },
   root: {
     width: "100%",

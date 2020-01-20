@@ -1,4 +1,9 @@
-import { dangerColor, primaryColor } from "../../constants/colors";
+import {
+  dangerColor,
+  grayColor,
+  primaryColor,
+  whiteColor
+} from "../../constants/colors";
 
 const loginContainer = {
   width: "25vw",
@@ -47,6 +52,10 @@ export default {
     marginTop: "1rem",
     borderRadius: "0 !important",
     backgroundColor: `${primaryColor[0]} !important`
+  },
+  disabledButton: {
+    backgroundColor: `${grayColor[2]} !important`,
+    color: `${whiteColor} !important`
   },
   error: {
     borderRadius: 4,
