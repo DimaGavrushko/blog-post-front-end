@@ -15,7 +15,11 @@ import { handleLoadNotApprovedPosts } from "../actions/posts";
 const authApiService = new ApiService(API_URL + "/auth");
 const postsApiService = new ApiService(API_URL + "/posts");
 
-export const login = ({ email, password }) => async dispatch => {
+export const login = ({
+  email,
+  password,
+  categories = []
+}) => async dispatch => {
   try {
     dispatch(startLogin());
     const user = await authApiService.post("login", { email, password });
@@ -25,6 +29,9 @@ export const login = ({ email, password }) => async dispatch => {
       dispatch(handleLoadNotApprovedPosts({ notApprovedPosts }));
     }
     dispatch(handleSuccessLogin({ user }));
+    if (!categories.length) {
+      dispatch(loadInitData(user));
+    }
     dispatch(push(NEWS_PATH));
   } catch (error) {
     dispatch(catchError({ error }));
