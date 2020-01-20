@@ -17,6 +17,7 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { NavLink, useLocation } from "react-router-dom";
 import { CREATE_POST_PATH } from "../../constants/routes";
+import { useScrollToTop } from "../../utils/hooks";
 
 const useStyles = makeStyles(style);
 
@@ -33,16 +34,13 @@ const Post = ({
   undislike,
   deletePost
 }) => {
-  // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const { pathname } = useLocation();
 
   const [post, setPost] = useState(null);
   const [isOwnPage, setIsOwnPage] = useState(user.role === "admin");
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  useScrollToTop(pathname);
 
   const isCanEdit = id => {
     return (

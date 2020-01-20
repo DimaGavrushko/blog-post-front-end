@@ -18,6 +18,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { createPost } from "../../store/thunk/posts";
 import { useLocation } from "react-router";
+import { useScrollToTop } from "../../utils/hooks";
 
 let postData;
 const fileReader = new FileReader();
@@ -53,9 +54,7 @@ const CreatePost = ({
   const [title, setTitle] = useState(post ? post.title : "");
   const [img, setImage] = useState(post ? post.url : "");
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  useScrollToTop(pathname);
 
   useEffect(() => {
     postData = new FormData();

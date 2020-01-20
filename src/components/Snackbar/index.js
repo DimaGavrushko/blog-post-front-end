@@ -20,7 +20,9 @@ function Snackbar({ ...props }) {
     closeSnackbar,
     isMobile
   } = props;
-  const useStyles = makeStyles(isMobile ? snackbarContentMobileStyle : snackbarContentStyle);
+  const useStyles = makeStyles(
+    isMobile ? snackbarContentMobileStyle : snackbarContentStyle
+  );
   const classes = useStyles();
   let action = [];
   const messageClasses = classNames({

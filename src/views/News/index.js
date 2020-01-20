@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import HorizontalPostsContainer from "../../components/HorizontalPostsContainer";
 import Grid from "@material-ui/core/Grid/Grid";
 import PopularPost from "../../components/PopularPost";
@@ -9,16 +9,14 @@ import * as PropTypes from "prop-types";
 import { getPopularPosts, getRecentPosts } from "../../utils/posts";
 import { RECENT_NEWS } from "../../constants";
 import { useLocation } from "react-router";
+import { useScrollToTop } from "../../utils/hooks";
 
 const useStyles = makeStyles(style);
 
 const News = ({ popularPosts, posts }) => {
   const classes = useStyles();
   const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  useScrollToTop(pathname);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import HorizontalPostsContainer from "../../components/HorizontalPostsContainer";
 import Grid from "@material-ui/core/Grid/Grid";
 import style from "./style";
@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography/Typography";
 import { NO_CONFIRMATION_POSTS } from "../../constants";
 import { approvePost, deletePost } from "../../store/thunk/posts";
 import { useLocation } from "react-router";
+import { useScrollToTop } from "../../utils/hooks";
 
 const useStyles = makeStyles(style);
 
@@ -17,9 +18,7 @@ const PostsApproval = ({ notApprovedPosts, approvePost, deletePost }) => {
   const classes = useStyles();
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  useScrollToTop(pathname);
 
   if (!notApprovedPosts.length) {
     return (

@@ -9,6 +9,7 @@ import PostInCategory from "../../components/PostInCategory";
 import Pagination from "../../components/Pagination";
 import { getRecentPosts } from "../../utils/posts";
 import { useLocation } from "react-router";
+import { useScrollToTop } from "../../utils/hooks";
 
 const useStyles = makeStyles(style);
 
@@ -28,9 +29,7 @@ const Category = ({
   );
   const postsStartRef = useRef(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  useScrollToTop(pathname);
 
   useEffect(() => {
     const p = getRecentPosts(posts, posts.length).filter(
