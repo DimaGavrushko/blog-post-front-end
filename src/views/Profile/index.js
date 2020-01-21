@@ -20,7 +20,7 @@ import { deletePost } from "../../store/thunk/posts";
 import { getRecentPosts } from "../../utils/posts";
 import ChangePasswordModal from "../../components/ChangePasswordModal";
 import { dismissError } from "../../store/actions/users";
-import { UPDATE_PASSWORD_ERROR } from "../../constants/errors";
+import { LOAD_USER_ERROR, UPDATE_PASSWORD_ERROR } from "../../constants/errors";
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 import { useScrollToTop } from "../../utils/hooks";
 
@@ -50,23 +50,32 @@ const Profile = ({
   const [currentEdit, setCurrentEdit] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const isThisError = (error, errorType) => error && error.type === errorType;
+
   useScrollToTop(pathname);
 
   useEffect(() => {
     const user = instances.find(el => el._id === id);
     if (!user) {
-      loadUser({ id });
+      if (!isThisError(latestError, LOAD_USER_ERROR)) {
+        loadUser({ id });
+      }
     } else {
       setSelectedUser(user);
       setIsOwnPage(
         (auth.user && auth.user._id === user._id) || auth.user.role === "admin"
       );
-    }
-
-    if (latestError && latestError.type !== UPDATE_PASSWORD_ERROR) {
-      onModalClose();
+      if (!isThisError(latestError, UPDATE_PASSWORD_ERROR)) {
+        onModalClose();
+      }
     }
   }, [instances, latestError, id, auth]);
+
+  useEffect(() => {
+    if (isThisError(latestError, LOAD_USER_ERROR)) {
+      dismissError();
+    }
+  }, [id]);
 
   const onDelete = postId => {
     deletePost(postId);

@@ -9,7 +9,7 @@ import { ApiService } from "../../utils/apiService";
 import { handleChangeAuthUserInfo } from "../actions/auth";
 import { addNotification } from "../actions/notifications";
 import { TYPE_DANGER, TYPE_SUCCESS } from "../../constants/notifications";
-import { UPDATE_PASSWORD_ERROR } from "../../constants/errors";
+import { LOAD_USER_ERROR, UPDATE_PASSWORD_ERROR } from "../../constants/errors";
 
 const apiService = new ApiService(API_URL + "/users");
 
@@ -19,7 +19,7 @@ export const loadUser = ({ id }) => async dispatch => {
     const user = await apiService.get(`${id}`);
     dispatch(handleSuccessLoadUser({ user }));
   } catch (error) {
-    dispatch(catchError({ error }));
+    dispatch(catchError({ error, errorType: LOAD_USER_ERROR }));
     dispatch(
       addNotification({
         message: error.message,
