@@ -83,7 +83,7 @@ const Profile = ({
 
   const onEditClick = name => {
     if (currentEdit !== "") {
-      onChangeUserInfo(currentEdit, selectedUser[name]);
+      onChangeUserInfo(currentEdit, selectedUser[currentEdit]);
     }
     setCurrentEdit(name);
   };
