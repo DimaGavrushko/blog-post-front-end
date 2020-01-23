@@ -42,6 +42,12 @@ export default () => ({
     marginRight: "0.5rem",
     marginBottom: 3
   },
+  appLogoImg: {
+    width: 32,
+    height: 32,
+    objectFit: "fit",
+    marginRight: "1rem"
+  },
   logoWithLink: {
     display: "flex",
     alignItems: "center",

@@ -3,6 +3,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./style";
 import Logo from "../shared/Logo";
 import { FOOTER_TEXT } from "../../constants";
+import APP_logo_white from "../../assets/images/logo_white.png";
 import VK_logo from "../../assets/images/vk-32.png";
 import GMAIL_logo from "../../assets/images/email-5-32.png";
 import LINKED_logo from "../../assets/images/linkedin-6-32.png";
@@ -31,6 +32,7 @@ const Footer = ({ posts }) => {
       <div className={classes.leftContainer}>
         <Logo />
         <p className={classes.footerText}>{FOOTER_TEXT}</p>
+        <img alt="" className={classes.appLogoImg} src={APP_logo_white} />
       </div>
       <div>
         <div className={classes.contactUs}>
